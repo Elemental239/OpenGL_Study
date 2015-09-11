@@ -53,8 +53,8 @@ public:
 private:
 	char buffer[MAX_LOG_STRING_LENGTH];
 
-	virtual void AddBeginning(char* buffer, LOG_CATEGORY category, int indent);
-	virtual void AddEnding(char* buffer, LOG_CATEGORY category, int indent);
+	virtual void AddBeginning(char* buffer, LOG_CATEGORY category, int indent) override;
+	virtual void AddEnding(char* buffer, LOG_CATEGORY category, int indent) override;
 	//void ConstructLogString(char* buffer, LOG_CATEGORY category, int indent, const char* log, va_list args) override;
 };
 
