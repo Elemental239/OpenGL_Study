@@ -4,13 +4,13 @@
 class Globals
 {
 public:
+	virtual ~Globals();
 	static Globals& Instance() { static Globals globals; return globals; }
 
 	void Init();
 
 private:
 	Globals();
-	virtual ~Globals();
 	Globals& operator=(const Globals&);
 	Globals(const Globals&);
 };
