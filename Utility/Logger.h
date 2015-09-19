@@ -45,7 +45,6 @@ protected:
 
 class Marker : public Logger
 {
-	//BASE_CLASS(Logger)
 public:
 	Marker(const char* log, ...);
 	~Marker();
@@ -55,7 +54,6 @@ private:
 
 	virtual void AddBeginning(char* buffer, LOG_CATEGORY category, int indent) override;
 	virtual void AddEnding(char* buffer, LOG_CATEGORY category, int indent) override;
-	//void ConstructLogString(char* buffer, LOG_CATEGORY category, int indent, const char* log, va_list args) override;
 };
 
 extern Logger log_instance;

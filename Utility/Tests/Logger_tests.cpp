@@ -67,5 +67,4 @@ TEST_CASE_METHOD(LoggerTest, "Log system test", "[Utility][Logger]")
 		Write(LOG_CATEGORY_ERROR, "Hello%c", '!');
 		REQUIRE(memcmp(GetLastLog(), testString, strlen(testString)) == 0);
 	}
-	
 }

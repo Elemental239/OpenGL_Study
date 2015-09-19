@@ -108,46 +108,6 @@ Marker::~Marker()
 	nCurrentIndent--;
 }
 
-//void Marker::ConstructLogString(char* LogString, LOG_CATEGORY category, int indent, const char* log, va_list args)
-//{
-//	char temp[MAX_PURE_LOG_SIZE];
-//
-//	vsprintf(temp, log, args);
-//
-//	if (indent > MAX_INDENT_SIZE)
-//		indent = MAX_INDENT_SIZE;
-//
-//	for (int i = 0; i < indent; i++)
-//	{
-//		if (i < indent - 1)
-//			LogString[i] = '|';
-//		else
-//			LogString[i] = ' ';
-//	}
-//
-//	if (indent > 0)
-//		buffer[0] = '.';
-//
-//	LogString[indent] = '>';
-//	LogString[indent + 1] = '>';
-//	LogString[indent + 2] = '[';
-//	
-//	memcpy(LogString + CATEGORY_MARKER_SIZE + indent, temp, MAX_PURE_LOG_SIZE);
-//	
-//	int stringLength = strlen(LogString);
-//
-//	if (stringLength < MAX_LOG_STRING_LENGTH - 1)
-//	{
-//		LogString[stringLength] = ']';
-//		LogString[stringLength + 1] = 0;
-//	}
-//	else
-//	{
-//		LogString[stringLength - 1] = ']';
-//		LogString[stringLength] = 0;
-//	}
-//}
-
 void Marker::AddBeginning(char* buffer, LOG_CATEGORY category, int indent)
 {
 	__super::AddBeginning(buffer, category, indent);

@@ -3,6 +3,7 @@
 #include <glut.h>
 #include "Logger.h"
 #include "UtilityMacros.h"
+#include <Globals.h>
 
 GLenum g_OpenGLError;
 
@@ -58,6 +59,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 {
 	LOG("WinMain");	
 	
+	Globals::Instance().Init();
 	InitMainWindow();
 
 	return 0;
