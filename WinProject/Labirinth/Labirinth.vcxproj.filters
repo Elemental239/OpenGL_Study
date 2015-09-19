@@ -21,12 +21,18 @@
     <ClCompile Include="..\..\Utility\Logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Logic\Globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Utility\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Utility\UtilityMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Logic\Globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

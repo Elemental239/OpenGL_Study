@@ -11,8 +11,10 @@ public:
 private:
 	Globals();
 	virtual ~Globals();
-	Globals& operator=(Globals&) = delete;
-	Globals(const Globals&) = delete;
+	Globals& operator=(const Globals&);
+	Globals(const Globals&);
 };
+
+#define GLOBALS Globals::Instance()
 
 #endif //__GLOBALS_H__

@@ -59,7 +59,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 {
 	LOG("WinMain");	
 	
-	Globals::Instance().Init();
+	GLOBALS.Init();
 	InitMainWindow();
 
 	return 0;

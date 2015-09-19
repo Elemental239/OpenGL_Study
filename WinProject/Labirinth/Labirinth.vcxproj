@@ -11,10 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
     <ClCompile Include="..\MainLabirinth.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\Utility\Logger.h" />
     <ClInclude Include="..\..\Utility\UtilityMacros.h" />
   </ItemGroup>
