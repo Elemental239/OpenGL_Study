@@ -1,17 +1,17 @@
 #include "Globals.h"
 #include <Logger.h>
 
-Globals::Globals()
+CGlobals::CGlobals()
 {
-	MARKER("Globals::Globals()");
+	MARKER("CGlobals::CGlobals()");
 }
 
-Globals::~Globals()
+CGlobals::~CGlobals()
 {
-	MARKER("Globals::~Globals()");
+	MARKER("CGlobals::~CGlobals()");
 }
 
-void Globals::Init()
+void CGlobals::Init()
 {
-	MARKER("Globals::Init()");
+	MARKER("CGlobals::Init()");
 }

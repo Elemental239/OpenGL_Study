@@ -2,7 +2,7 @@
 #include <Catch\include\catch.hpp>
 #include <iostream>
 
-class GlobalsTest : public Globals
+class CGlobalsTest : public CGlobals
 {
 };
 
@@ -10,12 +10,11 @@ TEST_CASE("Globals test", "[Globals][Logic]")
 {
 	SECTION("NoThrow Creation")
 	{
-		CHECK_NOTHROW(GlobalsTest::Instance());
+		CHECK_NOTHROW(CGlobalsTest::Instance());
 	}
 
 	SECTION("NoThrow Creation")
 	{
-		CHECK_NOTHROW(GlobalsTest::Instance().Init());
-
+		CHECK_NOTHROW(CGlobalsTest::Instance().Init());
 	}
 }

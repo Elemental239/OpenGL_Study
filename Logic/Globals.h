@@ -1,20 +1,20 @@
-#ifndef __GLOBALS_H__
-#define __GLOBALS_H__
+#ifndef __CGlobals_H__
+#define __CGlobals_H__
 
-class Globals
+class CGlobals
 {
 public:
-	virtual ~Globals();
-	static Globals& Instance() { static Globals globals; return globals; }
+	virtual ~CGlobals();
+	static CGlobals& Instance() { static CGlobals globals; return globals; }
 
 	void Init();
 
 private:
-	Globals();
-	Globals& operator=(const Globals&);
-	Globals(const Globals&);
+	CGlobals();
+	CGlobals& operator=(const CGlobals&);
+	CGlobals(const CGlobals&);
 };
 
-#define GLOBALS Globals::Instance()
+#define GLOBALS CGlobals::Instance()
 
-#endif //__GLOBALS_H__
+#endif //__CGlobals_H__
