@@ -27,9 +27,6 @@
     <ClCompile Include="..\..\Graphic\MainWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Utility\SharedPtr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Utility\Logger.h">

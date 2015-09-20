@@ -33,9 +33,6 @@
     <ClCompile Include="..\..\Logic\Tests\Global_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Utility\SharedPtr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Utility\Tests\SharedPtr_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

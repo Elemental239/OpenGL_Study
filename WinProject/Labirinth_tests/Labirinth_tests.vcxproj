@@ -87,7 +87,6 @@ exit 0</Command>
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Logic\Tests\Global_tests.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
-    <ClCompile Include="..\..\Utility\SharedPtr.cpp" />
     <ClCompile Include="..\..\Utility\Tests\Logger_tests.cpp" />
     <ClCompile Include="..\..\Utility\Tests\SharedPtr_tests.cpp" />
     <ClCompile Include="Labirinth_tests.cpp" />

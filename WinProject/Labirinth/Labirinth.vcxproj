@@ -14,7 +14,6 @@
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
-    <ClCompile Include="..\..\Utility\SharedPtr.cpp" />
     <ClCompile Include="..\MainLabirinth.cpp" />
   </ItemGroup>
   <ItemGroup>
