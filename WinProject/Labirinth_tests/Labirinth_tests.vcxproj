@@ -89,6 +89,7 @@ exit 0</Command>
     <ClCompile Include="..\..\Utility\Logger.cpp" />
     <ClCompile Include="..\..\Utility\SharedPtr.cpp" />
     <ClCompile Include="..\..\Utility\Tests\Logger_tests.cpp" />
+    <ClCompile Include="..\..\Utility\Tests\SharedPtr_tests.cpp" />
     <ClCompile Include="Labirinth_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
