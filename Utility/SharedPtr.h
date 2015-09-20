@@ -13,6 +13,8 @@ public:
 	CSharedPtr(const CSharedPtr<T>&);
 	~CSharedPtr();
 
+	operator T*() { return sp_obj.get(); }
+
 	std::shared_ptr<T>& operator->() { return sp_obj; }
 
 	int GetCount() { return sp_obj.use_count(); }
@@ -37,13 +39,13 @@ CSharedPtr<T>& CSharedPtr<T>::operator=(const CSharedPtr<T>& other)
 template<typename T>
 CSharedPtr<T>::CSharedPtr(const CSharedPtr<T>& other)
 {
-	sp_obj = other.GetPointer();
+	sp_obj = other.sp_obj;
 }
 
 template<typename T>
 CSharedPtr<T>::~CSharedPtr()
 {
-	sp_obj = NULL;
+	sp_obj = nullptr;
 }
 
 
