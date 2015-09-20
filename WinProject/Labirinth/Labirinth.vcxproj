@@ -14,12 +14,14 @@
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
+    <ClCompile Include="..\..\Utility\SharedPtr.cpp" />
     <ClCompile Include="..\MainLabirinth.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\Utility\Logger.h" />
+    <ClInclude Include="..\..\Utility\SharedPtr.h" />
     <ClInclude Include="..\..\Utility\UtilityMacros.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

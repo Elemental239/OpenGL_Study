@@ -87,6 +87,7 @@ exit 0</Command>
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Logic\Tests\Global_tests.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
+    <ClCompile Include="..\..\Utility\SharedPtr.cpp" />
     <ClCompile Include="..\..\Utility\Tests\Logger_tests.cpp" />
     <ClCompile Include="Labirinth_tests.cpp" />
   </ItemGroup>
@@ -94,6 +95,7 @@ exit 0</Command>
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\Utility\Logger.h" />
+    <ClInclude Include="..\..\Utility\SharedPtr.h" />
     <ClInclude Include="..\..\Utility\UtilityMacros.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,6 +1,9 @@
 #ifndef __CGlobals_H__
 #define __CGlobals_H__
 
+#include <memory>
+#include <MainWindow.h>
+
 class CGlobals
 {
 public:
@@ -13,6 +16,8 @@ private:
 	CGlobals();
 	CGlobals& operator=(const CGlobals&);
 	CGlobals(const CGlobals&);
+
+	std::shared_ptr<CMainWindow> m_spMainWindow;
 };
 
 #define GLOBALS CGlobals::Instance()
