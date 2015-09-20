@@ -13,27 +13,31 @@ public:
 	CSharedPtr(const CSharedPtr<T>&);
 	~CSharedPtr();
 
-	int GetCount() { return sp_obj.use_count(); }
+	std::shared_ptr<T>& operator->() { return sp_obj; }
 
-	std::shared_ptr sp_obj;
+	int GetCount() { return sp_obj.use_count(); }
+	std::shared_ptr<T>& GetPointer() { return sp_obj; }
+
+private:
+	std::shared_ptr<T> sp_obj;
 };
 
 template<typename T>
-CSharedPtr<T>::CSharedPtr(T* obj)
+CSharedPtr<T>::CSharedPtr(T* obj) : sp_obj(obj)
 {
-	sp_obj = make_shared<T>(obj);
 }
 
 template<typename T>
 CSharedPtr<T>& CSharedPtr<T>::operator=(const CSharedPtr<T>& other)
 {
 	sp_obj = other.sp_obj;
+	return *this;
 }
 
 template<typename T>
 CSharedPtr<T>::CSharedPtr(const CSharedPtr<T>& other)
 {
-	sp_obj = other.sp_obj;
+	sp_obj = other.GetPointer();
 }
 
 template<typename T>

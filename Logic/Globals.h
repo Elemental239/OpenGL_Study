@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <MainWindow.h>
+#include <SharedPtr.h>
 
 class CGlobals
 {
@@ -17,7 +18,7 @@ private:
 	CGlobals& operator=(const CGlobals&);
 	CGlobals(const CGlobals&);
 
-	std::shared_ptr<CMainWindow> m_spMainWindow;
+	CSharedPtr<CMainWindow> m_spMainWindow;
 };
 
 #define GLOBALS CGlobals::Instance()

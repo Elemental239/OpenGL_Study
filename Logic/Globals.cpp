@@ -17,5 +17,6 @@ void CGlobals::Init()
 {
 	MARKER("CGlobals::Init()");
 
-	//m_spMainWindow = make_shared(CMainWindow);
+	m_spMainWindow = CSharedPtr<CMainWindow>(new CMainWindow);
+	m_spMainWindow->Init();
 }
