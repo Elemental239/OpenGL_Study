@@ -1,7 +1,7 @@
 #ifndef __MainWindow_H__
 #define __MainWindow_H__
 
-class CMainWindow
+class CMainWindow : public CObject
 {
 public:
 	CMainWindow();

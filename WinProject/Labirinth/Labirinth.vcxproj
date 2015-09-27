@@ -20,6 +20,7 @@
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\Utility\Logger.h" />
+    <ClInclude Include="..\..\Utility\Object.h" />
     <ClInclude Include="..\..\Utility\SharedPtr.h" />
     <ClInclude Include="..\..\Utility\UtilityMacros.h" />
   </ItemGroup>

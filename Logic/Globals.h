@@ -4,8 +4,9 @@
 #include <memory>
 #include <MainWindow.h>
 #include <SharedPtr.h>
+#include <Object.h>
 
-class CGlobals
+class CGlobals : public CObject
 {
 public:
 	virtual ~CGlobals();
