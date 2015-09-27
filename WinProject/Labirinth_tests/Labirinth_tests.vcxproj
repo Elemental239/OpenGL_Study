@@ -86,7 +86,9 @@ exit 0</Command>
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Logic\Tests\Global_tests.cpp" />
+    <ClCompile Include="..\..\Utility\Listeners.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
+    <ClCompile Include="..\..\Utility\Tests\Listeners_tests.cpp" />
     <ClCompile Include="..\..\Utility\Tests\Logger_tests.cpp" />
     <ClCompile Include="..\..\Utility\Tests\SharedPtr_tests.cpp" />
     <ClCompile Include="Labirinth_tests.cpp" />
@@ -94,6 +96,7 @@ exit 0</Command>
   <ItemGroup>
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
+    <ClInclude Include="..\..\Utility\Listeners.h" />
     <ClInclude Include="..\..\Utility\Logger.h" />
     <ClInclude Include="..\..\Utility\SharedPtr.h" />
     <ClInclude Include="..\..\Utility\UtilityMacros.h" />

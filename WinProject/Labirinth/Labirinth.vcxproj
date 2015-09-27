@@ -13,12 +13,14 @@
   <ItemGroup>
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
+    <ClCompile Include="..\..\Utility\Listeners.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
     <ClCompile Include="..\MainLabirinth.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
+    <ClInclude Include="..\..\Utility\Listeners.h" />
     <ClInclude Include="..\..\Utility\Logger.h" />
     <ClInclude Include="..\..\Utility\Object.h" />
     <ClInclude Include="..\..\Utility\SharedPtr.h" />

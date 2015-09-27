@@ -10,11 +10,11 @@ TEST_CASE("Globals test", "[Globals][Logic]")
 {
 	SECTION("NoThrow Creation")
 	{
-		CHECK_NOTHROW(CGlobalsTest::Instance());
+		REQUIRE_NOTHROW(CGlobalsTest::Instance());
 	}
 
 	SECTION("NoThrow Creation")
 	{
-		CHECK_NOTHROW(CGlobalsTest::Instance().Init());
+		REQUIRE_NOTHROW(CGlobalsTest::Instance().Init());
 	}
 }
