@@ -48,4 +48,13 @@ TEST_CASE("SharedPtr test", "[Utility][CSharedPtr]")
 
 		REQUIRE_FALSE(pInt->GetField() == 12);
 	}
+
+	SECTION("Operator ==")
+	{
+		CSharedPtr<TestClass> spIntSame = spInt;
+		CSharedPtr<TestClass> spIntDifferent = new TestClass(10);
+
+		REQUIRE(spInt == spIntSame);
+		REQUIRE_FALSE(spInt == spIntDifferent);
+	}
 }
