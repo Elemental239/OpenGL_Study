@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp" />
+    <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Utility\Listeners.cpp" />
@@ -18,6 +20,8 @@
     <ClCompile Include="..\MainLabirinth.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Graphic\GraphicGeneral.h" />
+    <ClInclude Include="..\..\Graphic\GraphicObject.h" />
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\Utility\Listeners.h" />
