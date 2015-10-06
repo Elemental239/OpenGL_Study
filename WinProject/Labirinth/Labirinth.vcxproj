@@ -14,7 +14,9 @@
     <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
-    <ClCompile Include="..\..\Logic\Globals.cpp" />
+    <ClCompile Include="..\..\Logic\Globals.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Utility\Listeners.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
     <ClCompile Include="..\MainLabirinth.cpp" />
@@ -61,7 +63,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>G:\работа\Проекты\Labirinth\Utility;G:\работа\Проекты\Labirinth\Network;G:\работа\Проекты\Labirinth\Logic;G:\работа\Проекты\Labirinth\Graphic;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -72,6 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../Libs;$(SolutionDir)/../Logic;$(SolutionDir)/../Graphic;$(SolutionDir)/../Network;$(SolutionDir)/../Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
