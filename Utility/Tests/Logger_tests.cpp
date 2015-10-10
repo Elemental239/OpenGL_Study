@@ -1,5 +1,5 @@
 #include "Logger.h"
-#include <Catch\include\catch.hpp>
+#include "Catch\include\catch.hpp"
 #include <iostream>
 
 class LoggerTest : public Logger

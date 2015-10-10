@@ -1,7 +1,7 @@
 #include "Globals.h"
-#include <Logger.h>
+#include "Logger.h"
 #include <memory>
-#include <UtilityMacros.h>
+#include "UtilityMacros.h"
 
 CGlobals::CGlobals()
 {

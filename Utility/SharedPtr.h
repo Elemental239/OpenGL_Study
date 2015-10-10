@@ -2,7 +2,7 @@
 #define __SharedPtr_H__
 
 #include <memory>
-#include <Object.h>
+#include "Object.h"
 
 template<typename T>
 class CSharedPtr : public CObject

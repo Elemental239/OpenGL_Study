@@ -1,5 +1,5 @@
 #include "MainWindow.h"
-#include <Logger.h>
+#include "Logger.h"
 #include <glut.h>
 
 GLenum g_OpenGLError;

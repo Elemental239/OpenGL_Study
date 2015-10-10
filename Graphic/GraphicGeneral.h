@@ -1,7 +1,7 @@
 #ifndef __GraphicGeneral_H__
 #define __GraphicGeneral_H__
 
-#include <Object.h>
+#include "Object.h"
 
 class CPoint : public CObject
 {

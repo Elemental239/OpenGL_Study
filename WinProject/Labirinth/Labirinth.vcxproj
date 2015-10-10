@@ -11,13 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="..\..\Utility\Listeners.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
     <ClCompile Include="..\MainLabirinth.cpp" />
   </ItemGroup>

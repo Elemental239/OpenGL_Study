@@ -1,8 +1,8 @@
 #ifndef __GraphicObject_H__
 #define __GraphicObject_H__
 
-#include <Object.h>
-#include <SharedPtr.h>
+#include "Object.h"
+#include "SharedPtr.h"
 #include <list>
 
 //http://grafika.me/lessons - OpenGL tutorials

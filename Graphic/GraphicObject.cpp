@@ -1,5 +1,5 @@
 #include "GraphicObject.h"
-#include <Logger.h>
+#include "Logger.h"
 
 CGraphicObject::CGraphicObject()
 {

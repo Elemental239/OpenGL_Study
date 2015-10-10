@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>G:\работа\Проекты\Labirinth\Utility;G:\работа\Проекты\Labirinth\Network;G:\работа\Проекты\Labirinth\Logic;G:\работа\Проекты\Labirinth\Graphic;G:\работа\Проекты\Labirinth\Libs;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -83,27 +83,16 @@ exit 0</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp" />
-    <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
-    <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
-    <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Logic\Tests\Global_tests.cpp" />
-    <ClCompile Include="..\..\Utility\Listeners.cpp" />
-    <ClCompile Include="..\..\Utility\Logger.cpp" />
     <ClCompile Include="..\..\Utility\Tests\Listeners_tests.cpp" />
     <ClCompile Include="..\..\Utility\Tests\Logger_tests.cpp" />
     <ClCompile Include="..\..\Utility\Tests\SharedPtr_tests.cpp" />
     <ClCompile Include="Labirinth_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Graphic\GraphicGeneral.h" />
-    <ClInclude Include="..\..\Graphic\GraphicObject.h" />
-    <ClInclude Include="..\..\Graphic\MainWindow.h" />
-    <ClInclude Include="..\..\Logic\Globals.h" />
-    <ClInclude Include="..\..\Utility\Listeners.h" />
-    <ClInclude Include="..\..\Utility\Logger.h" />
-    <ClInclude Include="..\..\Utility\SharedPtr.h" />
-    <ClInclude Include="..\..\Utility\UtilityMacros.h" />
+    <ProjectReference Include="..\Labirinth\Labirinth.vcxproj">
+      <Project>{3ee85139-b889-4a9c-b786-f1224fec7d5a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

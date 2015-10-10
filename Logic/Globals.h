@@ -2,9 +2,9 @@
 #define __CGlobals_H__
 
 #include <memory>
-#include <MainWindow.h>
-#include <SharedPtr.h>
-#include <Object.h>
+#include "MainWindow.h"
+#include "SharedPtr.h"
+#include "Object.h"
 
 class CGlobals : public CObject
 {

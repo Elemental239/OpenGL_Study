@@ -6,7 +6,7 @@ class CGlobalsTest : public CGlobals
 {
 };
 
-TEST_CASE("Globals test", "[Globals][Logic]")
+TEST_CASE("Globals nothrow initialization test", "[Globals][Logic]")
 {
 	SECTION("NoThrow Creation")
 	{

@@ -1,7 +1,7 @@
 #ifndef __MainWindow_H__
 #define __MainWindow_H__
 
-#include <Object.h>
+#include "Object.h"
 
 class CMainWindow : public CObject
 {
