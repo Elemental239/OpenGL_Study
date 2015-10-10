@@ -51,9 +51,6 @@
     <ClCompile Include="..\..\Logic\Globals.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp">
-      <Filter>Graphic</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
