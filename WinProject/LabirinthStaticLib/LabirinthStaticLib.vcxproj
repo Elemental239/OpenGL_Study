@@ -11,27 +11,37 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\MainLabirinth.cpp" />
+    <ClInclude Include="..\..\Graphic\GraphicGeneral.h" />
+    <ClInclude Include="..\..\Graphic\GraphicObject.h" />
+    <ClInclude Include="..\..\Graphic\MainWindow.h" />
+    <ClInclude Include="..\..\Logic\Globals.h" />
+    <ClInclude Include="..\..\Utility\Listeners.h" />
+    <ClInclude Include="..\..\Utility\Logger.h" />
+    <ClInclude Include="..\..\Utility\Object.h" />
+    <ClInclude Include="..\..\Utility\SharedPtr.h" />
+    <ClInclude Include="..\..\Utility\UtilityMacros.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LabirinthStaticLib\LabirinthStaticLib.vcxproj">
-      <Project>{b8fae7ea-b6ec-4cd7-b599-a0b7f7c6b42e}</Project>
-    </ProjectReference>
+    <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp" />
+    <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
+    <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
+    <ClCompile Include="..\..\Logic\Globals.cpp" />
+    <ClCompile Include="..\..\Utility\Logger.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3EE85139-B889-4A9C-B786-F1224FEC7D5A}</ProjectGuid>
+    <ProjectGuid>{B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Labirinth</RootNamespace>
+    <RootNamespace>LabirinthStaticLib</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -47,20 +57,16 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(IncludePath)</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)/../Libs;$(SolutionDir)/../Logic;$(SolutionDir)/../Graphic;$(SolutionDir)/../Network;$(SolutionDir)/../Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../Libs;$(SolutionDir)/../Logic;$(SolutionDir)/../Graphic;$(SolutionDir)/../Network;$(SolutionDir)/../Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -70,11 +76,13 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

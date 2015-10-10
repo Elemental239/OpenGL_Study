@@ -33,7 +33,7 @@ void Logger::ConstructLogString(char* buffer, LOG_CATEGORY category, int indent,
 	char logString[MAX_PURE_LOG_SIZE];
 
 	//_snprintf_s(logString, MAX_PURE_LOG_SIZE, _TRUNCATE, log, args);	// El239: doesn't work with "%f, %s"
-	vsprintf(logString, log, args);
+	vsprintf_s(logString, log, args);
 
 	AddBeginning(buffer, category, indent);
 	memcpy(buffer + CATEGORY_MARKER_SIZE + indent, logString, MAX_PURE_LOG_SIZE);

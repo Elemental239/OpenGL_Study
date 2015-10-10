@@ -5,63 +5,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Graphic">
-      <UniqueIdentifier>{abed3abf-9054-465a-be50-736d196c7765}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Network">
       <UniqueIdentifier>{55e08f89-41da-4ea9-a169-7aa74240cfec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Utility">
-      <UniqueIdentifier>{335c16be-b721-4daa-8c6c-424d31270566}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Logic">
-      <UniqueIdentifier>{fde46e7f-9c32-48fd-80d4-68cefed777ce}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Graphic\GraphicObject.cpp">
-      <Filter>Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Utility\Logger.cpp">
-      <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Logic\Globals.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="..\MainLabirinth.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Graphic\MainWindow.cpp">
-      <Filter>Graphic</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Graphic\GraphicGeneral.h">
-      <Filter>Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Graphic\GraphicObject.h">
-      <Filter>Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Utility\Listeners.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Utility\Logger.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Utility\Object.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Utility\SharedPtr.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Utility\UtilityMacros.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Logic\Globals.h">
-      <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Graphic\MainWindow.h">
-      <Filter>Graphic</Filter>
-    </ClInclude>
+    <ClCompile Include="..\MainLabirinth.cpp" />
   </ItemGroup>
 </Project>

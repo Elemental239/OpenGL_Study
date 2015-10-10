@@ -2,11 +2,17 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Labirinth", "Labirinth\Labirinth.vcxproj", "{3EE85139-B889-4A9C-B786-F1224FEC7D5A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E} = {B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Labirinth_tests", "Labirinth_tests\Labirinth_tests.vcxproj", "{5667373B-065F-4A0E-B92F-E7847BF14967}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3EE85139-B889-4A9C-B786-F1224FEC7D5A} = {3EE85139-B889-4A9C-B786-F1224FEC7D5A}
+		{B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E} = {B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LabirinthStaticLib", "LabirinthStaticLib\LabirinthStaticLib.vcxproj", "{B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +28,10 @@ Global
 		{5667373B-065F-4A0E-B92F-E7847BF14967}.Debug|Win32.Build.0 = Debug|Win32
 		{5667373B-065F-4A0E-B92F-E7847BF14967}.Release|Win32.ActiveCfg = Release|Win32
 		{5667373B-065F-4A0E-B92F-E7847BF14967}.Release|Win32.Build.0 = Release|Win32
+		{B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E}.Debug|Win32.Build.0 = Debug|Win32
+		{B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E}.Release|Win32.ActiveCfg = Release|Win32
+		{B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
