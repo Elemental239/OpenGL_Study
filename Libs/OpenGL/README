@@ -1,0 +1,3 @@
+1) glu32.dll, glut.dll, glut32.dll положить в C:\Windows\System32
+2) glut.h положить в "Microsoft Visual Studio 11.0\VC\include"
+3) glut.lib и glut32.lib положить в "Microsoft Visual Studio 11.0\VC\lib"
