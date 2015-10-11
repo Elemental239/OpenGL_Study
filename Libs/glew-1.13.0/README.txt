@@ -32,3 +32,7 @@ An alternative to generating the GLEW sources from scratch is to
 download a pre-generated (unsupported) snapshot:
 
         https://sourceforge.net/projects/glew/files/glew/snapshots/
+
+
+
+NB! El239: don't forget to put Libs\glew-1.13.0\bin\Release\Win32\glew32.dll into C:/Windows/System32 folder
