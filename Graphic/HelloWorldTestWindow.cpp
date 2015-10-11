@@ -4,9 +4,9 @@
 
 #include "HelloWorldTestWindow.h"
 #include "Logger.h"
-#include <glut.h>
 #include <functional>
 
+#include "glew-1.13.0\include\GL\glew.h"
 #define GLEW_STATIC
 #include "glfw-3.1.1\include\GLFW\glfw3.h"
 
@@ -28,4 +28,10 @@ void CHelloWorldTestWindow::Render()
 void CHelloWorldTestWindow::Draw()
 {
 	MARKER("CHelloWorldTestWindow::Draw()");
+
+	glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 }
