@@ -61,4 +61,6 @@ CMainWindow::~CMainWindow()
 void CMainWindow::Init()
 {
 	MARKER("CMainWindow::Init()");
+
+	InitMainWindow();
 }

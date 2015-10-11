@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Labirinth", "Labirinth\Labirinth.vcxproj", "{3EE85139-B889-4A9C-B786-F1224FEC7D5A}"
 	ProjectSection(ProjectDependencies) = postProject
+		{5667373B-065F-4A0E-B92F-E7847BF14967} = {5667373B-065F-4A0E-B92F-E7847BF14967}
 		{B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E} = {B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Labirinth_tests", "Labirinth_tests\Labirinth_tests.vcxproj", "{5667373B-065F-4A0E-B92F-E7847BF14967}"
 	ProjectSection(ProjectDependencies) = postProject
-		{3EE85139-B889-4A9C-B786-F1224FEC7D5A} = {3EE85139-B889-4A9C-B786-F1224FEC7D5A}
 		{B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E} = {B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E}
 	EndProjectSection
 EndProject
