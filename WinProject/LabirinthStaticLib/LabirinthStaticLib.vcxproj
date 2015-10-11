@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Graphic\GraphicGeneral.h" />
     <ClInclude Include="..\..\Graphic\GraphicObject.h" />
+    <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h" />
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\Utility\Listeners.h" />
@@ -23,6 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
+    <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
@@ -65,12 +67,16 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/../Libs;$(SolutionDir)/../Logic;$(SolutionDir)/../Graphic;$(SolutionDir)/../Network;$(SolutionDir)/../Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../Libs/glfw-3.1.1/include;$(SolutionDir)/../Libs;$(SolutionDir)/../Logic;$(SolutionDir)/../Graphic;$(SolutionDir)/../Network;$(SolutionDir)/../Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)/../Libs/glfw-3.1.1/lib-vc2012;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

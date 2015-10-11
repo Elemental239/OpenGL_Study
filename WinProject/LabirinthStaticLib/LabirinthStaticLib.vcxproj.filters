@@ -43,6 +43,9 @@
     <ClInclude Include="..\..\Graphic\MainWindow.h">
       <Filter>Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -55,6 +58,9 @@
       <Filter>Graphic</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Graphic\MainWindow.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
   </ItemGroup>

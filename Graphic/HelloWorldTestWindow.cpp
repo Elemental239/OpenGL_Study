@@ -7,13 +7,8 @@
 #include <glut.h>
 #include <functional>
 
-GLenum g_OpenGLError;
-
-#define OPENGL_CALL(expression) { expression; \
-    if ((g_OpenGLError = glGetError()) != GL_NO_ERROR) \
-      LOG_ERROR("OpenGL expression \"" #expression "\" error 0x%X", (unsigned)g_OpenGLError); }
-
-#define OPENGL_CHECK_FOR_ERRORS if ((g_OpenGLError = glGetError()) != GL_NO_ERROR) LOGE("OpenGL error 0x%X\n", (unsigned)g_OpenGLError);
+#define GLEW_STATIC
+#include "glfw-3.1.1\include\GLFW\glfw3.h"
 
 CHelloWorldTestWindow::CHelloWorldTestWindow()
 {

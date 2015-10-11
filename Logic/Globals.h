@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "MainWindow.h"
+#include "HelloWorldTestWindow.h"
 #include "SharedPtr.h"
 #include "Object.h"
 
@@ -20,6 +21,7 @@ private:
 	CGlobals(const CGlobals&);
 
 	CSharedPtr<CMainWindow> m_spMainWindow;
+	CSharedPtr<CHelloWorldTestWindow> m_spHelloWorldTestWindow;
 };
 
 #define GLOBALS CGlobals::Instance()
