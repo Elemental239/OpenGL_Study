@@ -6,9 +6,14 @@
 #include "Logger.h"
 #include <functional>
 
-#include "glew-1.13.0\include\GL\glew.h"
 #define GLEW_STATIC
-#include "glfw-3.1.1\include\GLFW\glfw3.h"
+#include "glew-1.13.0/Source/GL/glew.h"
+#include "glfw-3.1.1/include/GLFW/glfw3.h"
+
+void error_callback(int error, const char* description)
+{
+    fputs(description, stderr);
+}
 
 CHelloWorldTestWindow::CHelloWorldTestWindow()
 {
@@ -31,12 +36,14 @@ void CHelloWorldTestWindow::Draw()
 
 	//Init GLFW
 	glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+    //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    //glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	//Create window
+	glfwSetErrorCallback(error_callback);
 	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", nullptr, nullptr);
 	if (window == nullptr)
 	{

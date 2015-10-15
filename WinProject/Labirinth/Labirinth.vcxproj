@@ -70,12 +70,12 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)/../Libs/glew-1.13.0/lib/Release/Win32/;$(SolutionDir)/../Libs/glfw-3.1.1/lib-vc2012/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>chcp 866
-"G:\работа\Проекты\Labirinth\WinProject\Debug\Labirinth_tests.exe"
+"$(ProjectDir)\..\Debug\Labirinth_tests.exe"
 exit 0</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
