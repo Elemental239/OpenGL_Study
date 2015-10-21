@@ -19,7 +19,4 @@ void CGlobals::Init()
 
 	m_spHelloWorldTestWindow = CSharedPtr<CHelloWorldTestWindow>(new CHelloWorldTestWindow);
 	m_spHelloWorldTestWindow->Draw();
-
-	//m_spMainWindow = CSharedPtr<CMainWindow>(new CMainWindow);
-	//m_spMainWindow->Init();
 }
