@@ -1,5 +1,5 @@
-#ifndef __GraphicGeneral_H__
-#define __GraphicGeneral_H__
+#ifndef __Graphic_GraphicGeneral_H__
+#define __Graphic_GraphicGeneral_H__
 
 #include "Object.h"
 
@@ -18,4 +18,4 @@ private:
 	int m_nY;
 }
 
-#endif //__GraphicGeneral_H__
+#endif //__Graphic_GraphicGeneral_H__

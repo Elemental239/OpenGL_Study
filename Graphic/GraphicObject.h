@@ -1,5 +1,5 @@
-#ifndef __GraphicObject_H__
-#define __GraphicObject_H__
+#ifndef __Graphic_GraphicObject_H__
+#define __Graphic_GraphicObject_H__
 
 #include "Object.h"
 #include "SharedPtr.h"
@@ -25,4 +25,4 @@ private:
 	std::list<CGraphicObjectRef> m_children;   
 };
 
-#endif //__GraphicObject_H__
+#endif //__Graphic_GraphicObject_H__

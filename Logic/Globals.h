@@ -1,5 +1,5 @@
-#ifndef __CGlobals_H__
-#define __CGlobals_H__
+#ifndef __Logic_CGlobals_H__
+#define __Logic_CGlobals_H__
 
 #include <memory>
 #include "MainWindow.h"
@@ -26,4 +26,4 @@ private:
 
 #define GLOBALS CGlobals::Instance()
 
-#endif //__CGlobals_H__
+#endif //__Logic_CGlobals_H__

@@ -1,5 +1,5 @@
-#ifndef __MainWindow_H__
-#define __MainWindow_H__
+#ifndef __Graphic_MainWindow_H__
+#define __Graphic_MainWindow_H__
 
 #include "Object.h"
 
@@ -12,4 +12,4 @@ public:
 	void Init();
 };
 
-#endif //__MainWindow_H__
+#endif //__Graphic_MainWindow_H__

@@ -1,5 +1,5 @@
-#ifndef __OBJECT_H__
-#define __OBJECT_H__
+#ifndef __Utility_OBJECT_H__
+#define __Utility_OBJECT_H__
 
 class CObject
 {
@@ -8,4 +8,4 @@ public:
 	virtual ~CObject() {}
 };
 
-#endif //__OBJECT_H__
+#endif //__Utility_OBJECT_H__

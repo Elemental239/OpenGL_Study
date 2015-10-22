@@ -1,5 +1,5 @@
-#ifndef __LISTENERS_H__
-#define __LISTENERS_H__
+#ifndef __Utility_LISTENERS_H__
+#define __Utility_LISTENERS_H__
 
 #include <map>
 
@@ -28,4 +28,4 @@
 #define CALL_ADDITIONAL_LISTENERS(type, op) CALL_LISTENERS_EX(op, type)
 
 
-#endif //__LISTENERS_H__
+#endif //__Utility_LISTENERS_H__

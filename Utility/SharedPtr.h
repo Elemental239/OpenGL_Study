@@ -1,5 +1,5 @@
-#ifndef __SharedPtr_H__
-#define __SharedPtr_H__
+#ifndef __Utility_SharedPtr_H__
+#define __Utility_SharedPtr_H__
 
 #include <memory>
 #include "Object.h"
@@ -55,4 +55,4 @@ bool operator==(const CSharedPtr<T>& left, const CSharedPtr<T>& right) {
 	return left.sp_obj == right.sp_obj;
 }
 
-#endif //__SharedPtr_H__
+#endif //__Utility_SharedPtr_H__

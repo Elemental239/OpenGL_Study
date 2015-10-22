@@ -1,5 +1,5 @@
-#ifndef __LOGGER_H__
-#define __LOGGER_H__
+#ifndef __Utility_LOGGER_H__
+#define __Utility_LOGGER_H__
 
 #include <stdarg.h>
 #include "UtilityMacros.h"
@@ -57,4 +57,4 @@ private:
 };
 
 extern Logger log_instance;
-#endif //__LOGGER_H__
+#endif //__Utility_LOGGER_H__
