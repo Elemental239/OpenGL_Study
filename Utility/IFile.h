@@ -27,7 +27,7 @@ public:
 
 	virtual bool IsExist() = 0;
 
-private:
+protected:
 	CString m_strPath;
 	EFileMode m_mode;
 };
