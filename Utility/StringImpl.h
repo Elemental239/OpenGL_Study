@@ -2,7 +2,7 @@
 #define __Utility_String_H__
 
 #include <string>
-#include <windows.h>
+#include "Windows/WinFunctions.h"
 
 #define CString std::string
 #define CStringWide std::wstring

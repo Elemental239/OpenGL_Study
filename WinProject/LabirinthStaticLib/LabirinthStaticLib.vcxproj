@@ -16,7 +16,8 @@
     <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h" />
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
-    <ClInclude Include="..\..\PlatformSpecific\Windows\File.h" />
+    <ClInclude Include="..\..\PlatformSpecific\Windows\WinFunctions.h" />
+    <ClInclude Include="..\..\Utility\File.h" />
     <ClInclude Include="..\..\Utility\IFile.h" />
     <ClInclude Include="..\..\Utility\Listeners.h" />
     <ClInclude Include="..\..\Utility\Logger.h" />
@@ -30,7 +31,7 @@
     <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
-    <ClCompile Include="..\..\PlatformSpecific\Windows\File.cpp" />
+    <ClCompile Include="..\..\Utility\File.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

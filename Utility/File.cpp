@@ -1,7 +1,7 @@
 #include "Logger.h"
 #include "File.h"
 #include "String.h"
-#include <windows.h>
+#include "Windows/WinFunctions.h"
 
 CFile::CFile(CString path, EFileMode mode): IFile(path, mode) 
 {

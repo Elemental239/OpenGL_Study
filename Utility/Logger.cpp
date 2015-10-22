@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string>
-#include <Windows.h>
+#include "Windows/WinFunctions.h"
 
 Logger log_instance;
 
