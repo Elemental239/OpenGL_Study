@@ -16,10 +16,13 @@
     <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h" />
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
+    <ClInclude Include="..\..\PlatformSpecific\Windows\File.h" />
+    <ClInclude Include="..\..\Utility\IFile.h" />
     <ClInclude Include="..\..\Utility\Listeners.h" />
     <ClInclude Include="..\..\Utility\Logger.h" />
     <ClInclude Include="..\..\Utility\Object.h" />
     <ClInclude Include="..\..\Utility\SharedPtr.h" />
+    <ClInclude Include="..\..\Utility\StringImpl.h" />
     <ClInclude Include="..\..\Utility\UtilityMacros.h" />
   </ItemGroup>
   <ItemGroup>
@@ -27,6 +30,7 @@
     <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
+    <ClCompile Include="..\..\PlatformSpecific\Windows\File.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -69,7 +73,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/../Libs;$(SolutionDir)/../Logic;$(SolutionDir)/../Graphic;$(SolutionDir)/../Network;$(SolutionDir)/../Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../PlatformSpecific;$(SolutionDir)/../Libs;$(SolutionDir)/../Logic;$(SolutionDir)/../Graphic;$(SolutionDir)/../Network;$(SolutionDir)/../Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

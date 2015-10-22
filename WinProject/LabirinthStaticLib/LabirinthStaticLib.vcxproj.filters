@@ -14,6 +14,9 @@
     <Filter Include="Utility">
       <UniqueIdentifier>{3883b0e4-502a-48f2-aae6-558ffb82eab1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Specific">
+      <UniqueIdentifier>{8a8dd8aa-d644-41e9-9b50-873219b18a13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Utility\Listeners.h">
@@ -46,6 +49,15 @@
     <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h">
       <Filter>Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Utility\IFile.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PlatformSpecific\Windows\File.h">
+      <Filter>Specific</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Utility\StringImpl.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -62,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp">
       <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\PlatformSpecific\Windows\File.cpp">
+      <Filter>Specific</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
