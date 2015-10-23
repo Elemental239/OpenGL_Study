@@ -12,9 +12,19 @@ public:
 	void Draw();
 
 private:
-	bool LoadResources() { return true; }
-	static void Idle() { }
+	void InitOpenGL();
+	void CreateWindow(int nWidth, int nHeight);
+	void PrepareGLObjects();
+	void CreateVertexShader();
+	void CreateFragmentShader();
+	void CreateShaderProgram();
+	
+
 	static void Render();
+	void StartRenderCycle();
+	
+
+
 };
 
 #endif //__HelloWorldTestWindow_H__

@@ -60,6 +60,37 @@ CHelloWorldTestWindow::~CHelloWorldTestWindow()
 	MARKER("CHelloWorldTestWindow::~CHelloWorldTestWindow()");
 }
 
+void CHelloWorldTestWindow::InitOpenGL()
+{
+}
+
+void CHelloWorldTestWindow::CreateWindow(int nWidth, int nHeight)
+{
+}
+
+void CHelloWorldTestWindow::PrepareGLObjects()
+{
+}
+
+void CHelloWorldTestWindow::CreateVertexShader()
+{
+}
+
+void CHelloWorldTestWindow::CreateFragmentShader()
+{
+}
+
+void CHelloWorldTestWindow::CreateShaderProgram()
+{
+}
+
+
+
+void CHelloWorldTestWindow::StartRenderCycle()
+{
+	MARKER("CHelloWorldTestWindow::StartRenderCycle()");
+}
+
 void CHelloWorldTestWindow::Render()
 {
 	LOG("CHelloWorldTestWindow::Render()");
@@ -80,13 +111,13 @@ void CHelloWorldTestWindow::Render()
 	GLuint vertexShader;
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 
-	std::string vertexShaderSource = "				\
-		#version 330 core							\
-		layout (location = 0) in vec3 position;		\
-		void main()									\
-		{											\
-			gl_Position = vec4(position.x, position.y, position.z, 1.0);	\
-		} ";
+	std::string vertexShaderSource =
+		"#version 330 core\n"
+		"layout (location = 0) in vec3 position;\n"
+		"void main()\n"
+		"{\n"
+			"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
+		"}";
 	const GLchar* GLvertexShaderSource = (GLchar*)vertexShaderSource.c_str();
 
 	glShaderSource(vertexShader, 1, &GLvertexShaderSource, NULL);	// Set shader source string
@@ -107,13 +138,13 @@ void CHelloWorldTestWindow::Render()
 	GLuint fragmentShader;
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
-	std::string fragmentShaderSource = "			\
-		#version 330 core							\
-		out vec4 color;								\
-		void main()									\
-		{											\
-			color = vec4(1.0f, 0.5f, 0.2f, 1.0f);	\
-		} ";
+	std::string fragmentShaderSource =
+		"#version 330 core\n"
+		"out vec4 color;\n"
+		"void main()\n"
+		"{"
+			"color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+		"}";
 	const GLchar* GLfragmentShaderSource = (GLchar*)fragmentShaderSource.c_str();
 
 	glShaderSource(fragmentShader, 1, &GLfragmentShaderSource, NULL);
@@ -141,8 +172,6 @@ void CHelloWorldTestWindow::Render()
 		LOG("ERROR::SHADER::FULL::LINKING_FAILED\n %s", infoLog);
 	}
 
-	glUseProgram(shaderProgram); // tell OpenGL to use our new shader program
-
 	//After linking cleanup
 	glDeleteShader(vertexShader);	
 	glDeleteShader(fragmentShader);
@@ -151,7 +180,28 @@ void CHelloWorldTestWindow::Render()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
 
+	//Create Vertex Array Object (compound of VBO && Vertex attributes)
+	GLuint VAO;
+	glGenVertexArrays(1, &VAO);
+
+	// 1. Bind Vertex Array Object
+	glBindVertexArray(VAO);
+
+		// 2. Copy our vertices array in a buffer for OpenGL to use
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	
+		// 3. Then set our vertex attributes pointers
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+		glEnableVertexAttribArray(0);
+	
+	//4. Unbind the VAO
+	glBindVertexArray(0);
+
+	glUseProgram(shaderProgram); // tell OpenGL to use our new shader program
+	glBindVertexArray(VAO);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glBindVertexArray(0);
 }
 
 void CHelloWorldTestWindow::Draw()
@@ -164,7 +214,6 @@ void CHelloWorldTestWindow::Draw()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	//Create window
 	glfwSetErrorCallback(error_callback);
