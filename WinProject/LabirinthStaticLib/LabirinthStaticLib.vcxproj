@@ -15,6 +15,8 @@
     <ClInclude Include="..\..\Graphic\GraphicObject.h" />
     <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h" />
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
+    <ClInclude Include="..\..\Graphic\OpenGL.h" />
+    <ClInclude Include="..\..\Graphic\Shader.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\PlatformSpecific\Windows\WinFunctions.h" />
     <ClInclude Include="..\..\Utility\File.h" />
@@ -30,6 +32,7 @@
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
     <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
+    <ClCompile Include="..\..\Graphic\Shader.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Utility\File.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />

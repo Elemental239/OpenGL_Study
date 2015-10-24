@@ -3,9 +3,8 @@
 
 #include "Object.h"
 #include "StringImpl.h"
+#include "OpenGL.h"
 
-#define GLEW_STATIC
-#include "glew-1.13.0/include/GL/glew.h"
 struct GLFWwindow;
 
 class CHelloWorldTestWindow : public CObject
