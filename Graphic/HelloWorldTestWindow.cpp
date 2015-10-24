@@ -72,6 +72,7 @@ void CHelloWorldTestWindow::InitOpenGL()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint (GLFW_SAMPLES, 16);
+	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 	glfwSetErrorCallback(error_callback);
 	
 	CreateNewWindow(1000, 800, "LearnOpenGL");
@@ -244,7 +245,7 @@ void CHelloWorldTestWindow::CreateMedmLogo18Vertex(float fHorizontalShift, float
 		-0.50f,  0.25f, 0.0f, IntColorPart2Float(218), IntColorPart2Float(91), IntColorPart2Float(101)  // Top Left
 	};
 
-	for (int i = 0; i < 48; i++)
+	for (int i = 0; i < 3*6*6; i++)
 	{
 		if ((i % 6) == 0)
 		{
@@ -462,7 +463,7 @@ void CHelloWorldTestWindow::Draw()
 	CreateGLObjects();
 	CreateMedmLogoObject(0.0f, 0.4f, m_MedmVAO);
 	CreateMedmLogoObject(0.2f, 0.0f, m_MedmVAOConstantBlue);
-	CreateMedmLogo18Vertex(0.0f, 0.0f, m_MedmVAO18Vertex);
+	CreateMedmLogo18Vertex(-0.4f, -0.65f, m_MedmVAO18Vertex); //40 65
 
 	StartRenderCycle();
 }
