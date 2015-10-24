@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "StringImpl.h"
 #include "OpenGL.h"
+#include "Shader.h"
 
 struct GLFWwindow;
 
@@ -17,17 +18,13 @@ public:
 
 private:
 	GLFWwindow* m_window;
-	GLuint m_vertexShader;
-	GLuint m_fragmentShader;
-	GLuint m_shaderProgram;
+	CShaderProgram m_shaderProgram;
 	GLuint m_VAO;
 	GLuint m_MedmVAO;
 
 	void InitOpenGL();
 	void CreateNewWindow(int nWidth, int nHeight, CString strTitle);
-	void CreateVertexShader();
-	void CreateFragmentShader();
-	void CreateShaderProgram(GLuint vertexShader, GLuint fragmentShader);
+	void CreateShaderProgram();
 	void CreateGLObjects();	
 
 	void StartRenderCycle();

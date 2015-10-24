@@ -33,18 +33,19 @@ private:
 class CVertexShader : public CShader
 {
 public:
-	CVertexShader(CString source) : CShader(source) { m_nShaderType = GL_VERTEX_SHADER; }
+	CVertexShader(CString source) : CShader(source) { m_nShaderType = GL_VERTEX_SHADER; Compile(); }
 };
 
 class CFragmentShader : public CShader
 {
 public:
-	CFragmentShader(CString source) : CShader(source) { m_nShaderType = GL_FRAGMENT_SHADER; }
+	CFragmentShader(CString source) : CShader(source) { m_nShaderType = GL_FRAGMENT_SHADER; Compile(); }
 };
 
 class CShaderProgram : public CObject
 {
 public:
+	CShaderProgram() : m_program(0) { }
 	CShaderProgram(CVertexShader VertexShader, CFragmentShader FragmentShader);
 	void Use() { glUseProgram(m_program); }
 

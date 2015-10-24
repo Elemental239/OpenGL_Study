@@ -6,8 +6,6 @@
 CShader::CShader(CString source) : m_strSource(source), m_nShaderType(0)
 {
 	MARKER("CShader::CShader()");
-
-	Compile();
 }
 
 void CShader::DeleteShader()
