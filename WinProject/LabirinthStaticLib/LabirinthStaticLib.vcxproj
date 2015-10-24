@@ -33,6 +33,7 @@
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Utility\File.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
+    <ClCompile Include="..\..\Utility\StringImpl.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B8FAE7EA-B6EC-4CD7-B599-A0B7F7C6B42E}</ProjectGuid>

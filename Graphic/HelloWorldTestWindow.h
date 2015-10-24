@@ -2,6 +2,11 @@
 #define __HelloWorldTestWindow_H__
 
 #include "Object.h"
+#include "StringImpl.h"
+
+#define GLEW_STATIC
+#include "glew-1.13.0/include/GL/glew.h"
+struct GLFWwindow;
 
 class CHelloWorldTestWindow : public CObject
 {
@@ -12,19 +17,21 @@ public:
 	void Draw();
 
 private:
+	GLFWwindow* m_window;
+	GLuint m_vertexShader;
+	GLuint m_fragmentShader;
+	GLuint m_shaderProgram;
+	GLuint m_VAO;
+
 	void InitOpenGL();
-	void CreateWindow(int nWidth, int nHeight);
-	void PrepareGLObjects();
+	void CreateNewWindow(int nWidth, int nHeight, CString strTitle);
 	void CreateVertexShader();
 	void CreateFragmentShader();
-	void CreateShaderProgram();
-	
+	void CreateShaderProgram(GLuint vertexShader, GLuint fragmentShader);
+	void CreateGLObjects();	
 
-	static void Render();
 	void StartRenderCycle();
-	
-
-
+	void Render();
 };
 
 #endif //__HelloWorldTestWindow_H__

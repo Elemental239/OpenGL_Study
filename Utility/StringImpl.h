@@ -1,21 +1,13 @@
 #ifndef __Utility_String_H__
 #define __Utility_String_H__
 
-#include <string>
 #include "Windows/WinFunctions.h"
+#include <string>
 
-#define CString std::string
-#define CStringWide std::wstring
+typedef std::string CString;
+typedef std::wstring CStringWide;
 
-CStringWide CString2CStringWide(const CString string)
-{
-	CStringWide wideString(string.begin(), string.end());
-	return wideString;
-}
-
-LPCWSTR CString2LPCWSTR(const CString string)
-{
-	return (LPCWSTR)CString2CStringWide(string).c_str();
-}
+CStringWide CString2CStringWide(const CString string);
+LPCWSTR CString2LPCWSTR(const CString string);
 
 #endif //__Utility_String_H__

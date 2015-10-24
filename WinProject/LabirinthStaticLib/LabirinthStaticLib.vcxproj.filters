@@ -81,5 +81,8 @@
     <ClCompile Include="..\..\Utility\File.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Utility\StringImpl.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
