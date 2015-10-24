@@ -19,8 +19,11 @@ public:
 private:
 	GLFWwindow* m_window;
 	CShaderProgram m_shaderProgram;
+	CShaderProgram m_shaderProgramFixedColorBlue;
 	GLuint m_VAO;
 	GLuint m_MedmVAO;
+	GLuint m_MedmVAOConstantBlue;
+	GLuint m_MedmVAO18Vertex;
 
 	void InitOpenGL();
 	void CreateNewWindow(int nWidth, int nHeight, CString strTitle);
@@ -30,8 +33,10 @@ private:
 	void StartRenderCycle();
 	void Render();
 
+	void CreateMedmLogoObject(float fHorizontalShift, float fVerticalShift, GLuint& VAO);
+	void CreateMedmLogo18Vertex(float fHorizontalShift, float fVerticalShift, GLuint& VAO);
 
-	void CreateMedmLogoObject();
+	float IntColorPart2Float(int nColor);
 };
 
 #endif //__HelloWorldTestWindow_H__

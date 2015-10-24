@@ -1,6 +1,8 @@
 // Possible OpenGL tutorials: http://www.learnopengl.com/#!Getting-started/Creating-a-window  - now it is the main course
 //							  https://open.gl/
 // OpenGL main site links:    https://www.opengl.org/sdk/docs/tutorials/
+//
+// GLFW documentation: http://www.glfw.org/docs/latest/window.html
 
 /* quick and dirty GLSL code loader:
 string getGLSLCode(string fname)
@@ -187,12 +189,109 @@ void CHelloWorldTestWindow::CreateShaderProgram()
 			"color = vec4(vertexColour, 1.0f);\n"
 		"}";
 
-	CVertexShader vertexShader(vertexShaderSource);
-	CFragmentShader fragmentShader(fragmentShaderSource);
-	m_shaderProgram = CShaderProgram(vertexShader, fragmentShader);
+	CString fragmentShaderSourceFixedColourBlue =
+		"#version 330 core\n"
+		"in vec3 vertexColour;"
+		"out vec4 color;\n"
+		"void main()\n"
+		"{"
+			"color = vec4(0.1f, 0.1f, 0.8f, 1.0f);\n"
+		"}";
+
+	{
+		CVertexShader vertexShader(vertexShaderSource);
+		CFragmentShader fragmentShader(fragmentShaderSource);
+		m_shaderProgram = CShaderProgram(vertexShader, fragmentShader);
+	}
+
+	{
+		CVertexShader vertexShader(vertexShaderSource);
+		CFragmentShader fragmentShader(fragmentShaderSourceFixedColourBlue);
+		m_shaderProgramFixedColorBlue = CShaderProgram(vertexShader, fragmentShader);
+	}
 }
 
-void CHelloWorldTestWindow::CreateMedmLogoObject()
+void CHelloWorldTestWindow::CreateMedmLogo18Vertex(float fHorizontalShift, float fVerticalShift, GLuint& VAO)
+{
+	//     *   *   *
+	//     |-*---*-|
+	//     *---*---*
+
+		GLfloat vertices[] = {
+		//Coordinates		  //Colors
+		 0.50f,  0.25f, 0.0f, IntColorPart2Float(173), IntColorPart2Float(23), IntColorPart2Float(29), // Top Right
+		 0.50f, -0.25f, 0.0f, IntColorPart2Float(173), IntColorPart2Float(23), IntColorPart2Float(29), // Bottom Right
+		 0.25f,  0.00f, 0.0f, IntColorPart2Float(173), IntColorPart2Float(23), IntColorPart2Float(29), // Center Right
+
+		 0.25f,  0.00f, 0.0f, IntColorPart2Float(117), IntColorPart2Float(2), IntColorPart2Float(3), // Center Right
+		 0.50f, -0.25f, 0.0f, IntColorPart2Float(117), IntColorPart2Float(2), IntColorPart2Float(3), // Bottom Right
+		 0.00f, -0.25f, 0.0f, IntColorPart2Float(117), IntColorPart2Float(2), IntColorPart2Float(3), // Center Bottom
+
+		 0.25f,  0.00f, 0.0f, IntColorPart2Float(173), IntColorPart2Float(23), IntColorPart2Float(29), // Center Right
+		 0.00f, -0.25f, 0.0f, IntColorPart2Float(173), IntColorPart2Float(23), IntColorPart2Float(29), // Center Bottom
+		 0.00f,  0.25f, 0.0f, IntColorPart2Float(173), IntColorPart2Float(23), IntColorPart2Float(29), // Center Top
+
+		 0.00f,  0.25f, 0.0f, IntColorPart2Float(202), IntColorPart2Float(22), IntColorPart2Float( 36), // Center Top
+		 0.00f, -0.25f, 0.0f, IntColorPart2Float(202), IntColorPart2Float(22), IntColorPart2Float( 36), // Center Bottom
+		-0.25f,  0.00f, 0.0f, IntColorPart2Float(202), IntColorPart2Float(22), IntColorPart2Float( 36), // Center Left
+
+		-0.25f,  0.00f, 0.0f, IntColorPart2Float(173), IntColorPart2Float(8), IntColorPart2Float( 14), // Center Left
+		 0.00f, -0.25f, 0.0f, IntColorPart2Float(173), IntColorPart2Float(8), IntColorPart2Float( 14), // Center Bottom
+		-0.50f, -0.25f, 0.0f, IntColorPart2Float(173), IntColorPart2Float(8), IntColorPart2Float( 14), // Bottom Left
+
+		-0.25f,  0.00f, 0.0f, IntColorPart2Float(218), IntColorPart2Float(91), IntColorPart2Float(101), // Center Left
+		-0.50f, -0.25f, 0.0f, IntColorPart2Float(218), IntColorPart2Float(91), IntColorPart2Float(101), // Bottom Left
+		-0.50f,  0.25f, 0.0f, IntColorPart2Float(218), IntColorPart2Float(91), IntColorPart2Float(101)  // Top Left
+	};
+
+	for (int i = 0; i < 48; i++)
+	{
+		if ((i % 6) == 0)
+		{
+			vertices[i] += fHorizontalShift;
+		} 
+		else if ((i % 6) == 1)
+		{
+			vertices[i] += fVerticalShift;
+		}
+	}
+
+	GLuint indices[] = {  // Note that we start from 0!
+		 0,  1,  2,   // Right-Right Triangle
+		 3,  4,  5,   // Right Bottom Triangle
+		 6,  7,  8,   // Right Center Triangle
+		 9, 10, 11,   // Left Center Triangle
+		12, 13, 14,   // Left Bottom Triangle
+		15, 16, 17    // Left-Left Triangle
+	};
+
+	GLuint EBO;
+	glGenBuffers(1, &EBO);
+
+	GLuint VBO;
+	glGenBuffers(1, &VBO);
+
+	//Form target VAO
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);	//Start work with this object
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	
+	// Position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	// Color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3* sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
+	
+	glBindVertexArray(0);
+}
+
+void CHelloWorldTestWindow::CreateMedmLogoObject(float fHorizontalShift, float fVerticalShift, GLuint& VAO)
 {
 	GLfloat vertices[] = {
 		//Coordinates		  //Colors
@@ -208,9 +307,13 @@ void CHelloWorldTestWindow::CreateMedmLogoObject()
 
 	for (int i = 0; i < 48; i++)
 	{
-		if ((i % 6) == 1)
+		if ((i % 6) == 0)
 		{
-			vertices[i] += 0.4f;
+			vertices[i] += fHorizontalShift;
+		} 
+		else if ((i % 6) == 1)
+		{
+			vertices[i] += fVerticalShift;
 		}
 	}
 
@@ -234,8 +337,8 @@ void CHelloWorldTestWindow::CreateMedmLogoObject()
 //	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // Copy triangle into VBO memory => triangle in graphic card memory
 
 	//Form target VAO
-	glGenVertexArrays(1, &m_MedmVAO);
-	glBindVertexArray(m_MedmVAO);	//Start work with this object
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);	//Start work with this object
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -329,17 +432,22 @@ void CHelloWorldTestWindow::StartRenderCycle()
 
 void CHelloWorldTestWindow::Render()
 {
-	//glDrawArrays(GL_TRIANGLES, 0, 3);
-
-	//glUseProgram(m_shaderProgram); // tell OpenGL to use our new shader program
 	m_shaderProgram.Use();
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//glBindVertexArray(m_VAO);
-	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-	glBindVertexArray(m_MedmVAO);
+	/*glBindVertexArray(m_MedmVAO);
+	glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0);	// = 8 * 3
+	glBindVertexArray(0);
+
+	m_shaderProgramFixedColorBlue.Use();
+
+	glBindVertexArray(m_MedmVAOConstantBlue);
 	glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);*/
+
+	glBindVertexArray(m_MedmVAO18Vertex);
+	glDrawElements(GL_TRIANGLES, 18*3, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
 
@@ -352,7 +460,14 @@ void CHelloWorldTestWindow::Draw()
 	//CreateFragmentShader();
 	CreateShaderProgram(/*m_vertexShader, m_fragmentShader*/);
 	CreateGLObjects();
-	CreateMedmLogoObject();
+	CreateMedmLogoObject(0.0f, 0.4f, m_MedmVAO);
+	CreateMedmLogoObject(0.2f, 0.0f, m_MedmVAOConstantBlue);
+	CreateMedmLogo18Vertex(0.0f, 0.0f, m_MedmVAO18Vertex);
 
 	StartRenderCycle();
+}
+
+float CHelloWorldTestWindow::IntColorPart2Float(int nColor)
+{
+	return (1.0f * nColor) / 0xFF;
 }
