@@ -22,6 +22,7 @@ private:
 	GLuint m_fragmentShader;
 	GLuint m_shaderProgram;
 	GLuint m_VAO;
+	GLuint m_MedmVAO;
 
 	void InitOpenGL();
 	void CreateNewWindow(int nWidth, int nHeight, CString strTitle);
@@ -32,6 +33,9 @@ private:
 
 	void StartRenderCycle();
 	void Render();
+
+
+	void CreateMedmLogoObject();
 };
 
 #endif //__HelloWorldTestWindow_H__

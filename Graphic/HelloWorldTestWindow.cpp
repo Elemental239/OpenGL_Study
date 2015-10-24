@@ -143,7 +143,7 @@ void CHelloWorldTestWindow::CreateFragmentShader()
 		"out vec4 color;\n"
 		"void main()\n"
 		"{"
-			"color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+			"color = vec4(0.8f, 0.2f, 0.2f, 1.0f);\n"
 		"}";
 	const GLchar* GLfragmentShaderSource = (GLchar*)fragmentShaderSource.c_str();
 
@@ -184,15 +184,85 @@ void CHelloWorldTestWindow::CreateShaderProgram(GLuint vertexShader, GLuint frag
 	glDeleteShader(fragmentShader);
 }
 
+void CHelloWorldTestWindow::CreateMedmLogoObject()
+{
+	GLfloat vertices[] = {
+		 0.50f,  0.25f, 0.0f,  // Top Right			*   *   *
+		 0.50f, -0.25f, 0.0f,  // Bottom Right      |-*---*-|
+		 0.25f,  0.00f, 0.0f,  // Center Right      *---*---*
+		 0.00f,  0.25f, 0.0f,  // Center Top           
+		 0.00f, -0.25f, 0.0f,  // Center Bottom       /|\ Y
+		-0.25f,  0.00f, 0.0f,  // Center Left          |
+		-0.50f,  0.25f, 0.0f,  // Top Left	    	---*---> X
+		-0.50f, -0.25f, 0.0f,  // Bottom Left          |
+	};
+
+	for (int i = 0; i < 24; i++)
+	{
+		LOG("vertices[%d] = %f", i, vertices[i]);
+		if ((i % 3) == 1)
+		{
+			vertices[i] += 0.4f;
+			LOG("corrected vertices[%d] = %f", i, vertices[i]);
+		}
+	}
+
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 2,   // Right-Right Triangle
+		2, 1, 4,   // Right Bottom Triangle
+		2, 4, 3,   // Right Center Triangle
+		3, 4, 5,   // Left Center Triangle
+		5, 4, 7,   // Left Bottom Triangle
+		5, 7, 6,   // Left-Left Triangle
+	};
+
+	GLuint EBO;
+	glGenBuffers(1, &EBO);
+//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+//	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	GLuint VBO;
+	glGenBuffers(1, &VBO);
+//	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+//	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // Copy triangle into VBO memory => triangle in graphic card memory
+
+	//Form target VAO
+	glGenVertexArrays(1, &m_MedmVAO);
+	glBindVertexArray(m_MedmVAO);	//Start work with this object
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	
+	glBindVertexArray(0);
+}
+
 void CHelloWorldTestWindow::CreateGLObjects()
 {
 	MARKER("CHelloWorldTestWindow::CreateGLObjects()");
 
-		GLfloat vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f
+	GLfloat vertices[] = {
+		 0.5f,  0.5f, 0.0f,  // Top Right
+		 0.5f, -0.5f, 0.0f,  // Bottom Right
+		-0.5f, -0.5f, 0.0f,  // Bottom Left
+	    -0.5f,  0.5f, 0.0f   // Top Left 
+	};
+
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3,   // First Triangle
+		1, 2, 3    // Second Triangle
 	};  
+
+	GLuint EBO;
+	glGenBuffers(1, &EBO);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	//Create Vertex Buffer
 	GLuint VBO;
@@ -213,12 +283,16 @@ void CHelloWorldTestWindow::CreateGLObjects()
 		// 2. Copy our vertices array in a buffer for OpenGL to use
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		// 3. Copy our index array in a element buffer for OpenGL to use
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	
-		// 3. Then set our vertex attributes pointers
+		// 4. Then set our vertex attributes pointers
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
 		glEnableVertexAttribArray(0);
 	
-	//4. Unbind the VAO
+	//5. Unbind the VAO
 	glBindVertexArray(0);
 }
 
@@ -230,7 +304,7 @@ void CHelloWorldTestWindow::StartRenderCycle()
 	{
 		glfwPollEvents();
 
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		Render();
@@ -244,9 +318,15 @@ void CHelloWorldTestWindow::StartRenderCycle()
 
 void CHelloWorldTestWindow::Render()
 {
+	//glDrawArrays(GL_TRIANGLES, 0, 3);
+
 	glUseProgram(m_shaderProgram); // tell OpenGL to use our new shader program
-	glBindVertexArray(m_VAO);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//glBindVertexArray(m_VAO);
+	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+	glBindVertexArray(m_MedmVAO);
+	glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
 
@@ -259,6 +339,7 @@ void CHelloWorldTestWindow::Draw()
 	CreateFragmentShader();
 	CreateShaderProgram(m_vertexShader, m_fragmentShader);
 	CreateGLObjects();
+	CreateMedmLogoObject();
 
 	StartRenderCycle();
 }
