@@ -26,7 +26,7 @@ private:
 	GLuint m_MedmVAO18Vertex;
 
 	void InitOpenGL();
-	void CreateNewWindow(int nWidth, int nHeight, CString strTitle);
+	void CreateNewWindow(GLFWwindow*& targetWindow, int nWidth, int nHeight, CString strTitle);
 	void CreateShaderProgram();
 	void CreateGLObjects();	
 

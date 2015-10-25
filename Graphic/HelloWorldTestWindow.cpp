@@ -49,7 +49,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     // closing the application
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     	glfwSetWindowShouldClose(window, GL_TRUE);
-}    
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
 
 CHelloWorldTestWindow::CHelloWorldTestWindow()
 {
@@ -70,12 +75,13 @@ void CHelloWorldTestWindow::InitOpenGL()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	glfwWindowHint (GLFW_SAMPLES, 16);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
+	glfwWindowHint(GLFW_SAMPLES, 16);
+
 	glfwSetErrorCallback(error_callback);
 	
-	CreateNewWindow(1000, 800, "LearnOpenGL");
+	CreateNewWindow(m_window, 1000, 800, "LearnOpenGL");
 
 	// Init GLEW
 	glewExperimental = GL_TRUE;
@@ -85,84 +91,26 @@ void CHelloWorldTestWindow::InitOpenGL()
 	}
 }
 
-void CHelloWorldTestWindow::CreateNewWindow(int nWidth, int nHeight, CString strTitle)
+void CHelloWorldTestWindow::CreateNewWindow(GLFWwindow*& pTargetWindow, int nWidth, int nHeight, CString strTitle)
 {
 	MARKER("CHelloWorldTestWindow::CreateNewWindow()");
 
-	m_window = glfwCreateWindow(nWidth, nHeight, strTitle.c_str(), nullptr, nullptr);
-	if (m_window == nullptr)
+	pTargetWindow = glfwCreateWindow(nWidth, nHeight, strTitle.c_str(), nullptr, nullptr);
+	if (pTargetWindow == nullptr)
 	{
 		LOGE("Failed to create GLFW window");
 		glfwTerminate();
 		return;
 	}
-	glfwMakeContextCurrent(m_window);
+	glfwMakeContextCurrent(pTargetWindow);
 	
 	//Set ViewPort
 	glViewport(0, 0, nWidth, nHeight);
 
 	//Set window-specific callback
-	glfwSetKeyCallback(m_window, key_callback);
+	glfwSetKeyCallback(pTargetWindow, key_callback);
+	glfwSetFramebufferSizeCallback(pTargetWindow, framebuffer_size_callback);
 }
-
-//void CHelloWorldTestWindow::CreateVertexShader()
-//{
-//	//MARKER("CHelloWorldTestWindow::CreateVertexShader()");
-//	//
-//	//m_vertexShader = glCreateShader(GL_VERTEX_SHADER);
-//
-//	//std::string vertexShaderSource =
-//	//	"#version 330 core\n"
-//	//	"layout (location = 0) in vec3 position;\n"
-//	//	"void main()\n"
-//	//	"{\n"
-//	//		"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
-//	//	"}";
-//	//const GLchar* GLvertexShaderSource = (GLchar*)vertexShaderSource.c_str();
-//
-//	//glShaderSource(m_vertexShader, 1, &GLvertexShaderSource, NULL);	// Set shader source string
-//	//glCompileShader(m_vertexShader);		// Apply shader to OpenGL
-//
-//	////Check for shader compilation errors 
-//	//GLint success;
-//	//GLchar infoLog[512];
-//	//glGetShaderiv(m_vertexShader, GL_COMPILE_STATUS, &success);
-//
-//	//if(!success)
-//	//{
-//	//	glGetShaderInfoLog(m_vertexShader, 512, NULL, infoLog);
-//	//	LOG("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n %s", infoLog);
-//	//}
-//}
-//
-//void CHelloWorldTestWindow::CreateFragmentShader()
-//{
-//	//MARKER("CHelloWorldTestWindow::CreateFragmentShader()");
-//
-//	//m_fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-//
-//	//std::string fragmentShaderSource =
-//	//	"#version 330 core\n"
-//	//	"out vec4 color;\n"
-//	//	"void main()\n"
-//	//	"{"
-//	//		"color = vec4(0.8f, 0.2f, 0.2f, 1.0f);\n"
-//	//	"}";
-//	//const GLchar* GLfragmentShaderSource = (GLchar*)fragmentShaderSource.c_str();
-//
-//	//glShaderSource(m_fragmentShader, 1, &GLfragmentShaderSource, NULL);
-//	//glCompileShader(m_fragmentShader);
-//
-//	////Check for shader compilation errors 
-//	//GLint success;
-//	//GLchar infoLog[512];
-//	//glGetShaderiv(m_fragmentShader, GL_COMPILE_STATUS, &success);
-//	//if(!success)
-//	//{
-//	//	glGetShaderInfoLog(m_fragmentShader, 512, NULL, infoLog);
-//	//	LOG("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n %s", infoLog);
-//	//}
-//}
 
 void CHelloWorldTestWindow::CreateShaderProgram()
 {
@@ -457,13 +405,11 @@ void CHelloWorldTestWindow::Draw()
 	MARKER("CHelloWorldTestWindow::Draw()");
 
 	InitOpenGL();
-	//CreateVertexShader();
-	//CreateFragmentShader();
-	CreateShaderProgram(/*m_vertexShader, m_fragmentShader*/);
+	CreateShaderProgram();
 	CreateGLObjects();
 	CreateMedmLogoObject(0.0f, 0.4f, m_MedmVAO);
 	CreateMedmLogoObject(0.2f, 0.0f, m_MedmVAOConstantBlue);
-	CreateMedmLogo18Vertex(-0.4f, -0.65f, m_MedmVAO18Vertex); //40 65
+	CreateMedmLogo18Vertex(0.0f, 0.0f, m_MedmVAO18Vertex); //40 65
 
 	StartRenderCycle();
 }

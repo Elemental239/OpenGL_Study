@@ -22,7 +22,7 @@ public:
 	void RemoveAllChildren() { m_children.erase(m_children.begin(), m_children.end()); }
 
 private:
-	std::list<CGraphicObjectRef> m_children;   
+	std::list<CGraphicObjectRef> m_children;
 };
 
 #endif //__Graphic_GraphicObject_H__
