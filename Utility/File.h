@@ -2,6 +2,7 @@
 #define __Utility_File_H__
 
 #include "IFile.h"
+#include <fstream>
 
 //El239: sample how to load file using std::streams
 /*#include <fstream>
@@ -48,6 +49,9 @@ public:
 	virtual CString ReadString() override;
 
 	virtual bool IsExist() override;
+
+private:
+	std::fstream m_stream;
 };
 
 #endif //__Utility_File_H__

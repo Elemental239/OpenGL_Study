@@ -93,5 +93,8 @@
     <ClCompile Include="..\..\Graphic\Shader.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\PlatformSpecific\Windows\WinFunctions.cpp">
+      <Filter>Specific</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

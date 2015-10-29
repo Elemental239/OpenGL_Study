@@ -3,6 +3,8 @@
 #include "String.h"
 #include "Windows/WinFunctions.h"
 
+//CreateDirectory("data\\", NULL); - winapi for creating directories
+
 CFile::CFile(CString path, EFileMode mode): IFile(path, mode) 
 {
 
@@ -44,7 +46,9 @@ bool CFile::IsExist()
 {
 	MARKER("CFile::IsExist(%s)", m_strPath);
 
-	//return GetFileAttributes(m_strPath.c_str());
+	m_stream.open(m_strPath, std::fstream::in);
+	bool bResult = m_stream.is_open();
+	m_stream.close();
 
-	return false;
+	return bResult;
 }
