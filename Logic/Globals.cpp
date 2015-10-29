@@ -27,5 +27,5 @@ void CGlobals::Init()
 #endif
 
 	CFile file(CString("input.txt"), EFileMode::FILE_MODE_OPEN);
-
+	bool bExist = file.IsExist();
 }

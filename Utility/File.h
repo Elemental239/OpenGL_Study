@@ -51,6 +51,12 @@ public:
 	virtual bool IsExist() override;
 
 private:
+	static const int MODE_INPUT = std::fstream::in;
+	static const int MODE_OUTPUT = std::fstream::out;
+	static const int MODE_BINARY = std::fstream::binary;
+	static const int MODE_APPEND = std::fstream::app;
+	static const int MODE_TRUNCATE = std::fstream::trunc;
+
 	std::fstream m_stream;
 };
 

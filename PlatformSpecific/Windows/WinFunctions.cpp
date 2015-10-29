@@ -37,4 +37,6 @@ CString ConvertStringToPath(CString input)
 
 		nPos = input.find(" ");
 	}
+
+	return input;
 }

@@ -7,5 +7,6 @@ typedef std::string CString;
 typedef std::wstring CStringWide;
 
 CStringWide CString2CStringWide(const CString string);
+const char* ToLog(CString input);
 
 #endif //__Utility_String_H__
