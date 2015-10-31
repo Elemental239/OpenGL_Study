@@ -6,7 +6,7 @@ CStringWide CString2CStringWide(const CString string)
 	return wideString;
 }
 
-LPCWSTR CString2LPCWSTR(const CString string)
+const char* ToLog(CString input)
 {
-	return (LPCWSTR)CString2CStringWide(string).c_str();
+	return input.c_str();
 }

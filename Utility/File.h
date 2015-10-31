@@ -2,6 +2,7 @@
 #define __Utility_File_H__
 
 #include "IFile.h"
+#include <fstream>
 
 //El239: sample how to load file using std::streams
 /*#include <fstream>
@@ -48,6 +49,15 @@ public:
 	virtual CString ReadString() override;
 
 	virtual bool IsExist() override;
+
+private:
+	static const int MODE_INPUT = std::fstream::in;
+	static const int MODE_OUTPUT = std::fstream::out;
+	static const int MODE_BINARY = std::fstream::binary;
+	static const int MODE_APPEND = std::fstream::app;
+	static const int MODE_TRUNCATE = std::fstream::trunc;
+
+	std::fstream m_stream;
 };
 
 #endif //__Utility_File_H__

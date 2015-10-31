@@ -3,6 +3,7 @@
 
 #include "Object.h"
 #include "StringImpl.h"
+#include "Windows/WinFunctions.h"
 
 enum EFileMode
 {
@@ -16,7 +17,7 @@ enum EFileMode
 class IFile : public CObject
 {
 public:
-	IFile(CString path, EFileMode mode): m_strPath(path), m_mode(mode) { }
+	IFile(CString path, EFileMode mode): m_mode(mode) { m_strPath = ConvertStringToPath(path); }
 	~IFile() { }
 
 	virtual void Open() = 0;
