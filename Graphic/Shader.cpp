@@ -82,3 +82,33 @@ CShaderProgram::CShaderProgram(CVertexShader VertexShader, CFragmentShader Fragm
 	VertexShader.DeleteShader();
 	FragmentShader.DeleteShader();
 }
+
+bool CShaderProgram::SetUniform(CString name, int value)
+{
+	//NB! Don't forget to create different SetUniform's for other inputs
+	GLint location = glGetUniformLocation(m_program, name.c_str());
+
+	if (location == -1)
+	{
+		LOGE("CShaderProgram::SetUniform1i() can't find uniform %s", ToLog(name));
+		return false;
+	}
+
+	glUniform1i(location, value);
+	return true;
+}
+
+bool CShaderProgram::SetUniform(CString name, float value)
+{
+	//NB! Don't forget to create different SetUniform's for other inputs
+	GLint location = glGetUniformLocation(m_program, name.c_str());
+
+	if (location == -1)
+	{
+		LOGE("CShaderProgram::SetUniform1f() can't find uniform %s", ToLog(name));
+		return false;
+	}
+
+	glUniform1f(location, value);
+	return true;
+}

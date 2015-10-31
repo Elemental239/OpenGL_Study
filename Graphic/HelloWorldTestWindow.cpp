@@ -34,6 +34,7 @@ const GLchar* vertexShaderSource = (GLchar*)source.c_str();
 #include "HelloWorldTestWindow.h"
 #include "Logger.h"
 #include <functional>
+#include "Globals.h"
 
 #include "glfw-3.1.1/include/GLFW/glfw3.h"
 #include "SOIL/Include/SOIL.h"
@@ -49,6 +50,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     // closing the application
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     	glfwSetWindowShouldClose(window, GL_TRUE);
+
+	if (GLFW_KEY_UP == key && GLFW_PRESS == action)
+	{
+		CGlobals::Instance().m_spHelloWorldTestWindow->ChangeTextureMixValue(0.1f);
+	}
+
+	if (GLFW_KEY_DOWN == key && GLFW_PRESS == action)
+	{
+		CGlobals::Instance().m_spHelloWorldTestWindow->ChangeTextureMixValue(-0.1f);
+	}
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -56,7 +67,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-CHelloWorldTestWindow::CHelloWorldTestWindow()
+CHelloWorldTestWindow::CHelloWorldTestWindow() : m_fTexturesMixValue(0.2f)
 {
 	MARKER("CHelloWorldTestWindow::CHelloWorldTestWindow()");
 }
@@ -161,10 +172,14 @@ void CHelloWorldTestWindow::CreateShaderProgram()
 		"out vec4 color;\n"
 		"\n"
 		"uniform sampler2D inputTexture;\n"
+		"uniform sampler2D inputTexture2;\n"
+		"\n"
+		"uniform float mixValue;\n"
 		"\n"
 		"void main()\n"
 		"{\n"
-		"	color = texture(inputTexture, TexCoord) * vec4(vertexColour, 1.0f);\n"
+		"	//color = texture(inputTexture, TexCoord) * vec4(vertexColour, 1.0f);\n"
+		"	color = mix(texture(inputTexture, TexCoord / 2), texture(inputTexture2, TexCoord), mixValue);"
 		"}";
 
 	{
@@ -343,10 +358,10 @@ void CHelloWorldTestWindow::CreateGLObjects()
 
 	GLfloat vertices[] = {
 		// Positions          // Colors           // Texture Coords
-		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // Top Right
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // Bottom Right
+		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   2.0f, 2.0f,   // Top Right
+		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   2.0f, 0.0f,   // Bottom Right
 		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // Bottom Left
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // Top Left 
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 2.0f    // Top Left 
 	};
 
 	GLuint indices[] = {  // Note that we start from 0!
@@ -388,18 +403,30 @@ void CHelloWorldTestWindow::CreateGLObjects()
 	//5. Unbind the VAO
 	glBindVertexArray(0);
 
-	// Load and create a texture 
-	glGenTextures(1, &m_texture);
-    glBindTexture(GL_TEXTURE_2D, m_texture); // All upcoming GL_TEXTURE_2D operations now have effect on this texture object
     // Set the texture wrapping parameters
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);	// GL_CLAMP_TOEDGE, GL_CLAMP_TO_BORDER, GL_REPEAT, GL_MIRRORED_REPEAT
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
     // Set texture filtering parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     // Load image, create texture and generate mipmaps
-    int width, height;
+
+	// Load and create a texture
+	glGenTextures(1, &m_texture);
+	glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, m_texture); // All upcoming GL_TEXTURE_2D operations now have effect on this texture object
+	int width, height;
     unsigned char* image = SOIL_load_image(".//..//..//Resources//Textures//wooden_container.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    SOIL_free_image_data(image);
+    glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture when done, so we won't accidentily mess up our texture.
+
+	glGenTextures(1, &m_texture2);
+	glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, m_texture2); // All upcoming GL_TEXTURE_2D operations now have effect on this texture object
+	/*int */width, height;
+    /*unsigned char**/ image = SOIL_load_image(".//..//..//Resources//Textures//awesomeface.png", &width, &height, 0, SOIL_LOAD_RGB);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
     glGenerateMipmap(GL_TEXTURE_2D);
     SOIL_free_image_data(image);
@@ -429,9 +456,17 @@ void CHelloWorldTestWindow::StartRenderCycle()
 
 void CHelloWorldTestWindow::Render()
 {
-	//m_shaderProgram.Use();
-	glBindTexture(GL_TEXTURE_2D, m_texture);
 	m_shaderProgramWithTexture.Use();
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+	m_shaderProgramWithTexture.SetUniform("inputTexture", 0);
+	
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, m_texture2);
+	m_shaderProgramWithTexture.SetUniform("inputTexture2", 1);
+
+	m_shaderProgramWithTexture.SetUniform("mixValue", m_fTexturesMixValue);
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 

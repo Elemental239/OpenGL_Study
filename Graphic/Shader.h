@@ -47,7 +47,10 @@ class CShaderProgram : public CObject
 public:
 	CShaderProgram() : m_program(0) { }
 	CShaderProgram(CVertexShader VertexShader, CFragmentShader FragmentShader);
+
 	void Use() { glUseProgram(m_program); }
+	bool SetUniform(CString name, int value);
+	bool SetUniform(CString name, float value);
 
 private:
 	GLuint m_program;

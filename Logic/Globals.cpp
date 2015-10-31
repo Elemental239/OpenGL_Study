@@ -2,10 +2,11 @@
 #include "Logger.h"
 #include <memory>
 #include "UtilityMacros.h"
+#include "HelloWorldTestWindow.h"
 
 #include "File.h"
 
-#define NO_GUI
+//#define NO_GUI
 
 CGlobals::CGlobals()
 {

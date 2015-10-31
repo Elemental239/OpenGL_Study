@@ -16,6 +16,8 @@ public:
 
 	void Draw();
 
+	void ChangeTextureMixValue(float delta) { m_fTexturesMixValue += delta; if (m_fTexturesMixValue < 0.0f) m_fTexturesMixValue = 0.0f; if (m_fTexturesMixValue > 1.0f) m_fTexturesMixValue = 1.0f; }
+
 private:
 	GLFWwindow* m_window;
 	CShaderProgram m_shaderProgram;
@@ -25,6 +27,8 @@ private:
 	GLuint m_MedmVAOConstantBlue;
 	GLuint m_MedmVAO18Vertex;
 	GLuint m_texture;
+	GLuint m_texture2;
+	float m_fTexturesMixValue;
 
 	void InitOpenGL();
 	void CreateNewWindow(GLFWwindow*& targetWindow, int nWidth, int nHeight, CString strTitle);

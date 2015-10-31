@@ -3,9 +3,10 @@
 
 #include <memory>
 #include "MainWindow.h"
-#include "HelloWorldTestWindow.h"
 #include "SharedPtr.h"
 #include "Object.h"
+
+class CHelloWorldTestWindow;
 
 class CGlobals : public CObject
 {
@@ -15,13 +16,14 @@ public:
 
 	void Init();
 
+	CSharedPtr<CHelloWorldTestWindow> m_spHelloWorldTestWindow;
+
 private:
 	CGlobals();
 	CGlobals& operator=(const CGlobals&);
 	CGlobals(const CGlobals&);
 
 	CSharedPtr<CMainWindow> m_spMainWindow;
-	CSharedPtr<CHelloWorldTestWindow> m_spHelloWorldTestWindow;
 };
 
 #define GLOBALS CGlobals::Instance()
