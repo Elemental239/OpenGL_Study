@@ -19,11 +19,12 @@ public:
 private:
 	GLFWwindow* m_window;
 	CShaderProgram m_shaderProgram;
-	CShaderProgram m_shaderProgramFixedColorBlue;
+	CShaderProgram m_shaderProgramWithTexture;
 	GLuint m_VAO;
 	GLuint m_MedmVAO;
 	GLuint m_MedmVAOConstantBlue;
 	GLuint m_MedmVAO18Vertex;
+	GLuint m_texture;
 
 	void InitOpenGL();
 	void CreateNewWindow(GLFWwindow*& targetWindow, int nWidth, int nHeight, CString strTitle);

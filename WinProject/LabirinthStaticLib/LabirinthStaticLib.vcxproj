@@ -16,6 +16,7 @@
     <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h" />
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Graphic\OpenGL.h" />
+    <ClInclude Include="..\..\Graphic\OpenGLGraphicObject.h" />
     <ClInclude Include="..\..\Graphic\Shader.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\PlatformSpecific\Windows\WinFunctions.h" />
@@ -32,6 +33,7 @@
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
     <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
+    <ClCompile Include="..\..\Graphic\OpenGLGraphicObject.cpp" />
     <ClCompile Include="..\..\Graphic\Shader.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\Utility\File.cpp" />
@@ -85,8 +87,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)/../Libs/glew-1.13.0/lib/Release/Win32/;$(SolutionDir)/../Libs/glfw-3.1.1/lib-vc2012/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;soil.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)/../Libs/glew-1.13.0/lib/Release/Win32/;$(SolutionDir)/../Libs/glfw-3.1.1/lib-vc2012/;$(SolutionDir)/../Libs/SOIL/Include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>

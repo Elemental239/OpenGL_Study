@@ -35,8 +35,8 @@ const GLchar* vertexShaderSource = (GLchar*)source.c_str();
 #include "Logger.h"
 #include <functional>
 
-
 #include "glfw-3.1.1/include/GLFW/glfw3.h"
+#include "SOIL/Include/SOIL.h"
 
 void error_callback(int error, const char* description)
 {
@@ -138,13 +138,33 @@ void CHelloWorldTestWindow::CreateShaderProgram()
 			"color = vec4(vertexColour, 1.0f);\n"
 		"}";
 
-	CString fragmentShaderSourceFixedColourBlue =
+	CString vertexShaderSourceWithTexture =
 		"#version 330 core\n"
-		"in vec3 vertexColour;"
-		"out vec4 color;\n"
+		"layout (location = 0) in vec3 position;\n"
+		"layout (location = 1) in vec3 colour;\n"
+		"layout (location = 2) in vec2 textureCoord;\n"
+		"\n"
+		"out vec3 vertexColour;\n"
+		"out vec2 TexCoord;\n"
+		"\n"
 		"void main()\n"
-		"{"
-			"color = vec4(0.1f, 0.1f, 0.8f, 1.0f);\n"
+		"{\n"
+			"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
+			"vertexColour = colour;\n"
+			"TexCoord = textureCoord;"
+		"}";
+
+	CString fragmentShaderSourceWithTexture =
+		"#version 330 core\n"
+		"in vec3 vertexColour;\n"
+		"in vec2 TexCoord;\n"
+		"out vec4 color;\n"
+		"\n"
+		"uniform sampler2D inputTexture;\n"
+		"\n"
+		"void main()\n"
+		"{\n"
+		"	color = texture(inputTexture, TexCoord);\n"
 		"}";
 
 	{
@@ -154,9 +174,9 @@ void CHelloWorldTestWindow::CreateShaderProgram()
 	}
 
 	{
-		CVertexShader vertexShader(vertexShaderSource);
-		CFragmentShader fragmentShader(fragmentShaderSourceFixedColourBlue);
-		m_shaderProgramFixedColorBlue = CShaderProgram(vertexShader, fragmentShader);
+		CVertexShader vertexShader(vertexShaderSourceWithTexture);
+		CFragmentShader fragmentShader(fragmentShaderSourceWithTexture);
+		m_shaderProgramWithTexture = CShaderProgram(vertexShader, fragmentShader);
 	}
 }
 
@@ -277,13 +297,9 @@ void CHelloWorldTestWindow::CreateMedmLogoObject(float fHorizontalShift, float f
 
 	GLuint EBO;
 	glGenBuffers(1, &EBO);
-//	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-//	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	GLuint VBO;
 	glGenBuffers(1, &VBO);
-//	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-//	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // Copy triangle into VBO memory => triangle in graphic card memory
 
 	//Form target VAO
 	glGenVertexArrays(1, &VAO);
@@ -309,33 +325,41 @@ void CHelloWorldTestWindow::CreateGLObjects()
 {
 	MARKER("CHelloWorldTestWindow::CreateGLObjects()");
 
+	//GLfloat vertices[] = {
+	//	-0.5f, -0.5f, 0.0f, 0.1f,  0.1f, 0.8f, // Bottom Left
+	//	 0.5f, -0.5f, 0.0f, 0.1f,  0.8f, 0.1f, // Bottom Right
+	//	 0.0f,  0.5f, 0.0f, 0.8f,  0.1f, 0.1f, // Top
+	//};
+
+	//GLuint indices[] = {  // Note that we start from 0!
+	//	0, 1, 2
+	//};
+
+	//GLfloat texCoords[] = {		// NB! Texture coordinate system starts from left bottom corner for right and top, all ranges are [0..1]
+	//	0.0f, 0.0f,  // Lower-left corner  
+	//	1.0f, 0.0f,  // Lower-right corner
+	//	0.5f, 1.0f   // Top-center corner
+	//};
+
 	GLfloat vertices[] = {
-		 0.5f,  0.5f, 0.0f,  // Top Right
-		 0.5f, -0.5f, 0.0f,  // Bottom Right
-		-0.5f, -0.5f, 0.0f,  // Bottom Left
-	    -0.5f,  0.5f, 0.0f   // Top Left 
+		// Positions          // Colors           // Texture Coords
+		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // Top Right
+		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // Bottom Right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // Bottom Left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // Top Left 
 	};
 
 	GLuint indices[] = {  // Note that we start from 0!
-		0, 1, 3,   // First Triangle
-		1, 2, 3    // Second Triangle
-	};  
+		0, 1, 3,
+		1, 2, 3,
+	};
+
 
 	GLuint EBO;
 	glGenBuffers(1, &EBO);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	//Create Vertex Buffer
 	GLuint VBO;
 	glGenBuffers(1, &VBO); //Create a Vertex Buffer Object 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO); // Bind VBO to GL_ARRAY_BUFFER type
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // Copy triangle into VBO memory => triangle in graphic card memory
-
-	//Tell OpenGL that vertex data is 12 bytes array (3 axes * 4 byte float value size)
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);
 
 	//Create Vertex Array Object (compound of VBO && Vertex attributes)
 	glGenVertexArrays(1, &m_VAO);
@@ -351,12 +375,35 @@ void CHelloWorldTestWindow::CreateGLObjects()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	
-		// 4. Then set our vertex attributes pointers
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+		// Position attribute
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
 		glEnableVertexAttribArray(0);
+		// Color attribute
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+		glEnableVertexAttribArray(1);
+		//Texture attribute
+		glVertexAttribPointer(2, 2, GL_FLOAT,GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
+		glEnableVertexAttribArray(2);
 	
 	//5. Unbind the VAO
 	glBindVertexArray(0);
+
+	// Load and create a texture 
+	glGenTextures(1, &m_texture);
+    glBindTexture(GL_TEXTURE_2D, m_texture); // All upcoming GL_TEXTURE_2D operations now have effect on this texture object
+    // Set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    // Set texture filtering parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // Load image, create texture and generate mipmaps
+    int width, height;
+    unsigned char* image = SOIL_load_image(".//..//..//Resources//Textures//wooden_container.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    SOIL_free_image_data(image);
+    glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture when done, so we won't accidentily mess up our texture.
 }
 
 void CHelloWorldTestWindow::StartRenderCycle()
@@ -376,12 +423,15 @@ void CHelloWorldTestWindow::StartRenderCycle()
 	}
 
 	// End of all
+	glDeleteVertexArrays(1, &m_VAO);
 	glfwTerminate();
 }
 
 void CHelloWorldTestWindow::Render()
 {
-	m_shaderProgram.Use();
+	//m_shaderProgram.Use();
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+	m_shaderProgramWithTexture.Use();
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
@@ -395,8 +445,12 @@ void CHelloWorldTestWindow::Render()
 	glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);*/
 
-	glBindVertexArray(m_MedmVAO18Vertex);
+	/*glBindVertexArray(m_MedmVAO18Vertex);
 	glDrawElements(GL_TRIANGLES, 18*3, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);*/
+
+	glBindVertexArray(m_VAO);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
 
@@ -407,9 +461,9 @@ void CHelloWorldTestWindow::Draw()
 	InitOpenGL();
 	CreateShaderProgram();
 	CreateGLObjects();
-	CreateMedmLogoObject(0.0f, 0.4f, m_MedmVAO);
-	CreateMedmLogoObject(0.2f, 0.0f, m_MedmVAOConstantBlue);
-	CreateMedmLogo18Vertex(0.0f, 0.0f, m_MedmVAO18Vertex); //40 65
+	//CreateMedmLogoObject(0.0f, 0.4f, m_MedmVAO);
+	//CreateMedmLogoObject(0.2f, 0.0f, m_MedmVAOConstantBlue);
+	//CreateMedmLogo18Vertex(0.0f, 0.0f, m_MedmVAO18Vertex); //40 65
 
 	StartRenderCycle();
 }

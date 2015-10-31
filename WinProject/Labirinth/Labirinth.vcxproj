@@ -70,8 +70,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)/../Libs/glew-1.13.0/lib/Release/Win32/;$(SolutionDir)/../Libs/glfw-3.1.1/lib-vc2012/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;soil.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)/../Libs/glew-1.13.0/lib/Release/Win32/;$(SolutionDir)/../Libs/glfw-3.1.1/lib-vc2012/;$(SolutionDir)/../Libs/SOIL/Include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>chcp 866

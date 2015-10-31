@@ -67,6 +67,9 @@
     <ClInclude Include="..\..\Graphic\OpenGL.h">
       <Filter>Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Graphic\OpenGLGraphicObject.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -91,6 +94,9 @@
       <Filter>Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Graphic\Shader.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\OpenGLGraphicObject.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
   </ItemGroup>
