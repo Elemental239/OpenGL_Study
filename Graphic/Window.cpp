@@ -10,3 +10,8 @@ CWindow::~CWindow()
 {
 	MARKER("CWindow::~CWindow()");
 }
+
+bool CWindow::OnSystemEvent(const EventData& event)
+{
+	return false;
+}

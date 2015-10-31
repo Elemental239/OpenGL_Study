@@ -10,6 +10,9 @@ public:
 	~CMainWindow();
 
 	void Init();
+
+private:
+
 };
 
 #endif //__Graphic_MainWindow_H__
