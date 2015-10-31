@@ -37,7 +37,7 @@ const GLchar* vertexShaderSource = (GLchar*)source.c_str();
 #include "Globals.h"
 
 #include "glfw-3.1.1/include/GLFW/glfw3.h"
-#include "SOIL/Include/SOIL.h"
+#include "OpenGL.h"
 
 void error_callback(int error, const char* description)
 {
