@@ -5,8 +5,6 @@
 #include "SharedPtr.h"
 #include <list>
 
-//http://grafika.me/lessons - OpenGL tutorials
-
 class CGraphicObject : public CObject
 {
 public:
