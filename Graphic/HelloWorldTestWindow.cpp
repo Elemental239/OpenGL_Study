@@ -164,7 +164,7 @@ void CHelloWorldTestWindow::CreateShaderProgram()
 		"\n"
 		"void main()\n"
 		"{\n"
-		"	color = texture(inputTexture, TexCoord);\n"
+		"	color = texture(inputTexture, TexCoord) * vec4(vertexColour, 1.0f);\n"
 		"}";
 
 	{
@@ -438,12 +438,6 @@ void CHelloWorldTestWindow::Render()
 	/*glBindVertexArray(m_MedmVAO);
 	glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0);	// = 8 * 3
 	glBindVertexArray(0);
-
-	m_shaderProgramFixedColorBlue.Use();
-
-	glBindVertexArray(m_MedmVAOConstantBlue);
-	glDrawElements(GL_TRIANGLES, 24, GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);*/
 
 	/*glBindVertexArray(m_MedmVAO18Vertex);
 	glDrawElements(GL_TRIANGLES, 18*3, GL_UNSIGNED_INT, 0);
