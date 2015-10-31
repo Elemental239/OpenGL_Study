@@ -18,6 +18,7 @@
     <ClInclude Include="..\..\Graphic\OpenGL.h" />
     <ClInclude Include="..\..\Graphic\OpenGLGraphicObject.h" />
     <ClInclude Include="..\..\Graphic\Shader.h" />
+    <ClInclude Include="..\..\Graphic\Window.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\PlatformSpecific\Windows\WinFunctions.h" />
     <ClInclude Include="..\..\Utility\File.h" />
@@ -26,6 +27,7 @@
     <ClInclude Include="..\..\Utility\Logger.h" />
     <ClInclude Include="..\..\Utility\Object.h" />
     <ClInclude Include="..\..\Utility\SharedPtr.h" />
+    <ClInclude Include="..\..\Utility\Singleton.h" />
     <ClInclude Include="..\..\Utility\StringImpl.h" />
     <ClInclude Include="..\..\Utility\UtilityMacros.h" />
   </ItemGroup>
@@ -35,6 +37,7 @@
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Graphic\OpenGLGraphicObject.cpp" />
     <ClCompile Include="..\..\Graphic\Shader.cpp" />
+    <ClCompile Include="..\..\Graphic\Window.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\PlatformSpecific\Windows\WinFunctions.cpp" />
     <ClCompile Include="..\..\Utility\File.cpp" />

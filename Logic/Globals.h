@@ -5,24 +5,20 @@
 #include "MainWindow.h"
 #include "SharedPtr.h"
 #include "Object.h"
+#include "Singleton.h"
 
 class CHelloWorldTestWindow;
 
 class CGlobals : public CObject
 {
 public:
-	virtual ~CGlobals();
-	static CGlobals& Instance() { static CGlobals globals; return globals; }
+	SINGLETON(CGlobals, CGlobals());
 
 	void Init();
 
 	CSharedPtr<CHelloWorldTestWindow> m_spHelloWorldTestWindow;
 
 private:
-	CGlobals();
-	CGlobals& operator=(const CGlobals&);
-	CGlobals(const CGlobals&);
-
 	CSharedPtr<CMainWindow> m_spMainWindow;
 };
 

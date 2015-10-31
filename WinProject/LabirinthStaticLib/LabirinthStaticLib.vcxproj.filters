@@ -70,6 +70,12 @@
     <ClInclude Include="..\..\Graphic\OpenGLGraphicObject.h">
       <Filter>Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Graphic\Window.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Utility\Singleton.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -101,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="..\..\PlatformSpecific\Windows\WinFunctions.cpp">
       <Filter>Specific</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\Window.cpp">
+      <Filter>Graphic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
