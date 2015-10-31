@@ -51,15 +51,17 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     	glfwSetWindowShouldClose(window, GL_TRUE);
 
-	if (GLFW_KEY_UP == key && GLFW_PRESS == action)
+	if (GLFW_KEY_UP == key && (GLFW_PRESS == action || GLFW_REPEAT == action))
 	{
 		CGlobals::Instance().m_spHelloWorldTestWindow->ChangeTextureMixValue(0.1f);
 	}
 
-	if (GLFW_KEY_DOWN == key && GLFW_PRESS == action)
+	if (GLFW_KEY_DOWN == key && (GLFW_PRESS == action || GLFW_REPEAT == action))
 	{
 		CGlobals::Instance().m_spHelloWorldTestWindow->ChangeTextureMixValue(-0.1f);
 	}
+
+	LOG("key_callback key = %d and action = %d", key, action);
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
