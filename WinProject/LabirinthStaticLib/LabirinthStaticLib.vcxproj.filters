@@ -76,6 +76,15 @@
     <ClInclude Include="..\..\Utility\Singleton.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Graphic\WindowManager.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Graphic\Dialog.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Logic\ApplicationInfo.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -109,6 +118,12 @@
       <Filter>Specific</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Graphic\Window.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\WindowManager.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\Dialog.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
   </ItemGroup>

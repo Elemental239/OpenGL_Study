@@ -4,20 +4,40 @@
 #include "Object.h"
 #include <stack>
 #include "WindowManager.h"
+#include "StringImpl.h"
 
 struct GLFWwindow;
 
-class CWindow : public CObject
+struct WindowConstructionParams
+{
+	CString strWindowLabel;
+	int WindowWidth;	// Pixels
+	int WindowHeight;	// Pixels
+
+	CString ToString() const { return "Window params: Label = " + strWindowLabel + ", size = " + ToStr(WindowWidth) + "x" + ToStr(WindowHeight); }
+};
+
+class IWindow : public CObject
 {
 public:
-	CWindow();
-	~CWindow();
+	virtual bool OnSystemEvent(const EventData& event) = 0;
 
 	bool IsMineOpenGLWindow(GLFWwindow* window) { return window == m_window; }
-	bool OnSystemEvent(const EventData& event);
+	void SetOpenGLDrawingContext();
+
+protected:
+	GLFWwindow* m_window;
+};
+
+class CWindow : public IWindow
+{
+public:
+	CWindow(const WindowConstructionParams& params);
+	~CWindow();
+
+	virtual bool OnSystemEvent(const EventData& event) override;
 
 private:
-	GLFWwindow* m_window;
 	//std::stack<> m_dialogs; 
 };
 

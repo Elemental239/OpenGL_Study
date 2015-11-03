@@ -22,7 +22,9 @@ void CGraphicObject::RemoveChildren(CGraphicObjectRef obj)
 {
 	MARKER("CGraphicObject::RemoveChildren()");
 
-	m_children.remove_if([obj](CGraphicObjectRef listRef){
-		return obj == listRef;
-	});
+	for (auto iter = m_children.end(); iter-- != m_children.begin(); )
+	{
+		if ((*iter) == obj)
+			m_children.erase(iter);
+	}
 }

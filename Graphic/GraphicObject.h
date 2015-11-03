@@ -3,7 +3,7 @@
 
 #include "Object.h"
 #include "SharedPtr.h"
-#include <list>
+#include <vector>
 
 class CGraphicObject : public CObject
 {
@@ -20,7 +20,7 @@ public:
 	void RemoveAllChildren() { m_children.erase(m_children.begin(), m_children.end()); }
 
 private:
-	std::list<CGraphicObjectRef> m_children;
+	std::vector<CGraphicObjectRef> m_children;
 };
 
 #endif //__Graphic_GraphicObject_H__

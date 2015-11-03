@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Graphic\Dialog.h" />
     <ClInclude Include="..\..\Graphic\GraphicGeneral.h" />
     <ClInclude Include="..\..\Graphic\GraphicObject.h" />
     <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h" />
@@ -19,6 +20,8 @@
     <ClInclude Include="..\..\Graphic\OpenGLGraphicObject.h" />
     <ClInclude Include="..\..\Graphic\Shader.h" />
     <ClInclude Include="..\..\Graphic\Window.h" />
+    <ClInclude Include="..\..\Graphic\WindowManager.h" />
+    <ClInclude Include="..\..\Logic\ApplicationInfo.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\PlatformSpecific\Windows\WinFunctions.h" />
     <ClInclude Include="..\..\Utility\File.h" />
@@ -32,12 +35,14 @@
     <ClInclude Include="..\..\Utility\UtilityMacros.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Graphic\Dialog.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
     <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Graphic\OpenGLGraphicObject.cpp" />
     <ClCompile Include="..\..\Graphic\Shader.cpp" />
     <ClCompile Include="..\..\Graphic\Window.cpp" />
+    <ClCompile Include="..\..\Graphic\WindowManager.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\PlatformSpecific\Windows\WinFunctions.cpp" />
     <ClCompile Include="..\..\Utility\File.cpp" />

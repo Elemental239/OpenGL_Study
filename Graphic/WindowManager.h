@@ -6,7 +6,7 @@
 #include "Singleton.h"
 #include "SharedPtr.h"
 
-class CWindow;
+class IWindow;
 struct GLFWwindow;
 
 enum EVENT_TYPE
@@ -36,13 +36,20 @@ class CWindowManager : public CObject
 public:
 	SINGLETON(CWindowManager, CWindowManager())
 
+	void Init();
+
 	void OnSystemEvent(const EventData& event);
 
-	void AddWindow(CSharedPtr<CWindow> spWindow);
-	void RemoveWindow(CSharedPtr<CWindow> spWindow);
+	void AddWindow(CSharedPtr<IWindow> spWindow);
+	void RemoveWindow(CSharedPtr<IWindow> spWindow);
 
 private:
-	std::vector<CSharedPtr<CWindow> > m_windows; 
+	std::vector<CSharedPtr<IWindow> > m_windows;
+	bool m_bInited;
+
+	void InitOpenGLWindowLibrary(); //GLFW
+	void CreateFirstWindow();
+	void InitOpenGLDriverLibrary(); //GLEW
 };
 
 #endif //__Graphic_WindowManager_H__

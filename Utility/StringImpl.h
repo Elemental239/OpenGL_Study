@@ -9,4 +9,6 @@ typedef std::wstring CStringWide;
 CStringWide CString2CStringWide(const CString string);
 const char* ToLog(CString input);
 
+CString ToStr(int input);
+
 #endif //__Utility_String_H__
