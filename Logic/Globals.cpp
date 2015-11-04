@@ -3,10 +3,14 @@
 #include <memory>
 #include "UtilityMacros.h"
 #include "HelloWorldTestWindow.h"
+#include "WindowManager.h"
+#include "Window.h"
+#include "ApplicationInfo.h"
 
 #include "File.h"
 
-//#define NO_GUI
+#define NO_GUI
+#define EXPERIMENTAL_GUI
 
 CGlobals::CGlobals()
 {
@@ -27,6 +31,16 @@ void CGlobals::Init()
 	m_spHelloWorldTestWindow->Draw();
 #endif
 
-	CFile file(CString("input.txt"), EFileMode::FILE_MODE_OPEN);
-	bool bExist = file.IsExist();
+#if defined(EXPERIMENTAL_GUI)
+	WindowConstructionParams firstWindowParams;
+	firstWindowParams.m_nWindowWidth = 800;
+	firstWindowParams.m_nWindowHeight = 600;
+	firstWindowParams.m_strWindowLabel = MAIN_WINDOW_LABEL;
+
+	CWindowManager::Instance().Init(firstWindowParams);
+
+#endif
+
+	//CFile file(CString("input.txt"), EFileMode::FILE_MODE_OPEN);
+	//bool bExist = file.IsExist();
 }

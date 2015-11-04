@@ -126,5 +126,8 @@
     <ClCompile Include="..\..\Graphic\Dialog.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
