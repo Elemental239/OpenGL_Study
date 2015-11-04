@@ -18,7 +18,7 @@ void IWindow::SetOpenGLDrawingContext()
 
 /////////////////////////////////////////////
 ///CWindow
-CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params)
+CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params), m_bClosed(false)
 {
 	MARKER("CWindow::CWindow()");
 	LOG("%s", ToLog(params.ToString()));
@@ -46,3 +46,28 @@ bool CWindow::OnSystemEvent(const EventData& event)
 {
 	return false;
 }
+
+void CWindow::Close()
+{
+	MARKER("CWindow::Close()");
+
+	m_bClosed = true;
+	//glfwSetWindowShouldClose(m_window, true);
+}
+
+void CWindow::Draw()
+{
+	glClearColor(m_params.m_colorBase.GetPart(COLOR_PART_RED), 
+				 m_params.m_colorBase.GetPart(COLOR_PART_GREEN), 
+				 m_params.m_colorBase.GetPart(COLOR_PART_BLUE), 
+				 m_params.m_colorBase.GetPart(COLOR_PART_ALPHA));
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	if (m_dialogs.size() > 0)
+		m_dialogs.top()->Draw();
+
+	glfwSwapBuffers(m_window);
+}
+
+void AddDialog(CSharedPtr<IDialog> spDialog);
+void RemoveDialog(CSharedPtr<IDialog> spDialog);

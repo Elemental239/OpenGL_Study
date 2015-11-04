@@ -5,13 +5,19 @@
 #include <vector>
 #include "WindowManager.h"
 
-class CDialog : public CGraphicObject
+class IDialog : public CGraphicObject
+{
+public:
+	virtual bool OnSystemEvent(const EventData& event) = 0;
+};
+
+class CDialog : public IDialog
 {
 public:
 	CDialog();
 	~CDialog();
 
-	bool OnSystemEvent(const EventData& event);
+	virtual bool OnSystemEvent(const EventData& event) override;
 };
 
 #endif //__Graphic_Dialog_H__

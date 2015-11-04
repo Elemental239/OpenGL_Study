@@ -1,6 +1,13 @@
 #ifndef __Graphic_WindowManager_H__
 #define __Graphic_WindowManager_H__
 
+//* Now WindowManager can't create more than 1 window at once
+//* To enable multiple windows, one has to manually build GLEW
+//* with GLEW_MX flag. 
+//* For more information, google GLEW MX
+//*
+//*
+
 #include "Object.h"
 #include <vector>
 #include "Singleton.h"
@@ -69,6 +76,7 @@ private:
 	void InitOpenGLWindowLibrary(); //GLFW
 	void CreateFirstWindow(WindowConstructionParams& firstWindowParams);
 	void InitOpenGLDriverLibrary(); //GLEW
+	void StartMainLoop();
 };
 
 #endif //__Graphic_WindowManager_H__

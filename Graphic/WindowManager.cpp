@@ -96,11 +96,35 @@ void CWindowManager::InitOpenGLDriverLibrary()
 	}
 }
 
+void CWindowManager::StartMainLoop()
+{
+	MARKER("CWindowManager::StartRenderLoop()");
+
+	while (m_windows.size() > 0)
+	{
+		glfwPollEvents();
+
+		for (int i = m_windows.size() - 1; i >= 0; i--)
+		{
+			if (m_windows[i]->IsClosed())
+			{
+				m_windows.erase(m_windows.begin() + i);
+			}
+			else
+			{
+				m_windows[i]->Draw();
+			}
+		}
+	}
+
+	glfwTerminate();
+}
+
 void CWindowManager::OnSystemEvent(const EventData& event)
 {
 	for (auto iter = m_windows.begin(); iter != m_windows.end(); iter++)
 	{
-		if ((*iter)->IsMineOpenGLWindow(event.m_pTargetWindow))
+		if ((*iter)->m_window == event.m_pTargetWindow)
 		{
 			(*iter)->OnSystemEvent(event);
 			break;
@@ -110,6 +134,9 @@ void CWindowManager::OnSystemEvent(const EventData& event)
 
 void CWindowManager::AddWindow(CSharedPtr<IWindow> spWindow)
 {
+	if (m_windows.size() > 0)
+		return; // See the note at the top of .h file
+
 	m_windows.push_back(spWindow);
 }
 
