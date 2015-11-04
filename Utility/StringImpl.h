@@ -7,7 +7,8 @@ typedef std::string CString;
 typedef std::wstring CStringWide;
 
 CStringWide CString2CStringWide(const CString string);
-const char* ToLog(CString input);
+const char* ToLog(const CString& input);
+CString FormatString(const CString fmt_str, ...);
 
 CString ToStr(int input);
 
