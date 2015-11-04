@@ -8,11 +8,13 @@
 
 class IWindow;
 struct GLFWwindow;
+struct WindowConstructionParams;
 
 enum EVENT_TYPE
 {
 	EVT_MOUSE,
-	EVT_RESIZE
+	EVT_RESIZE,
+	EVT_BUTTON
 };
 
 enum MOUSE_EVENT_TYPE
@@ -23,11 +25,28 @@ enum MOUSE_EVENT_TYPE
 
 struct EventData
 {
-	EVENT_TYPE m_type;
+	EVENT_TYPE m_nEventType;
 	GLFWwindow* m_pTargetWindow;
 
 	union {
-		MOUSE_EVENT_TYPE m_nMouseEventType;
+		struct //EVT_MOUSE
+		{
+			MOUSE_EVENT_TYPE m_nMouseEventType;
+		};
+
+		struct //EVT_BUTTON
+		{
+			int m_nKeyboardKey;
+			int m_nScancode;
+			int m_nAction;
+			int m_nMode;
+		};
+
+		struct //EVT_RESIZE
+		{
+			int m_nNewHeight;
+			int m_nNewWidth;
+		};
 	};
 };
 
@@ -36,7 +55,7 @@ class CWindowManager : public CObject
 public:
 	SINGLETON(CWindowManager, CWindowManager())
 
-	void Init();
+	void Init(WindowConstructionParams& firstWindowParams);
 
 	void OnSystemEvent(const EventData& event);
 
@@ -48,7 +67,7 @@ private:
 	bool m_bInited;
 
 	void InitOpenGLWindowLibrary(); //GLFW
-	void CreateFirstWindow();
+	void CreateFirstWindow(WindowConstructionParams& firstWindowParams);
 	void InitOpenGLDriverLibrary(); //GLEW
 };
 
