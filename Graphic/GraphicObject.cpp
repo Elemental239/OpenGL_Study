@@ -11,14 +11,23 @@ CGraphicObject::~CGraphicObject()
 	MARKER("CGraphicObject::~CGraphicObject()");
 }
 
-void CGraphicObject::AddChildren(CGraphicObjectRef obj)
+void CGraphicObject::Draw()
+{
+	DrawSelf();
+	for (auto iter = m_children.begin(); iter != m_children.end(); ++iter)
+	{
+		(*iter)->Draw();
+	}
+}
+
+void CGraphicObject::AddChild(TGraphicObjectRef obj)
 {
 	MARKER("CGraphicObject::AddChildren()");
 
 	m_children.push_back(obj);
 }
 
-void CGraphicObject::RemoveChildren(CGraphicObjectRef obj)
+void CGraphicObject::RemoveChild(TGraphicObjectRef obj)
 {
 	MARKER("CGraphicObject::RemoveChildren()");
 

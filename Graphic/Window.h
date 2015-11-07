@@ -2,7 +2,7 @@
 #define __Graphic_Window_H__
 
 #include "Object.h"
-#include <stack>
+#include "Stack.h"
 #include "WindowManager.h"
 #include "StringImpl.h"
 #include "Dialog.h"
@@ -40,6 +40,7 @@ protected:
 	WindowConstructionParams m_params;
 	
 };
+typedef CSharedPtr<IWindow> TWindowRef;
 
 class CWindow : public IWindow
 {
@@ -52,12 +53,12 @@ public:
 	virtual void Close() override;
 	virtual void Draw() override;
 
-	void AddDialog(CSharedPtr<IDialog> spDialog);
-	void RemoveDialog(CSharedPtr<IDialog> spDialog);
+	void AddDialog(TDialogRef spDialog);
+	void RemoveDialog(TDialogRef spDialog);
 
 private:
 	bool m_bClosed;
-	std::stack<CSharedPtr<IDialog> > m_dialogs;
+	CStack<TDialogRef> m_dialogs;
 
 	int GetHeight() { return m_params.m_nWindowHeight; }
 	int GetWidth() { return m_params.m_nWindowWidth; }

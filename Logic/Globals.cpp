@@ -36,6 +36,7 @@ void CGlobals::Init()
 	firstWindowParams.m_nWindowWidth = 800;
 	firstWindowParams.m_nWindowHeight = 600;
 	firstWindowParams.m_strWindowLabel = MAIN_WINDOW_LABEL;
+	firstWindowParams.m_colorBase = CColor(0xFF,0xFF,0xFF);
 
 	CWindowManager::Instance().Init(firstWindowParams);
 	CWindowManager::Instance().StartMainLoop();

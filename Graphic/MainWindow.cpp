@@ -1,9 +1,13 @@
 #include "MainWindow.h"
 #include "Logger.h"
+#include "Dialogs/MainMenuDialog.h"
 
-CMainWindow::CMainWindow()
+CMainWindow::CMainWindow(const WindowConstructionParams& params) : CWindow(params)
 {
 	MARKER("CMainWindow::CMainWindow()");
+
+	CSharedPtr<IDialog> spDialog = new CMainMenuDialog; 
+	AddDialog(spDialog);
 }
 
 CMainWindow::~CMainWindow()
@@ -11,7 +15,11 @@ CMainWindow::~CMainWindow()
 	MARKER("CMainWindow::~CMainWindow()");
 }
 
-void CMainWindow::Init()
-{
-	MARKER("CMainWindow::Init()");
-}
+//bool CMainWindow::OnSystemEvent(const EventData& event)
+//{
+//	MARKER("CMainWindow::OnSystemEvent()");
+//
+//
+//
+//	return __super::OnSystemEvent(event);
+//}

@@ -13,5 +13,12 @@ CDialog::~CDialog()
 
 bool CDialog::OnSystemEvent(const EventData& event)
 {
+	MARKER("CDialog::OnSystemEvent()");
 	return false;
+}
+
+void CDialog::OnLifetimeEvent(EDialogLifetimeEvent event)
+{
+	MARKER("CDialog::OnLifetimeEvent()");
+	return;
 }

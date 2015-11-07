@@ -12,8 +12,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Graphic\Dialog.h" />
+    <ClInclude Include="..\..\Graphic\Dialogs\MainMenuDialog.h" />
     <ClInclude Include="..\..\Graphic\GraphicGeneral.h" />
     <ClInclude Include="..\..\Graphic\GraphicObject.h" />
+    <ClInclude Include="..\..\Graphic\GraphicObjects\Triangle.h" />
     <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h" />
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Graphic\OpenGL.h" />
@@ -31,13 +33,16 @@
     <ClInclude Include="..\..\Utility\Object.h" />
     <ClInclude Include="..\..\Utility\SharedPtr.h" />
     <ClInclude Include="..\..\Utility\Singleton.h" />
+    <ClInclude Include="..\..\Utility\Stack.h" />
     <ClInclude Include="..\..\Utility\StringImpl.h" />
     <ClInclude Include="..\..\Utility\UtilityMacros.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Graphic\Dialog.cpp" />
+    <ClCompile Include="..\..\Graphic\Dialogs\MainMenuDialog.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
+    <ClCompile Include="..\..\Graphic\GraphicObjects\Triangle.cpp" />
     <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Graphic\OpenGLGraphicObject.cpp" />

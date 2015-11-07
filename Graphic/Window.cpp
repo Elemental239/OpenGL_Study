@@ -44,6 +44,12 @@ CWindow::~CWindow()
 
 bool CWindow::OnSystemEvent(const EventData& event)
 {
+	for (int i = m_dialogs.size() - 1; i >= 0; i--)
+	{
+		if (m_dialogs[i]->OnSystemEvent(event))
+			return true;
+	}
+
 	return false;
 }
 
@@ -63,11 +69,39 @@ void CWindow::Draw()
 				 m_params.m_colorBase.GetPart(COLOR_PART_ALPHA));
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	// Remove all closed all dialogs
+	while (m_dialogs.size() > 0 && m_dialogs.top()->IsClosed())
+	{
+		LOG("Delete top dialog cause it was closed");
+		m_dialogs.pop();
+	}
+
 	if (m_dialogs.size() > 0)
+	{
 		m_dialogs.top()->Draw();
+	}
+	else
+	{
+		LOG("Close window cause of no dialogs in it");
+		Close();
+	}
 
 	glfwSwapBuffers(m_window);
 }
 
-void AddDialog(CSharedPtr<IDialog> spDialog);
-void RemoveDialog(CSharedPtr<IDialog> spDialog);
+void CWindow::AddDialog(TDialogRef spDialog)
+{
+	m_dialogs.push(spDialog);
+}
+
+void CWindow::RemoveDialog(TDialogRef spDialog)
+{
+	if (m_dialogs.size() > 0)
+	{
+		for (int i = 0; i < m_dialogs.size(); i++)
+		{
+			if (m_dialogs[i] == spDialog)
+				m_dialogs[i]->Close();
+		}
+	}
+}

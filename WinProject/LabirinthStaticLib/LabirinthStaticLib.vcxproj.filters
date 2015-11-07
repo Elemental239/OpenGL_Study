@@ -17,6 +17,9 @@
     <Filter Include="Specific">
       <UniqueIdentifier>{8a8dd8aa-d644-41e9-9b50-873219b18a13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphic\GraphicObject">
+      <UniqueIdentifier>{494565cd-b0a6-4f21-9ef4-6c3f7d367707}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Utility\Listeners.h">
@@ -85,6 +88,15 @@
     <ClInclude Include="..\..\Logic\ApplicationInfo.h">
       <Filter>Logic</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Utility\Stack.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Graphic\Dialogs\MainMenuDialog.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Graphic\GraphicObjects\Triangle.h">
+      <Filter>Graphic\GraphicObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -128,6 +140,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp">
       <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\Dialogs\MainMenuDialog.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\GraphicObjects\Triangle.cpp">
+      <Filter>Graphic\GraphicObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

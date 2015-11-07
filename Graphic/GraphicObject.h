@@ -5,22 +5,25 @@
 #include "SharedPtr.h"
 #include <vector>
 
+class CGraphicObject;
+typedef CSharedPtr<CGraphicObject> TGraphicObjectRef;
+
 class CGraphicObject : public CObject
 {
 public:
-	typedef CSharedPtr<CGraphicObject> CGraphicObjectRef;
-
 	CGraphicObject();
 	~CGraphicObject();
 
-	virtual void Draw() = 0;
+	virtual void Draw();
 
-	void AddChildren(CGraphicObjectRef obj);
-	void RemoveChildren(CGraphicObjectRef obj);
-	void RemoveAllChildren() { m_children.erase(m_children.begin(), m_children.end()); }
+	void AddChild(TGraphicObjectRef obj);
+	void RemoveChild(TGraphicObjectRef obj);
+	void RemoveChildren() { m_children.erase(m_children.begin(), m_children.end()); }
 
 private:
-	std::vector<CGraphicObjectRef> m_children;
+	std::vector<TGraphicObjectRef> m_children;
+
+	virtual void DrawSelf() = 0;
 };
 
 #endif //__Graphic_GraphicObject_H__

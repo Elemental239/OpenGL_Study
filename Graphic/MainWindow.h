@@ -2,17 +2,15 @@
 #define __Graphic_MainWindow_H__
 
 #include "Object.h"
+#include "Window.h"
 
-class CMainWindow : public CObject
+class CMainWindow : public CWindow
 {
 public:
-	CMainWindow();
+	CMainWindow(const WindowConstructionParams& params);
 	~CMainWindow();
 
-	void Init();
-
-private:
-
+//	virtual bool OnSystemEvent(const EventData& event) override;
 };
 
 #endif //__Graphic_MainWindow_H__

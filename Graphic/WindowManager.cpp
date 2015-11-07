@@ -1,8 +1,8 @@
 #include "WindowManager.h"
 #include "Logger.h"
-#include "Window.h"
 #include "OpenGL.h"
 #include "glfw-3.1.1/include/GLFW/glfw3.h"
+#include "MainWindow.h"
 
 ///////////////////////////////////////////////////
 ///Various OpenGL global callbacks
@@ -81,7 +81,7 @@ void CWindowManager::CreateFirstWindow(WindowConstructionParams& firstWindowPara
 {
 	MARKER("CWindowManager::CreateFirstWindow()");
 
-	AddWindow(CSharedPtr<IWindow>(new CWindow(firstWindowParams)));
+	AddWindow(CSharedPtr<IWindow>(new CMainWindow(firstWindowParams)));
 }
 
 void CWindowManager::InitOpenGLDriverLibrary()
