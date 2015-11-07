@@ -38,6 +38,7 @@ void CGlobals::Init()
 	firstWindowParams.m_strWindowLabel = MAIN_WINDOW_LABEL;
 
 	CWindowManager::Instance().Init(firstWindowParams);
+	CWindowManager::Instance().StartMainLoop();
 
 #endif
 

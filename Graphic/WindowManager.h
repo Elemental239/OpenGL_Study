@@ -63,6 +63,7 @@ public:
 	SINGLETON(CWindowManager, CWindowManager())
 
 	void Init(WindowConstructionParams& firstWindowParams);
+	void StartMainLoop();
 
 	void OnSystemEvent(const EventData& event);
 
@@ -76,7 +77,6 @@ private:
 	void InitOpenGLWindowLibrary(); //GLFW
 	void CreateFirstWindow(WindowConstructionParams& firstWindowParams);
 	void InitOpenGLDriverLibrary(); //GLEW
-	void StartMainLoop();
 };
 
 #endif //__Graphic_WindowManager_H__

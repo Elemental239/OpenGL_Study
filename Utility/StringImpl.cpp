@@ -27,9 +27,9 @@ CString FormatString(const CString fmt_str, ...)
     va_list ap;
     while(1) {
         formatted.reset(new char[n]); /* Wrap the plain char array into the unique_ptr */
-		strcpy_s(&formatted[0], fmt_str.size(), fmt_str.c_str()); // was strcpy(&formatted[0], fmt_str.c_str());
+		strcpy_s(&formatted[0], n, fmt_str.c_str()); // El239: was strcpy(&formatted[0], fmt_str.c_str());
         va_start(ap, fmt_str);
-        final_n = vsnprintf_s(&formatted[0], n, n, fmt_str.c_str(), ap);	// was final_n = vsnprintf(&formatted[0], n, fmt_str.c_str(), ap);
+		final_n = vsnprintf_s(&formatted[0], n, _TRUNCATE, fmt_str.c_str(), ap);	// El239: was final_n = vsnprintf(&formatted[0], n, fmt_str.c_str(), ap);
         va_end(ap);
         if (final_n < 0 || final_n >= n)
             n += abs(final_n - n + 1);
