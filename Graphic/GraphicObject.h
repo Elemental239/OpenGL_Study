@@ -20,10 +20,11 @@ public:
 	void RemoveChild(TGraphicObjectRef obj);
 	void RemoveChildren() { m_children.erase(m_children.begin(), m_children.end()); }
 
+protected:
+	virtual void DrawSelf() = 0;
+
 private:
 	std::vector<TGraphicObjectRef> m_children;
-
-	virtual void DrawSelf() = 0;
 };
 
 #endif //__Graphic_GraphicObject_H__

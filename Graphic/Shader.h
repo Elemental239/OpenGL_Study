@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "OpenGL.h"
 #include "StringImpl.h"
+#include "SharedPtr.h"
 
 class CShader : public CObject
 {
@@ -55,5 +56,6 @@ public:
 private:
 	GLuint m_program;
 };
+typedef CSharedPtr<CShaderProgram> TShaderProgramRef;
 
 #endif __SHADER_H__

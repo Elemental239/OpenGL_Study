@@ -2,21 +2,46 @@
 #define __Graphic_GraphicGeneral_H__
 
 #include "Object.h"
+#include "OpenGL.h"
 
-class CPoint : public CObject
+template<class T>
+class CGenericPoint : public CObject
 {
 public: 
-	CPoint(int x, int y) : m_nX(x), m_nY(y) {}
-	CPoint(const CPoint& other) : m_nX(other.GetX()), m_nY(other.GetY()) {}
-	CPoint& operator=(const CPoint& other);
+	CGenericPoint(T x, T y) : m_nX(x), m_nY(y), m_nZ(0) {}
+	CGenericPoint(const CGenericPoint<T>& other) : m_nX(other.GetX()), m_nY(other.GetY()), m_nZ(other.GetZ()) {}
+	CGenericPoint<T>& operator=(const CGenericPoint<T>& other);
 
-	int GetX() const { return m_nX; }
-	int GetY() const { return m_nY; }
+	T GetX() const { return m_nX; }
+	T GetY() const { return m_nY; }
+	T GetZ() const { return m_nZ; }
 
-private:
-	int m_nX;
-	int m_nY;
+protected:
+	T m_nX;
+	T m_nY;
+	T m_nZ;
 };
+
+/////////////////////////////////////////
+///CGenericPoint
+template<class T>
+CGenericPoint<T>& CGenericPoint<T>::operator=(const CGenericPoint<T>& other)
+{
+	if (&other == this)
+		return *this;
+
+	m_nX = other.GetX();
+	m_nY = other.GetY();
+	m_nZ = other.GetZ();
+
+	return *this;
+}
+
+typedef CGenericPoint<int> CPoint;
+typedef CGenericPoint<GLfloat> COpenGLPoint;
+typedef CGenericPoint<int> CSize;
+
+
 
 typedef unsigned short CColorPart;
 #define MAX_COLOR_PART_VALUE 0xFF
@@ -47,5 +72,38 @@ private:
 	CColorPart m_nBlue;
 	CColorPart m_nAlpha;
 };
+
+template<class T>
+class CGenericPointWithColor : public CPoint
+{
+public:
+	CGenericPointWithColor(T x, T y, T z, CColor color) : CGenericPointWithColor(x, y, z), m_cColor(color) {}
+	CGenericPointWithColor(const CGenericPointWithColor& other) : CPoint(other), m_cColor(other.GetColor()) {}
+	CGenericPointWithColor& operator=(const CGenericPointWithColor& other);
+
+	CColor GetColor() const { return m_cColor; }
+
+private:
+	CColor m_cColor;
+};
+
+/////////////////////////////////////////
+///CGenericPointWithColor
+template<class T>
+CGenericPointWithColor<T>& CGenericPointWithColor<T>::operator=(const CGenericPointWithColor<T>& other)
+{
+	if (&other == this)
+		return *this;
+
+	m_nX = other.GetX();
+	m_nY = other.GetY();
+	m_nZ = other.GetZ();
+	m_cColor = other.GetColor();
+
+	return *this;
+}
+
+typedef CGenericPointWithColor<int> CPointWithColor;
+typedef CGenericPointWithColor<GLfloat> COpenGLPointWithColor;
 
 #endif //__Graphic_GraphicGeneral_H__

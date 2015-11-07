@@ -22,7 +22,7 @@ public:
 	virtual bool OnSystemEvent(const EventData& event) = 0;
 	virtual void OnLifetimeEvent(EDialogLifetimeEvent event) = 0;
 
-	bool IsClosed() { return m_bClosed; }
+	bool IsClosed() const { return m_bClosed; }
 	void Close() { m_bClosed = true; }
 private:
 	bool m_bClosed;

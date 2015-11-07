@@ -25,11 +25,15 @@ class IWindow : public CObject
 {
 public:
 	IWindow(const WindowConstructionParams& params);
+	~IWindow() {}
 	
 	virtual bool OnSystemEvent(const EventData& event) = 0;
 
 	void SetOpenGLDrawingContext();
-	virtual bool IsClosed() = 0;
+	int GetWidth() { return m_params.m_nWindowWidth; }
+	int GetHeight() { return m_params.m_nWindowHeight; }
+
+	virtual bool IsClosed() const = 0;
 	virtual void Close() = 0;
 	virtual void Draw() = 0;
 
@@ -49,7 +53,7 @@ public:
 	~CWindow();
 
 	virtual bool OnSystemEvent(const EventData& event) override;
-	virtual bool IsClosed() override { return m_bClosed; }
+	virtual bool IsClosed() const override { return m_bClosed; }
 	virtual void Close() override;
 	virtual void Draw() override;
 

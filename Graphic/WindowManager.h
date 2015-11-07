@@ -70,8 +70,12 @@ public:
 	void AddWindow(CSharedPtr<IWindow> spWindow);
 	void RemoveWindow(CSharedPtr<IWindow> spWindow);
 
+	void SetActiveWindow(CSharedPtr<IWindow> spWindow) { m_activeWindow = spWindow; }
+	CSharedPtr<IWindow> GetActiveWindow() { return m_activeWindow; }
+
 private:
 	std::vector<CSharedPtr<IWindow> > m_windows;
+	CSharedPtr<IWindow> m_activeWindow;
 	bool m_bInited;
 
 	void InitOpenGLWindowLibrary(); //GLFW

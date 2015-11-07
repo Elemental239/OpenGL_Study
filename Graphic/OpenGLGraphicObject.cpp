@@ -1,12 +1,49 @@
 #include "OpenGLGraphicObject.h"
 #include "Logger.h"
+#include "WindowManager.h"
+#include "Window.h"
 
-COpenGLGraphicObject::COpenGLGraphicObject()
+COpenGLGraphicObject::COpenGLGraphicObject(CPoint originPoint) : m_origin(originPoint), m_bInited(false)
 {
 	MARKER("COpenGLGraphicObject::COpenGLGraphicObject()");
+
+	glGenBuffers(1, &m_VBO);
+	glGenBuffers(1, &m_EBO);
+	glGenVertexArrays(1, &m_VAO);
 }
 
 COpenGLGraphicObject::~COpenGLGraphicObject()
 {
 	MARKER("COpenGLGraphicObject::~COpenGLGraphicObject()");
+
+	glDeleteVertexArrays(1, &m_VAO);
+	glDeleteBuffers(1, &m_EBO);
+	glDeleteBuffers(1, &m_VBO);
+}
+
+void COpenGLGraphicObject::DrawSelf()
+{
+	if (!m_bInited)
+	{
+		m_bInited = true;
+
+		// Open VAO, fill VBO & EBO with data, set attributes, close VAO
+		glBindVertexArray(m_VAO);
+			BindVBO();
+			BindEBO();
+			SetupVAOAttributes();
+		glBindVertexArray(0);
+		CreateShaderProgram();
+	}
+}
+
+COpenGLPoint COpenGLGraphicObject::TranslatePixelPoint(const CPoint& point) const
+{
+	CSize szWindowSize = CSize(CWindowManager::Instance().GetActiveWindow()->GetWidth(), 
+							   CWindowManager::Instance().GetActiveWindow()->GetHeight());
+
+	GLfloat xFloat = (2.0f * (point.GetX() + m_origin.GetX())) / szWindowSize.GetX() - 1;
+	GLfloat yFloat = (2.0f * (point.GetY() + m_origin.GetY())) / szWindowSize.GetY() - 1;
+
+	return COpenGLPoint(xFloat, yFloat);
 }

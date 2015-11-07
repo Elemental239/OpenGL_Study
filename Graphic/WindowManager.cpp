@@ -81,7 +81,9 @@ void CWindowManager::CreateFirstWindow(WindowConstructionParams& firstWindowPara
 {
 	MARKER("CWindowManager::CreateFirstWindow()");
 
-	AddWindow(CSharedPtr<IWindow>(new CMainWindow(firstWindowParams)));
+	TWindowRef spWindow = new CMainWindow(firstWindowParams);
+	AddWindow(spWindow);
+	SetActiveWindow(spWindow);
 }
 
 void CWindowManager::InitOpenGLDriverLibrary()

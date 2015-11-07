@@ -3,19 +3,6 @@
 #include "StringImpl.h"
 
 /////////////////////////////////////////
-///CPoint
-CPoint& CPoint::operator=(const CPoint& other)
-{
-	if (&other == this)
-		return *this;
-
-	m_nX = other.GetX();
-	m_nY = other.GetY();
-
-	return *this;
-}
-
-/////////////////////////////////////////
 ///CColor
 int CColor::GetPartInt(ColorPart part)
 {
