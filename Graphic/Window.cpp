@@ -41,6 +41,7 @@ CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params), m_bC
 	MARKER("CWindow::CWindow()");
 	LOG("%s", ToLog(params.ToString()));
 
+	glfwWindowHint(GLFW_RESIZABLE, params.m_bIsResizable ? GL_TRUE : GL_FALSE);
 	m_window = glfwCreateWindow(params.m_nWindowWidth, params.m_nWindowHeight, params.m_strWindowLabel.c_str(), nullptr, nullptr);
 	if (m_window == nullptr)
 	{

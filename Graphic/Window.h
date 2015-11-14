@@ -19,6 +19,8 @@ struct WindowConstructionParams
 
 	CString ToString() const { return "Window params: Label = " + m_strWindowLabel + ", size = " + ToStr(m_nWindowWidth) 
 		+ "x" + ToStr(m_nWindowHeight) + "; color = " + m_colorBase.ToString(); }
+
+	bool m_bIsResizable;
 };
 
 class IWindow : public CObject
