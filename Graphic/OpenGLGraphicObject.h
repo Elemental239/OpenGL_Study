@@ -1,6 +1,12 @@
 #ifndef __Graphic_OpenGLGraphicObject_H__
 #define __Graphic_OpenGLGraphicObject_H__
 
+// Possible OpenGL tutorials: http://www.learnopengl.com/#!Getting-started/Creating-a-window  - now it is the main course
+//							  https://open.gl/
+// OpenGL main site links:    https://www.opengl.org/sdk/docs/tutorials/
+//
+// GLFW documentation: http://www.glfw.org/docs/latest/window.html
+
 #include "GraphicObject.h"
 #include "SharedPtr.h"
 #include "Shader.h"
@@ -14,6 +20,7 @@ public:
 	~COpenGLGraphicObject();
 
 	virtual void DrawSelf() override;
+	virtual CPoint GetOrigin() override { return CPoint(); }
 
 protected:
 	CPoint m_origin;

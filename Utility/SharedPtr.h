@@ -14,6 +14,9 @@ public:
 	CSharedPtr(const CSharedPtr<T>&);
 	~CSharedPtr();
 
+	template<class K>
+	K* static_cast_to() { return static_cast<K*>(sp_obj.get()); }
+
 	operator T*() { return sp_obj.get(); }
 
 	std::shared_ptr<T>& operator->() { return sp_obj; }

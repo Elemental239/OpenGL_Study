@@ -15,6 +15,7 @@
     <ClInclude Include="..\..\Graphic\Dialogs\MainMenuDialog.h" />
     <ClInclude Include="..\..\Graphic\GraphicGeneral.h" />
     <ClInclude Include="..\..\Graphic\GraphicObject.h" />
+    <ClInclude Include="..\..\Graphic\GraphicObjects\Rectangle.h" />
     <ClInclude Include="..\..\Graphic\GraphicObjects\Triangle.h" />
     <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h" />
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
@@ -44,6 +45,7 @@
     <ClCompile Include="..\..\Graphic\Dialogs\MainMenuDialog.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
+    <ClCompile Include="..\..\Graphic\GraphicObjects\Rectangle.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObjects\Triangle.cpp" />
     <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />

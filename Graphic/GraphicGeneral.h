@@ -15,6 +15,11 @@ public:
 	CGenericPoint(const CGenericPoint<T>& other) : m_nX(other.GetX()), m_nY(other.GetY()), m_nZ(other.GetZ()) {}
 	CGenericPoint<T>& operator=(const CGenericPoint<T>& other);
 
+	friend const CGenericPoint<T> operator+(const CGenericPoint<T>& left, const CGenericPoint<T>& right)
+	{
+		return CGenericPoint<T>(left.GetX() + right.GetX(), left.GetY() + right.GetY(), left.GetZ() + right.GetZ());
+	}
+	
 	T GetX() const { return m_nX; }
 	T GetY() const { return m_nY; }
 	T GetZ() const { return m_nZ; }
@@ -76,6 +81,7 @@ class CGenericPointWithColor : public CPoint
 {
 public:
 	CGenericPointWithColor(T x, T y, T z, CColor color) : CGenericPoint(x, y, z), m_cColor(color) {}
+	CGenericPointWithColor(CGenericPoint<T> p, CColor color) : CGenericPoint(p), m_cColor(color) {}
 	CGenericPointWithColor(const CGenericPointWithColor& other) : CGenericPoint(other), m_cColor(other.GetColor()) {}
 	CGenericPointWithColor& operator=(const CGenericPointWithColor& other);
 
@@ -99,6 +105,12 @@ CGenericPoint<T>& CGenericPoint<T>::operator=(const CGenericPoint<T>& other)
 
 	return *this;
 }
+
+//template<class T>
+//const CGenericPoint<T> operator+(const CGenericPoint<T>& left, const CGenericPoint<T>& right)
+//{
+//	return CGenericPoint<T>(left.GetX() + right.GetX(), left.GetY() + right.GetY(), left.GetZ() + right.GetZ());
+//}
 
 /////////////////////////////////////////
 ///CGenericPointWithColor

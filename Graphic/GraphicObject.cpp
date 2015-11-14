@@ -1,7 +1,7 @@
 #include "GraphicObject.h"
 #include "Logger.h"
 
-CGraphicObject::CGraphicObject()
+CGraphicObject::CGraphicObject() : m_pParent(nullptr)
 {
 	MARKER("CGraphicObject::CGraphicObject()");
 }
@@ -25,6 +25,7 @@ void CGraphicObject::AddChild(TGraphicObjectRef obj)
 	MARKER("CGraphicObject::AddChildren()");
 
 	m_children.push_back(obj);
+	obj->SetParent(this);
 }
 
 void CGraphicObject::RemoveChild(TGraphicObjectRef obj)
@@ -36,4 +37,6 @@ void CGraphicObject::RemoveChild(TGraphicObjectRef obj)
 		if ((*iter) == obj)
 			m_children.erase(iter);
 	}
+
+	obj->SetParent(nullptr);
 }

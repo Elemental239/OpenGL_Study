@@ -22,4 +22,4 @@ private:
 	std::vector<CPointWithColor> m_points;
 };
 
-#endif
+#endif //__Graphic__Triangle__H__

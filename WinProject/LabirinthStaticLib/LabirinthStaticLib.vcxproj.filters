@@ -103,6 +103,9 @@
     <ClInclude Include="..\..\Utility\Random.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Graphic\GraphicObjects\Rectangle.h">
+      <Filter>Graphic\GraphicObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -155,6 +158,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Utility\Random.cpp">
       <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\GraphicObjects\Rectangle.cpp">
+      <Filter>Graphic\GraphicObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

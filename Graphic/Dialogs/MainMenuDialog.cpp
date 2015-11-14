@@ -1,30 +1,54 @@
 #include "MainMenuDialog.h"
 #include "Logger.h"
 #include "GraphicObjects/Triangle.h"
+#include "GraphicObjects/Rectangle.h"
 
 CMainMenuDialog::CMainMenuDialog()
 {
 	MARKER("CMainMenuDialog::CMainMenuDialog()");
 
-	TGraphicObjectRef spTopTriangle = new CTrianglePrimitive( 
-		CPointWithColor(200,   0, 1, CColor("#227722")),
-		CPointWithColor(800, 600, 1, CColor("#772222")),
-		CPointWithColor(800,   0, 1, CColor("#222277"))
+	TGraphicObjectRef spTopRectangle = new CRectanglePrimitive( 
+		CPointWithColor(  0,   0, 1, CRandomColor()),
+		CPointWithColor(  0, 600, 1, CRandomColor()),
+		CPointWithColor(800, 600, 1, CRandomColor()),
+		CPointWithColor(800,   0, 1, CRandomColor())
 	);
-	TGraphicObjectRef spCurrentTriangle = spTopTriangle;
-	AddChild(spTopTriangle);
+	TGraphicObjectRef spCurrentRectangle = spTopRectangle;
+	AddChild(spTopRectangle);
 
 	for (int i = 1; i < 4; i++)
 	{
-		TGraphicObjectRef spTriangle = new CTrianglePrimitive( 
-			CPointWithColor(200 + i * 100,   30 * i, 1, CRandomColor()),
-			CPointWithColor(800 - 30 * i, 600 - i * 100, 1, CRandomColor()),
-			CPointWithColor(800 - 30 * i,             30 * i, 1, CRandomColor())
-		); 
+		TGraphicObjectRef spRectangle = new CRectangle( 
+			CPoint(50, 50, 1),
+			CPoint(spCurrentRectangle.static_cast_to<CRectanglePrimitive>()->GetWidth() - 50,
+			       spCurrentRectangle.static_cast_to<CRectanglePrimitive>()->GetHeight() - 50, 1),
+			CRandomColor(),
+			spCurrentRectangle->GetOrigin()
+		);
 
-		spCurrentTriangle->AddChild(spTriangle);
-		spCurrentTriangle = spTriangle;
-	}
+		spCurrentRectangle->AddChild(spRectangle);
+		spCurrentRectangle = spRectangle;
+	};
+
+	//TGraphicObjectRef spTopTriangle = new CTrianglePrimitive( 
+	//	CPointWithColor(200,   0, 1, CColor("#227722")),
+	//	CPointWithColor(800, 600, 1, CColor("#772222")),
+	//	CPointWithColor(800,   0, 1, CColor("#222277"))
+	//);
+	//TGraphicObjectRef spCurrentTriangle = spTopTriangle;
+	//AddChild(spTopTriangle);
+
+	//for (int i = 1; i < 4; i++)
+	//{
+	//	TGraphicObjectRef spTriangle = new CTrianglePrimitive( 
+	//		CPointWithColor(200 + i * 100,   30 * i, 1, CRandomColor()),
+	//		CPointWithColor(800 - 30 * i, 600 - i * 100, 1, CRandomColor()),
+	//		CPointWithColor(800 - 30 * i,             30 * i, 1, CRandomColor())
+	//	); 
+
+	//	spCurrentTriangle->AddChild(spTriangle);
+	//	spCurrentTriangle = spTriangle;
+	//}
 }
 
 CMainMenuDialog::~CMainMenuDialog()
