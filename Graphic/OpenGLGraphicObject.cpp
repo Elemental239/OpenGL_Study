@@ -44,6 +44,7 @@ COpenGLPoint COpenGLGraphicObject::TranslatePixelPoint(const CPoint& point) cons
 
 	GLfloat xFloat = (2.0f * (point.GetX() + m_origin.GetX())) / szWindowSize.GetX() - 1;
 	GLfloat yFloat = (2.0f * (point.GetY() + m_origin.GetY())) / szWindowSize.GetY() - 1;
+	GLfloat zFloat = 1.0f * point.GetZ();
 
-	return COpenGLPoint(xFloat, yFloat);
+	return COpenGLPoint(xFloat, yFloat, zFloat);
 }

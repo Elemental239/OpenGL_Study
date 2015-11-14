@@ -16,6 +16,24 @@ void IWindow::SetOpenGLDrawingContext()
 	glfwMakeContextCurrent(m_window);
 }
 
+
+void IWindow::AddDialog(TDialogRef spDialog)
+{
+	m_dialogs.push(spDialog);
+}
+
+void IWindow::RemoveDialog(TDialogRef spDialog)
+{
+	if (m_dialogs.size() > 0)
+	{
+		for (int i = 0; i < m_dialogs.size(); i++)
+		{
+			if (m_dialogs[i] == spDialog)
+				m_dialogs[i]->Close();
+		}
+	}
+}
+
 /////////////////////////////////////////////
 ///CWindow
 CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params), m_bClosed(false)
@@ -87,21 +105,4 @@ void CWindow::Draw()
 	}
 
 	glfwSwapBuffers(m_window);
-}
-
-void CWindow::AddDialog(TDialogRef spDialog)
-{
-	m_dialogs.push(spDialog);
-}
-
-void CWindow::RemoveDialog(TDialogRef spDialog)
-{
-	if (m_dialogs.size() > 0)
-	{
-		for (int i = 0; i < m_dialogs.size(); i++)
-		{
-			if (m_dialogs[i] == spDialog)
-				m_dialogs[i]->Close();
-		}
-	}
 }

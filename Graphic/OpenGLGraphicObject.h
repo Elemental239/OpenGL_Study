@@ -24,7 +24,7 @@ protected:
 	GLuint m_VAO; // VertexArrayObject
 	GLuint m_VBO; // VertexBufferObject
 	GLuint m_EBO; // ElementsBufferObject
-	//GLuint m_Texture;
+	//GLuint m_Texture; // Not used for now
 
 	COpenGLPoint TranslatePixelPoint(const CPoint& point) const;
 	virtual void CreateShaderProgram() = 0;

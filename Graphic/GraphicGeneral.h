@@ -7,8 +7,10 @@
 template<class T>
 class CGenericPoint : public CObject
 {
-public: 
+public:
+	CGenericPoint() : m_nX(0), m_nY(0), m_nZ(0) {}
 	CGenericPoint(T x, T y) : m_nX(x), m_nY(y), m_nZ(0) {}
+	CGenericPoint(T x, T y, T z) : m_nX(x), m_nY(y), m_nZ(z) {}
 	CGenericPoint(const CGenericPoint<T>& other) : m_nX(other.GetX()), m_nY(other.GetY()), m_nZ(other.GetZ()) {}
 	CGenericPoint<T>& operator=(const CGenericPoint<T>& other);
 
@@ -57,9 +59,10 @@ enum ColorPart
 class CColor : public CObject
 {
 public:
-	CColor() : m_nRed(MAX_COLOR_PART_VALUE), m_nGreen(MAX_COLOR_PART_VALUE), m_nBlue(MAX_COLOR_PART_VALUE), m_nAlpha(MAX_COLOR_PART_VALUE) { }
+	CColor() : m_nRed(0), m_nGreen(0), m_nBlue(0), m_nAlpha(MAX_COLOR_PART_VALUE) { }
 	CColor(CColorPart red, CColorPart green, CColorPart blue, CColorPart alpha) : m_nRed(red), m_nGreen(green), m_nBlue(blue), m_nAlpha(alpha) { }
 	CColor(CColorPart red, CColorPart green, CColorPart blue) : m_nRed(red), m_nGreen(green), m_nBlue(blue), m_nAlpha(MAX_COLOR_PART_VALUE) { }
+	CColor(CString strColor);
 
 	float GetPart(ColorPart part) { return (1.0f * GetPartInt(part)) / MAX_COLOR_PART_VALUE; }
 	int GetPartInt(ColorPart part);
@@ -77,8 +80,8 @@ template<class T>
 class CGenericPointWithColor : public CPoint
 {
 public:
-	CGenericPointWithColor(T x, T y, T z, CColor color) : CGenericPointWithColor(x, y, z), m_cColor(color) {}
-	CGenericPointWithColor(const CGenericPointWithColor& other) : CPoint(other), m_cColor(other.GetColor()) {}
+	CGenericPointWithColor(T x, T y, T z, CColor color) : CGenericPoint(x, y, z), m_cColor(color) {}
+	CGenericPointWithColor(const CGenericPointWithColor& other) : CGenericPoint(other), m_cColor(other.GetColor()) {}
 	CGenericPointWithColor& operator=(const CGenericPointWithColor& other);
 
 	CColor GetColor() const { return m_cColor; }

@@ -3,6 +3,8 @@
 #include "OpenGL.h"
 #include "glfw-3.1.1/include/GLFW/glfw3.h"
 #include "MainWindow.h"
+#include "Window.h"
+#include "Dialogs/MainMenuDialog.h"
 
 ///////////////////////////////////////////////////
 ///Various OpenGL global callbacks
@@ -57,6 +59,9 @@ void CWindowManager::Init(WindowConstructionParams& firstWindowParams)
 	InitOpenGLWindowLibrary();
 	CreateFirstWindow(firstWindowParams);
 	InitOpenGLDriverLibrary();
+
+	CSharedPtr<IDialog> spDialog = new CMainMenuDialog; 
+	m_windows[0]->AddDialog(spDialog);
 
 	m_bInited = true;
 }

@@ -7,7 +7,7 @@
 class CTrianglePrimitive : public COpenGLGraphicObject
 {
 public:
-	CTrianglePrimitive(CPoint originPoint, CPointWithColor p1, CPointWithColor p2, CPointWithColor p3);
+	CTrianglePrimitive(CPointWithColor p1, CPointWithColor p2, CPointWithColor p3, CPoint originPoint = CPoint());
 	~CTrianglePrimitive();
 
 	virtual void DrawSelf() override;

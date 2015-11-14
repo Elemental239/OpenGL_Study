@@ -6,7 +6,6 @@
 //* with GLEW_MX flag. 
 //* For more information, google GLEW MX
 //*
-//*
 
 #include "Object.h"
 #include <vector>

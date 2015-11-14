@@ -1,6 +1,8 @@
 #include "Triangle.h"
 
-CTrianglePrimitive::CTrianglePrimitive(CPoint originPoint, CPointWithColor p1, CPointWithColor p2, CPointWithColor p3) : 
+static const int DATA_ROW_LENGTH = 6; // 3 for pos and 3 for color
+
+CTrianglePrimitive::CTrianglePrimitive(CPointWithColor p1, CPointWithColor p2, CPointWithColor p3, CPoint originPoint /*= CPoint()*/) : 
 	COpenGLGraphicObject(originPoint)
 {
 	m_points.push_back(p1);
@@ -15,6 +17,10 @@ void CTrianglePrimitive::DrawSelf()
 	__super::DrawSelf();
 
 	m_shaderProgram->Use();
+
+	glBindVertexArray(m_VAO);
+	glDrawElements(GL_TRIANGLES, m_points.size() * 3, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
 }
 
 void CTrianglePrimitive::CreateShaderProgram()
@@ -46,14 +52,28 @@ void CTrianglePrimitive::CreateShaderProgram()
 
 void CTrianglePrimitive::BindVBO()
 {
+	GLfloat vertices[3 * DATA_ROW_LENGTH];
 
+	for (decltype(m_points.size()) i = 0; i < m_points.size(); i++)
+	{
+		// Positions
+		COpenGLPoint glPoint = TranslatePixelPoint(m_points[i]);
+		vertices[i * DATA_ROW_LENGTH + 0] = glPoint.GetX();
+		vertices[i * DATA_ROW_LENGTH + 1] = glPoint.GetY();
+		vertices[i * DATA_ROW_LENGTH + 2] = glPoint.GetZ();
 
-	GLfloat vertices[] = {
-		// Positions          // Colors
-		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,
-	};
+		// Color
+		vertices[i * DATA_ROW_LENGTH + 3] = m_points[i].GetColor().GetPart(COLOR_PART_RED);
+		vertices[i * DATA_ROW_LENGTH + 4] = m_points[i].GetColor().GetPart(COLOR_PART_GREEN);
+		vertices[i * DATA_ROW_LENGTH + 5] = m_points[i].GetColor().GetPart(COLOR_PART_BLUE);
+	}
+
+	//GLfloat vertices[] = {
+	//	// Positions          // Colors
+	//	 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,
+	//	 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,
+	//	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,
+	//};
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -61,10 +81,18 @@ void CTrianglePrimitive::BindVBO()
 
 void CTrianglePrimitive::BindEBO()
 {
+	GLuint indices[] = { 0, 1, 2 };
 
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 }
 
 void CTrianglePrimitive::SetupVAOAttributes()
 {
-
+	// Position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	// Color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3* sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
 }

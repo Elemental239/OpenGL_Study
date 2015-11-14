@@ -1,11 +1,16 @@
 #include "MainMenuDialog.h"
 #include "Logger.h"
+#include "GraphicObjects/Triangle.h"
 
 CMainMenuDialog::CMainMenuDialog()
 {
 	MARKER("CMainMenuDialog::CMainMenuDialog()");
 
-	//AddChild();
+	AddChild(new CTrianglePrimitive( CPointWithColor(100, 100, 1, CColor("#227722")),
+									 CPointWithColor(200, 200, 1, CColor("#227722")),
+									 CPointWithColor(300, 100, 1, CColor("#227722"))
+								    )
+	);
 }
 
 CMainMenuDialog::~CMainMenuDialog()
@@ -32,5 +37,5 @@ bool CMainMenuDialog::OnSystemEvent(const EventData& event)
 
 void CMainMenuDialog::DrawSelf()
 {
-
+	MARKER("CMainMenuDialog::DrawSelf()");
 }

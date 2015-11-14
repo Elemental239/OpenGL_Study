@@ -24,6 +24,7 @@ public:
 
 	bool IsClosed() const { return m_bClosed; }
 	void Close() { m_bClosed = true; }
+
 private:
 	bool m_bClosed;
 };

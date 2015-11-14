@@ -25,7 +25,7 @@ class IWindow : public CObject
 {
 public:
 	IWindow(const WindowConstructionParams& params);
-	~IWindow() {}
+	virtual ~IWindow() {}
 	
 	virtual bool OnSystemEvent(const EventData& event) = 0;
 
@@ -37,12 +37,15 @@ public:
 	virtual void Close() = 0;
 	virtual void Draw() = 0;
 
+	void AddDialog(TDialogRef spDialog);
+	void RemoveDialog(TDialogRef spDialog);
+
 	friend class CWindowManager;
 
 protected:
 	GLFWwindow* m_window;
 	WindowConstructionParams m_params;
-	
+	CStack<TDialogRef> m_dialogs;
 };
 typedef CSharedPtr<IWindow> TWindowRef;
 
@@ -57,12 +60,8 @@ public:
 	virtual void Close() override;
 	virtual void Draw() override;
 
-	void AddDialog(TDialogRef spDialog);
-	void RemoveDialog(TDialogRef spDialog);
-
 private:
 	bool m_bClosed;
-	CStack<TDialogRef> m_dialogs;
 
 	int GetHeight() { return m_params.m_nWindowHeight; }
 	int GetWidth() { return m_params.m_nWindowWidth; }

@@ -6,8 +6,8 @@ CMainWindow::CMainWindow(const WindowConstructionParams& params) : CWindow(param
 {
 	MARKER("CMainWindow::CMainWindow()");
 
-	CSharedPtr<IDialog> spDialog = new CMainMenuDialog; 
-	AddDialog(spDialog);
+	//CSharedPtr<IDialog> spDialog = new CMainMenuDialog; 
+	//AddDialog(spDialog);
 }
 
 CMainWindow::~CMainWindow()

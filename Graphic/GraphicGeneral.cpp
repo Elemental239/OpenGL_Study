@@ -4,6 +4,41 @@
 
 /////////////////////////////////////////
 ///CColor
+CColor::CColor(CString strColor)
+{
+	if (strColor[0] == '#')
+		strColor = strColor.substr(1, strColor.length() - 1);
+
+	if (strColor.length() != 6 && strColor.length() != 8)
+	{
+		LOGE("Can't parse color string %s in constructor", ToLog(strColor));
+		m_nRed = 0;
+		m_nGreen = 0;
+		m_nBlue = 0;
+		m_nAlpha = MAX_COLOR_PART_VALUE;
+		return;
+	}
+
+	CString substr = strColor.substr(0, 2);
+	m_nRed = std::stoi(substr, 0, 16);
+	
+	substr = strColor.substr(2, 2);
+	m_nGreen = std::stoi(substr, 0, 16);
+	
+	substr = strColor.substr(4, 2);
+	m_nBlue = std::stoi(substr, 0, 16);
+
+	if (strColor.length() == 6)
+	{
+		m_nAlpha = MAX_COLOR_PART_VALUE;
+	}
+	else
+	{
+		substr = strColor.substr(6, 2);
+		m_nAlpha = std::stoi(substr, 0, 16);
+	}
+}
+
 int CColor::GetPartInt(ColorPart part)
 {
 	switch (part)
@@ -28,5 +63,5 @@ int CColor::GetPartInt(ColorPart part)
 
 CString CColor::ToString() const
 {
-	return FormatString("#%02X%02X%02X:%02X", m_nRed, m_nGreen, m_nBlue, m_nAlpha);
+	return FormatString("#%02X%02X%02X%02X", m_nRed, m_nGreen, m_nBlue, m_nAlpha);
 }
