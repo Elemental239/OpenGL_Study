@@ -32,6 +32,7 @@
     <ClInclude Include="..\..\Utility\Listeners.h" />
     <ClInclude Include="..\..\Utility\Logger.h" />
     <ClInclude Include="..\..\Utility\Object.h" />
+    <ClInclude Include="..\..\Utility\Random.h" />
     <ClInclude Include="..\..\Utility\SharedPtr.h" />
     <ClInclude Include="..\..\Utility\Singleton.h" />
     <ClInclude Include="..\..\Utility\Stack.h" />
@@ -54,6 +55,7 @@
     <ClCompile Include="..\..\PlatformSpecific\Windows\WinFunctions.cpp" />
     <ClCompile Include="..\..\Utility\File.cpp" />
     <ClCompile Include="..\..\Utility\Logger.cpp" />
+    <ClCompile Include="..\..\Utility\Random.cpp" />
     <ClCompile Include="..\..\Utility\StringImpl.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
