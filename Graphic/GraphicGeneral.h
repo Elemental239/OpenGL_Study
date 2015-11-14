@@ -3,6 +3,7 @@
 
 #include "Object.h"
 #include "OpenGL.h"
+#include "Random.h"
 
 template<class T>
 class CGenericPoint : public CObject
@@ -24,25 +25,9 @@ protected:
 	T m_nZ;
 };
 
-/////////////////////////////////////////
-///CGenericPoint
-template<class T>
-CGenericPoint<T>& CGenericPoint<T>::operator=(const CGenericPoint<T>& other)
-{
-	if (&other == this)
-		return *this;
-
-	m_nX = other.GetX();
-	m_nY = other.GetY();
-	m_nZ = other.GetZ();
-
-	return *this;
-}
-
 typedef CGenericPoint<int> CPoint;
 typedef CGenericPoint<GLfloat> COpenGLPoint;
 typedef CGenericPoint<int> CSize;
-
 
 
 typedef unsigned short CColorPart;
@@ -76,6 +61,16 @@ private:
 	CColorPart m_nAlpha;
 };
 
+class CRandomColor : public CColor
+{
+public: 
+	CRandomColor() : CColor(Random::Instance().GetIntII(0, 0xFF), 
+							Random::Instance().GetIntII(0, 0xFF), 
+							Random::Instance().GetIntII(0, 0xFF), 
+							MAX_COLOR_PART_VALUE) {}
+};
+
+
 template<class T>
 class CGenericPointWithColor : public CPoint
 {
@@ -89,6 +84,21 @@ public:
 private:
 	CColor m_cColor;
 };
+
+/////////////////////////////////////////
+///CGenericPoint
+template<class T>
+CGenericPoint<T>& CGenericPoint<T>::operator=(const CGenericPoint<T>& other)
+{
+	if (&other == this)
+		return *this;
+
+	m_nX = other.GetX();
+	m_nY = other.GetY();
+	m_nZ = other.GetZ();
+
+	return *this;
+}
 
 /////////////////////////////////////////
 ///CGenericPointWithColor

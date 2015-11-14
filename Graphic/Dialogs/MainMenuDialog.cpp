@@ -6,8 +6,6 @@ CMainMenuDialog::CMainMenuDialog()
 {
 	MARKER("CMainMenuDialog::CMainMenuDialog()");
 
-	int nCurrentWidth = 200;
-	int nCurrentHeight = 600;
 	TGraphicObjectRef spTopTriangle = new CTrianglePrimitive( 
 		CPointWithColor(200,   0, 1, CColor("#227722")),
 		CPointWithColor(800, 600, 1, CColor("#772222")),
@@ -16,12 +14,12 @@ CMainMenuDialog::CMainMenuDialog()
 	TGraphicObjectRef spCurrentTriangle = spTopTriangle;
 	AddChild(spTopTriangle);
 
-	for (int i = 1; i < 5; i++)
+	for (int i = 1; i < 4; i++)
 	{
 		TGraphicObjectRef spTriangle = new CTrianglePrimitive( 
-			CPointWithColor(200 + i * 100,   0, 1, CColor("#227722")),
-			CPointWithColor(800, 600 - i * 100, 1, CColor("#772222")),
-			CPointWithColor(800,             0, 1, CColor("#222277"))
+			CPointWithColor(200 + i * 100,   30 * i, 1, CRandomColor()),
+			CPointWithColor(800 - 30 * i, 600 - i * 100, 1, CRandomColor()),
+			CPointWithColor(800 - 30 * i,             30 * i, 1, CRandomColor())
 		); 
 
 		spCurrentTriangle->AddChild(spTriangle);
