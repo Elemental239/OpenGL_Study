@@ -26,6 +26,7 @@
     <ClInclude Include="..\..\Logic\ApplicationInfo.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\PlatformSpecific\Windows\WinFunctions.h" />
+    <ClInclude Include="..\..\Resources\ColorsResources.h" />
     <ClInclude Include="..\..\Utility\File.h" />
     <ClInclude Include="..\..\Utility\IFile.h" />
     <ClInclude Include="..\..\Utility\Listeners.h" />

@@ -97,6 +97,9 @@
     <ClInclude Include="..\..\Graphic\GraphicObjects\Triangle.h">
       <Filter>Graphic\GraphicObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Resources\ColorsResources.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
