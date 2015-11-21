@@ -23,30 +23,6 @@ void LoggerTest::WriteString(char* buffer)
 	memcpy(m_pLastLog, buffer, strlen(buffer) + 1);
 }
 
-int FailFunc()
-{
-	return 0;
-}
-
-TEST_CASE("Catch test", "[Catch]")
-{
-	SECTION("Ok test")
-	{
-		REQUIRE(1 == 1);
-	}
-
-	SECTION("Fail test")
-	{
-		REQUIRE(1 == FailFunc());
-	}
-
-	SECTION("Fail2")
-	{
-		int a = 0;
-		REQUIRE_FALSE(a == FailFunc());
-	}
-}
-
 TEST_CASE_METHOD(LoggerTest, "Log system test", "[Utility][Logger]")
 {
 	SECTION("Basic text")
