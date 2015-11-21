@@ -1,2 +1,0 @@
-http://banditcpp.org/
-https://github.com/martinmoene/lest
