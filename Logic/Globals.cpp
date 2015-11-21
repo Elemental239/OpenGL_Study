@@ -26,6 +26,8 @@ void CGlobals::Init()
 {
 	MARKER("CGlobals::Init()");
 
+	m_strAppFilepath = GetAppFilePath();
+
 #if !defined(NO_GUI)
 	m_spHelloWorldTestWindow = CSharedPtr<CHelloWorldTestWindow>(new CHelloWorldTestWindow);
 	m_spHelloWorldTestWindow->Draw();

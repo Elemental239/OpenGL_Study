@@ -90,7 +90,7 @@ bool CShaderProgram::SetUniform(CString name, int value)
 
 	if (location == -1)
 	{
-		LOGE("CShaderProgram::SetUniform1i() can't find uniform %s", ToLog(name));
+		LOGE("CShaderProgram::SetUniform1i() can't find uniform %s", LST(name));
 		return false;
 	}
 
@@ -105,7 +105,7 @@ bool CShaderProgram::SetUniform(CString name, float value)
 
 	if (location == -1)
 	{
-		LOGE("CShaderProgram::SetUniform1f() can't find uniform %s", ToLog(name));
+		LOGE("CShaderProgram::SetUniform1f() can't find uniform %s", LST(name));
 		return false;
 	}
 

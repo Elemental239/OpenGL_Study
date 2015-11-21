@@ -17,19 +17,21 @@ enum EFileMode
 class IFile : public CObject
 {
 public:
-	IFile(CString path, EFileMode mode): m_mode(mode) { m_strPath = ConvertStringToPath(path); }
+	IFile(CStringWide path, EFileMode mode): m_mode(mode) { m_strPath = ConvertStringToPath(path); }
 	~IFile() { }
 
 	virtual void Open() = 0;
 	virtual void Close() = 0;
 	virtual void Flush() = 0;
-	virtual void Write(CString data) = 0;
-	virtual CString ReadString() = 0;
+	virtual void Write(CStringWide data) = 0;
+	virtual CStringWide ReadString() = 0;
 
 	virtual bool IsExist() = 0;
 
+	void SetPath(CStringWide path) { m_strPath = path; }
+
 protected:
-	CString m_strPath;
+	CStringWide m_strPath;
 	EFileMode m_mode;
 };
 

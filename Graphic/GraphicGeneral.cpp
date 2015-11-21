@@ -11,7 +11,7 @@ CColor::CColor(CString strColor)
 
 	if (strColor.length() != 6 && strColor.length() != 8)
 	{
-		LOGE("Can't parse color string %s in constructor", ToLog(strColor));
+		LOGE("Can't parse color string %s in constructor", LST(strColor));
 		m_nRed = 0;
 		m_nGreen = 0;
 		m_nBlue = 0;

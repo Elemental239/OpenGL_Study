@@ -33,5 +33,8 @@
     <ClCompile Include="..\..\PlatformSpecific\Windows\Tests\WinFunctions_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Utility\Tests\File_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Logic\Tests\Global_tests.cpp" />
     <ClCompile Include="..\..\PlatformSpecific\Windows\Tests\WinFunctions_tests.cpp" />
+    <ClCompile Include="..\..\Utility\Tests\File_tests.cpp" />
     <ClCompile Include="..\..\Utility\Tests\Listeners_tests.cpp" />
     <ClCompile Include="..\..\Utility\Tests\Logger_tests.cpp" />
     <ClCompile Include="..\..\Utility\Tests\SharedPtr_tests.cpp" />

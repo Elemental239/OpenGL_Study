@@ -22,6 +22,9 @@ enum LOG_CATEGORY
 #define MARKERW(...) BASE_MARKER(__VA_ARGS__)
 #define MARKERE(...) BASE_MARKER(__VA_ARGS__)
 
+#define LST(a) ((a).c_str())
+#define LSTW(a) ((CStringWide2CString(a)).c_str())
+
 #define BASE_LOGGER(...) log_instance.Write(__VA_ARGS__)
 #define BASE_MARKER(...) Marker CONCAT(m,LINE)(__VA_ARGS__)
 
