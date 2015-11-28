@@ -15,6 +15,7 @@ public:
 	SINGLETON(CGlobals, CGlobals());
 
 	void Init();
+	void InitGUI();
 
 	CSharedPtr<CHelloWorldTestWindow> m_spHelloWorldTestWindow;
 

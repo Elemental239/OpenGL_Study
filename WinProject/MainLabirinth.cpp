@@ -11,6 +11,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	LOG("WinMain");	
 	
 	GLOBALS.Init();
+	GLOBALS.InitGUI();
 
 	return 0;
 }
