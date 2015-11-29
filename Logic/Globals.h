@@ -19,10 +19,10 @@ public:
 
 	CSharedPtr<CHelloWorldTestWindow> m_spHelloWorldTestWindow;
 
-	CStringWide GetAppFilePath() { return m_strAppFilepath; }
+	CString GetAppFilePath() { return m_strAppFilepath; }
 
 private:
-	CStringWide m_strAppFilepath;
+	CString m_strAppFilepath;
 	CSharedPtr<CMainWindow> m_spMainWindow;
 };
 

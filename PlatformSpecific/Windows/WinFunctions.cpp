@@ -5,77 +5,72 @@
 
 static const int MAX_APP_PATH_LENGTH = 1024;
 
-LPCWSTR CString2LPCWSTR(const CString string)
-{
-	return (LPCWSTR)CString2CStringWide(string).c_str();
-}
-
-CString LPCSTR2CString(LPCSTR string)
-{
-	if (string == NULL)
-		return CString();
-
-	return CString(string);
-}
-
-CString LPCWSTR2CString(LPCWSTR string)
-{
-	if (string == NULL)
-		return CString();
-
-	CStringWide wideString = CStringWide(string);
-	return CStringWide2CString(wideString);
-}
-
-CString LPCTSTR2CString(LPCTSTR string)
-{
-	if (string == NULL)
-		return CString();
-
-	if (sizeof(TCHAR) == sizeof(wchar_t))
-		return LPCWSTR2CString((LPCWSTR)string);
-	else
-		return LPCSTR2CString((LPCSTR)string);
-}
-
-CStringWide LPCSTR2CStringWide(LPCSTR string)
-{
-	if (string == NULL)
-		return CStringWide();
-
-	return CString2CStringWide(LPCSTR2CString(string));
-}
-
-CStringWide LPCWSTR2CStringWide(LPCWSTR string)
-{
-	if (string == NULL)
-		return CStringWide();
-
-	return CStringWide(string);
-}
-
-CStringWide LPCTSTR2CStringWide(LPCTSTR string)
-{
-	if (string == NULL)
-		return CStringWide();
-
-	if (sizeof(TCHAR) == sizeof(wchar_t))
-		return LPCWSTR2CStringWide((LPCWSTR)string);
-	else
-		return LPCSTR2CStringWide((LPCSTR)string);
-}
+//LPCWSTR CString2LPCWSTR(const CString string)
+//{
+//	return (LPCWSTR)CString2CStringWide(string).c_str();
+//}
+//
+//CString LPCSTR2CString(LPCSTR string)
+//{
+//	if (string == NULL)
+//		return CString();
+//
+//	return CString(string);
+//}
+//
+//CString LPCWSTR2CString(LPCWSTR string)
+//{
+//	if (string == NULL)
+//		return CString();
+//
+//	CStringWide wideString = CStringWide(string);
+//	return CStringWide2CString(wideString);
+//}
+//
+//CString LPCTSTR2CString(LPCTSTR string)
+//{
+//	if (string == NULL)
+//		return CString();
+//
+//	if (sizeof(TCHAR) == sizeof(wchar_t))
+//		return LPCWSTR2CString((LPCWSTR)string);
+//	else
+//		return LPCSTR2CString((LPCSTR)string);
+//}
+//
+//CStringWide LPCSTR2CStringWide(LPCSTR string)
+//{
+//	if (string == NULL)
+//		return CStringWide();
+//
+//	return CString2CStringWide(LPCSTR2CString(string));
+//}
+//
+//CStringWide LPCWSTR2CStringWide(LPCWSTR string)
+//{
+//	if (string == NULL)
+//		return CStringWide();
+//
+//	return CStringWide(string);
+//}
+//
+//CStringWide LPCTSTR2CStringWide(LPCTSTR string)
+//{
+//	if (string == NULL)
+//		return CStringWide();
+//
+//	if (sizeof(TCHAR) == sizeof(wchar_t))
+//		return LPCWSTR2CStringWide((LPCWSTR)string);
+//	else
+//		return LPCSTR2CStringWide((LPCSTR)string);
+//}
 
 CString ConvertStringToPath(CString input)
-{
-	return CStringWide2CString(ConvertStringToPath(CString2CStringWide(input)));
-}
-
-CStringWide ConvertStringToPath(CStringWide input)
 {
 	if (input.length() < 1)
 	{
 		LOGE("ConvertStringToPath::empty input");
-		return CStringWide();
+		return CString();
 	}
 
 	//at first, convert all '/' with "\\"
