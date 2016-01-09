@@ -57,7 +57,7 @@ private:
 	static const int MODE_APPEND = std::fstream::app;
 	static const int MODE_TRUNCATE = std::fstream::trunc;
 
-	std::fstream m_stream;
+	std::wfstream m_stream;
 };
 
 #endif //__Utility_File_H__

@@ -5,7 +5,7 @@ TEST_CASE("ConvertStringToPath() test", "[Windows][String][Path]")
 {
 	SECTION("Nothing to do")
 	{
-		CStringA path = "\\input.txt";
+		CStringA path = "input.txt";
 		CString8 output = ConvertStringToPath(CStringA2CString8(path));
 
 		REQUIRE(path == output);
@@ -13,7 +13,7 @@ TEST_CASE("ConvertStringToPath() test", "[Windows][String][Path]")
 
 	SECTION("All is ok")
 	{
-		CStringA path = "\\\"my documents\"\\input.txt";
+		CStringA path = "\"my documents\"\\input.txt";
 		CString8 output = ConvertStringToPath(CStringA2CString8(path));
 
 		REQUIRE(path == output);
@@ -21,8 +21,8 @@ TEST_CASE("ConvertStringToPath() test", "[Windows][String][Path]")
 
 	SECTION("Just change / to \\")
 	{
-		CStringA path = "/documents/input.txt";
-		CStringA rightOutput = "\\documents\\input.txt";
+		CStringA path = "documents/input.txt";
+		CStringA rightOutput = "documents\\input.txt";
 		CString8 output = ConvertStringToPath(path);
 
 		REQUIRE(rightOutput == output);
@@ -30,8 +30,8 @@ TEST_CASE("ConvertStringToPath() test", "[Windows][String][Path]")
 
 	SECTION("Just escape path with space")
 	{
-		CStringA path = "\\my documents\\input.txt";
-		CStringA rightOutput = "\\\"my documents\"\\input.txt";
+		CStringA path = "my documents\\input.txt";
+		CStringA rightOutput = "\"my documents\"\\input.txt";
 		CString8 output = ConvertStringToPath(path);
 
 		REQUIRE(rightOutput == output);
@@ -39,17 +39,8 @@ TEST_CASE("ConvertStringToPath() test", "[Windows][String][Path]")
 
 	SECTION("escape space & change /")
 	{
-		CStringA path = "/my documents/kvaka_dom/input.txt";
-		CStringA rightOutput = "\\\"my documents\"\\kvaka_dom\\input.txt";
-		CString8 output = ConvertStringToPath(path);
-
-		REQUIRE(rightOutput == output);
-	}
-
-	SECTION("String with no start slash")
-	{
-		CStringA path = "input.txt";
-		CStringA rightOutput = "\\input.txt";
+		CStringA path = "my documents/kvaka_dom/input.txt";
+		CStringA rightOutput = "\"my documents\"\\kvaka_dom\\input.txt";
 		CString8 output = ConvertStringToPath(path);
 
 		REQUIRE(rightOutput == output);
@@ -68,8 +59,8 @@ TEST_CASE("ConvertStringToPath() test", "[Windows][String][Path]")
 
 	SECTION("Arg with / at the end")
 	{
-		CStringA path = "/documents/input.txt/";
-		CStringA rightOutput = "\\documents\\input.txt";
+		CStringA path = "documents/input.txt/";
+		CStringA rightOutput = "documents\\input.txt";
 		CString8 output = ConvertStringToPath(path);
 
 		REQUIRE(rightOutput == output);

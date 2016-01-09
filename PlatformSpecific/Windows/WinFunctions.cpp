@@ -58,6 +58,9 @@ CString8 ConvertStringToPath(CString8 input)
 		nPos = input.Search(" ", nPos + 2);
 	}
 
+	if (input[0] == "\\")
+		input = input.Substring(1);
+
 	return input;
 }
 

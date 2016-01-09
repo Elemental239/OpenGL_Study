@@ -138,7 +138,7 @@ UTF8::String UTF8::String::FromFile(const UTF8::String &Path) {
 long UTF8::String::Search(const UTF8::String &SubString, unsigned int StartPosition, int Direction) const {
 
     unsigned int SubstringLength = SubString.Length();
-    unsigned int n = StartPosition;
+    int n = StartPosition;
 
     if (n > Length() - SubstringLength) {
         if (Direction == SearchDirectionFromLeftToRight) {

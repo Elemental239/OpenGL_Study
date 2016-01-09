@@ -53,8 +53,12 @@ bool CFile::IsExist()
 {
 	MARKER("CFile::IsExist(%s)", m_strPath.ToCharPtr());
 
-	m_stream.open(CString82CStringW(m_strPath), MODE_INPUT);
+	m_stream.clear();
+
+	CStringW pathW = CString82CStringW(m_strPath);
+	m_stream.open(pathW, MODE_INPUT | MODE_BINARY);
 	bool bResult = m_stream.is_open();
+
 	m_stream.close();
 
 	return bResult;
