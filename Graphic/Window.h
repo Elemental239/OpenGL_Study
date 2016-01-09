@@ -12,13 +12,14 @@ struct GLFWwindow;
 
 struct WindowConstructionParams
 {
-	CString m_strWindowLabel;
+	CString8 m_strWindowLabel;
 	int m_nWindowWidth;		// Pixels
 	int m_nWindowHeight;	// Pixels
 	CColor m_colorBase;
 
-	CString ToString() const { return "Window params: Label = " + m_strWindowLabel + ", size = " + ToStr(m_nWindowWidth) 
-		+ "x" + ToStr(m_nWindowHeight) + "; color = " + m_colorBase.ToString(); }
+	CStringA ToString() const { return ToString8().ToString().c_str(); }
+	CString8 ToString8() const { return "Window params: Label = " + m_strWindowLabel + ", size = " + m_nWindowWidth
+		+ "x" + m_nWindowHeight + "; color = " + m_colorBase.ToString(); }
 
 	bool m_bIsResizable;
 };

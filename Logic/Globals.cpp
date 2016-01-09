@@ -15,6 +15,8 @@
 CGlobals::CGlobals()
 {
 	MARKER("CGlobals::CGlobals()");
+
+	Init();
 }
 
 CGlobals::~CGlobals()

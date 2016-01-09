@@ -61,7 +61,7 @@ int CColor::GetPartInt(ColorPart part)
 	}
 }
 
-CString CColor::ToString() const
+CString8 CColor::ToString() const
 {
 	return FormatString("#%02X%02X%02X%02X", m_nRed, m_nGreen, m_nBlue, m_nAlpha);
 }

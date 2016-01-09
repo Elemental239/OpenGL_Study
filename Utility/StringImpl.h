@@ -1,23 +1,26 @@
 #ifndef __Utility_String_H__
 #define __Utility_String_H__
 
+#include "UTF8Strings/String.h"
 #include <string>
-#include <locale>
-#include <vector>
 
-typedef std::string CString;						//UTF-8
-typedef std::vector<unsigned short> CStringWide;	//UTF-16
+typedef UTF8::String CString8;
 
-extern std::locale russianLocalization;
-extern std::locale englishUSALocalization;
+typedef std::string CStringA;
+typedef std::wstring CStringW;
 
-//CStringWide CString2CStringWide(const CString string, const std::locale& loc = std::locale::classic());
-//CString CStringWide2CString(const CStringWide string, const std::locale& loc = std::locale::classic());
+#ifdef UNICODE
+	typedef CStringW CString;
+#else
+	typedef CStringA CString;
+#endif
 
-bool CString2CStringWide(const CString input, CStringWide& output);
-bool CStringWide2CString(const CStringWide input, CString& output);
-CString FormatString(const CString fmt_str, ...);
-
-CString ToStr(int input);
+CStringA FormatString(const CStringA fmt_str, ...);
+//
+//CStringA ToStrA(int input);
+//CStringA ToStrA(CStringW input);
+//
+//CStringW ToStrW(int input);
+//CStringW ToStrA(CStringA input);
 
 #endif //__Utility_String_H__

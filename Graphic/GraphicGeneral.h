@@ -57,7 +57,7 @@ public:
 	float GetPart(ColorPart part) { return (1.0f * GetPartInt(part)) / MAX_COLOR_PART_VALUE; }
 	int GetPartInt(ColorPart part);
 
-	CString ToString() const override;
+	CString8 ToString() const override;
 
 private:
 	CColorPart m_nRed;

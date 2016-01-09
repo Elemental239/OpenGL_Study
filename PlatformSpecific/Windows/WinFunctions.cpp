@@ -1,144 +1,148 @@
-#include "WinFunctions.h"
+#include "..\Headers\WinFunctions.h"
 
 #include "StringImpl.h"
 #include "Logger.h"
+#include <atlbase.h>
 
 static const int MAX_APP_PATH_LENGTH = 1024;
 
-//LPCWSTR CString2LPCWSTR(const CString string)
-//{
-//	return (LPCWSTR)CString2CStringWide(string).c_str();
-//}
-//
-//CString LPCSTR2CString(LPCSTR string)
-//{
-//	if (string == NULL)
-//		return CString();
-//
-//	return CString(string);
-//}
-//
-//CString LPCWSTR2CString(LPCWSTR string)
-//{
-//	if (string == NULL)
-//		return CString();
-//
-//	CStringWide wideString = CStringWide(string);
-//	return CStringWide2CString(wideString);
-//}
-//
-//CString LPCTSTR2CString(LPCTSTR string)
-//{
-//	if (string == NULL)
-//		return CString();
-//
-//	if (sizeof(TCHAR) == sizeof(wchar_t))
-//		return LPCWSTR2CString((LPCWSTR)string);
-//	else
-//		return LPCSTR2CString((LPCSTR)string);
-//}
-//
-//CStringWide LPCSTR2CStringWide(LPCSTR string)
-//{
-//	if (string == NULL)
-//		return CStringWide();
-//
-//	return CString2CStringWide(LPCSTR2CString(string));
-//}
-//
-//CStringWide LPCWSTR2CStringWide(LPCWSTR string)
-//{
-//	if (string == NULL)
-//		return CStringWide();
-//
-//	return CStringWide(string);
-//}
-//
-//CStringWide LPCTSTR2CStringWide(LPCTSTR string)
-//{
-//	if (string == NULL)
-//		return CStringWide();
-//
-//	if (sizeof(TCHAR) == sizeof(wchar_t))
-//		return LPCWSTR2CStringWide((LPCWSTR)string);
-//	else
-//		return LPCSTR2CStringWide((LPCSTR)string);
-//}
-
-CString ConvertStringToPath(CString input)
+CString8 ConvertStringToPath(CString8 input)
 {
-	if (input.length() < 1)
+	if (input.Length() < 1)
 	{
 		LOGE("ConvertStringToPath::empty input");
-		return CString();
+		return CString8();
 	}
+
+	input.Trim();
 
 	//at first, convert all '/' with "\\"
-	size_t nPos = input.find('/');
-	while (nPos != std::string::npos)
-	{
-		input.replace(nPos, 1, L"\\");
-		nPos = input.find('/', nPos + 1);
-	}
+	input = input.Replace("/", "\\");
 
 	// Check starting slash presence, ending slash unpresence, length
-	if (input[0] != '\\')
-		input.insert(0, L"\\");
+	if (input[0] != "\\")
+		input = "\\" + input;
 
-	int nIter = input.length() - 1;
-	while (nIter >= 0 && input[nIter] == '\\')
+	int nIter = input.Length() - 1;
+	while (nIter >= 0 && input[nIter] == "\\")
 	{
-		input.erase(nIter, 1);
+		input = input.SubstringReplace(nIter, 1, "");
 		nIter -= 1;
 	}
 
-	if (input.length() < 1)
+	if (input.Length() < 1)
 	{
 		LOGE("ConvertStringToPath::empty string");
-		return L"";
+		return CString8();
 	}
 
 	//at second, surround all "<word> <word>" with \"
-	nPos = input.find(L" ");
-	while (nPos != std::string::npos)
+	long nPos = input.Search(" ");
+	while (nPos >= 0)
 	{
-		int leftPos = input.rfind(L"\\", nPos);
-		int rightPos = input.find(L"\\", nPos);
+		long leftPos = input.Search("\\", nPos, UTF8::String::SearchDirectionFromRightToLeft);
+		long rightPos = input.Search("\\", nPos);
 
-		if (leftPos == std::string::npos || rightPos == std::string::npos)
+		if (leftPos < 0 || rightPos < 0)
 		{
 			LOGE("Error searching spaces");
 			return input;
 		}
 
-		if (input.substr(rightPos - 1, 1) != L"\"")
-			input.insert(rightPos, L"\"");
+		if (input[rightPos - 1] != "\"")
+			input = input.Insert(rightPos, "\"");
 
-		if (input.substr(leftPos + 1, 1) != L"\"")
-			input.insert(leftPos + 1, L"\"");
+		if (input[leftPos + 1] != "\"")
+			input = input.Insert(leftPos + 1, "\"");
 
-		nPos = input.find(L" ", nPos + 2);
+		nPos = input.Search(" ", nPos + 2);
 	}
 
 	return input;
 }
 
-CStringWide GetAppFilePath()
+CString8 GetAppFilePath()
 {
 	TCHAR path[MAX_APP_PATH_LENGTH];
 
-    // Will contain exe path
-    HMODULE hModule = GetModuleHandle(NULL);
-    if (hModule != NULL)
-    {
-		// When passing NULL to GetModuleHandle, it returns handle of exe itself
-		GetModuleFileName(hModule, (LPTSTR)path, (sizeof(path))); 
+	GetCurrentDirectory(sizeof(path), path);
 
-		return LPCTSTR2CStringWide(path);
-    }
-    else
-    {
-		LOGE("GetAppFilePath(): Error getting app filepath");
-		return CStringWide();
-    }
+	return LPCTSTR2CString8(path);
+
+    // Will contain exe path
+    //HMODULE hModule = GetModuleHandle(NULL);
+    //if (hModule != NULL)
+    //{
+		// When passing NULL to GetModuleHandle, it returns handle of exe itself
+	//	GetModuleFileName(hModule, (LPTSTR)path, (sizeof(path))); 
+
+	//	return LPCTSTR2CString8(path);
+    //}
+    //else
+    //{
+	//	LOGE("GetAppFilePath(): Error getting app filepath");
+	//	return CString8();
+    //}
+}
+
+LPCWSTR CStringW2LPCWSTR(CStringW inputW)
+{
+	return inputW.c_str();
+}
+
+CStringA LPCTSTR2CStringA(LPCTSTR input)
+{
+	return CStringA(CT2A(input));
+}
+
+CStringW LPCTSTR2CStringW(LPCTSTR input)
+{
+	return CStringW(CT2W(input));
+}
+
+CString8 LPCTSTR2CString8(LPCTSTR input)
+{
+	CStringW tempW = LPCTSTR2CStringW(input);
+	return CStringW2CString8(tempW); //LPCTSTR2CStringA(input);
+}
+
+CStringW LPCWSTR2CStringW(LPCWSTR inputW)
+{
+	return inputW;
+}
+
+CString8 CStringW2CString8(CStringW inputW)
+{
+	if (inputW.empty())
+	{
+		return CString8();
+	}
+
+	LPCWSTR input = inputW.c_str();
+	int length = WideCharToMultiByte(CP_UTF8, 0, input, -1, 0, 0, NULL, NULL);
+
+	CString8 str8(length, 1);
+	
+	WideCharToMultiByte(CP_UTF8, 0, input, -1, str8.ToCharPtr(), length, NULL, NULL);
+
+	return str8;
+}
+
+CStringW CString82CStringW(CString8 input8)
+{
+	if (!input8.Length())
+		return CStringW();
+
+	int size_needed = MultiByteToWideChar(CP_UTF8, 0, input8.ToConstCharPtr(), (int)input8.DataLength(), NULL, 0);
+
+    CStringW wstrTo(size_needed, 0);
+
+    MultiByteToWideChar(CP_UTF8, 0, input8.ToConstCharPtr(), (int)input8.DataLength(), &wstrTo[0], size_needed);
+
+    return wstrTo;
+}
+
+CString8 CStringA2CString8(CStringA inputA)
+{
+	return inputA;
 }

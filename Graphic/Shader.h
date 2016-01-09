@@ -9,7 +9,7 @@
 class CShader : public CObject
 {
 public:
-	CShader(CString source);
+	CShader(CStringA source);
 	
 	void Compile();
 
@@ -21,26 +21,26 @@ public:
 
 protected:
 	GLuint m_shader;
-	CString m_strSource;
+	CStringA m_strSource;
 	int m_nShaderType; 
 
 private:
 	void CompileShader();
 	void CheckErrors();
 
-	CString ShaderType2String(int nShaderType);
+	CStringA ShaderType2String(int nShaderType);
 };
 
 class CVertexShader : public CShader
 {
 public:
-	CVertexShader(CString source) : CShader(source) { m_nShaderType = GL_VERTEX_SHADER; Compile(); }
+	CVertexShader(CStringA source) : CShader(source) { m_nShaderType = GL_VERTEX_SHADER; Compile(); }
 };
 
 class CFragmentShader : public CShader
 {
 public:
-	CFragmentShader(CString source) : CShader(source) { m_nShaderType = GL_FRAGMENT_SHADER; Compile(); }
+	CFragmentShader(CStringA source) : CShader(source) { m_nShaderType = GL_FRAGMENT_SHADER; Compile(); }
 };
 
 class CShaderProgram : public CObject
@@ -50,8 +50,8 @@ public:
 	CShaderProgram(CVertexShader VertexShader, CFragmentShader FragmentShader);
 
 	void Use() { glUseProgram(m_program); }
-	bool SetUniform(CString name, int value);
-	bool SetUniform(CString name, float value);
+	bool SetUniform(CStringA name, int value);
+	bool SetUniform(CStringA name, float value);
 
 private:
 	GLuint m_program;

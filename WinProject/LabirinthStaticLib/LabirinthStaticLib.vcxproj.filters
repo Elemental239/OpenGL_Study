@@ -61,9 +61,6 @@
     <ClInclude Include="..\..\Utility\File.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\PlatformSpecific\Windows\WinFunctions.h">
-      <Filter>Specific</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Graphic\Shader.h">
       <Filter>Graphic</Filter>
     </ClInclude>
@@ -105,6 +102,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Graphic\GraphicObjects\Rectangle.h">
       <Filter>Graphic\GraphicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\PlatformSpecific\Headers\WinFunctions.h">
+      <Filter>Specific</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libs\UTF8Strings\Exception.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libs\UTF8Strings\String.h">
+      <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +167,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Graphic\GraphicObjects\Rectangle.cpp">
       <Filter>Graphic\GraphicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libs\UTF8Strings\Exception.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libs\UTF8Strings\String.cpp">
+      <Filter>Utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

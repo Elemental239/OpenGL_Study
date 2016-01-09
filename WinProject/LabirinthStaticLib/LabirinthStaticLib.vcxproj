@@ -24,9 +24,11 @@
     <ClInclude Include="..\..\Graphic\Shader.h" />
     <ClInclude Include="..\..\Graphic\Window.h" />
     <ClInclude Include="..\..\Graphic\WindowManager.h" />
+    <ClInclude Include="..\..\Libs\UTF8Strings\Exception.h" />
+    <ClInclude Include="..\..\Libs\UTF8Strings\String.h" />
     <ClInclude Include="..\..\Logic\ApplicationInfo.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
-    <ClInclude Include="..\..\PlatformSpecific\Windows\WinFunctions.h" />
+    <ClInclude Include="..\..\PlatformSpecific\Headers\WinFunctions.h" />
     <ClInclude Include="..\..\Resources\ColorsResources.h" />
     <ClInclude Include="..\..\Utility\File.h" />
     <ClInclude Include="..\..\Utility\IFile.h" />
@@ -53,6 +55,8 @@
     <ClCompile Include="..\..\Graphic\Shader.cpp" />
     <ClCompile Include="..\..\Graphic\Window.cpp" />
     <ClCompile Include="..\..\Graphic\WindowManager.cpp" />
+    <ClCompile Include="..\..\Libs\UTF8Strings\Exception.cpp" />
+    <ClCompile Include="..\..\Libs\UTF8Strings\String.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\PlatformSpecific\Windows\WinFunctions.cpp" />
     <ClCompile Include="..\..\Utility\File.cpp" />
@@ -108,7 +112,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;soil.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)/../Libs/glew-1.13.0/lib/Release/Win32/;$(SolutionDir)/../Libs/glfw-3.1.1/lib-vc2012/;$(SolutionDir)/../Libs/SOIL/Include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)/../Libs/glew-1.13.0/lib/Release/Win32/;$(SolutionDir)/../Libs/glfw-3.1.1/lib-vc2012/;$(SolutionDir)/../Libs/SOIL/Include;$(SolutionDir)/../Libs/UTF8Strings/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>

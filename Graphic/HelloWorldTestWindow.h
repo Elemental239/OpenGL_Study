@@ -31,7 +31,7 @@ private:
 	float m_fTexturesMixValue;
 
 	void InitOpenGL();
-	void CreateNewWindow(GLFWwindow*& targetWindow, int nWidth, int nHeight, CString strTitle);
+	void CreateNewWindow(GLFWwindow*& targetWindow, int nWidth, int nHeight, CStringA strTitle);
 	void CreateShaderProgram();
 	void CreateGLObjects();	
 

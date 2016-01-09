@@ -39,14 +39,14 @@
 class CFile : public IFile
 {
 public:
-	CFile(CStringWide path, EFileMode mode);
+	CFile(CString8 path, EFileMode mode);
 	~CFile();
 
 	virtual void Open() override;
 	virtual void Close() override;
 	virtual void Flush() override;
-	virtual void Write(CStringWide data) override;
-	virtual CStringWide ReadString() override;
+	virtual void Write(CString8 data) override;
+	virtual CString8 ReadString() override;
 
 	virtual bool IsExist() override;
 

@@ -104,7 +104,7 @@ void CHelloWorldTestWindow::InitOpenGL()
 	}
 }
 
-void CHelloWorldTestWindow::CreateNewWindow(GLFWwindow*& pTargetWindow, int nWidth, int nHeight, CString strTitle)
+void CHelloWorldTestWindow::CreateNewWindow(GLFWwindow*& pTargetWindow, int nWidth, int nHeight, CStringA strTitle)
 {
 	MARKER("CHelloWorldTestWindow::CreateNewWindow()");
 
@@ -129,7 +129,7 @@ void CHelloWorldTestWindow::CreateShaderProgram()
 {
 	MARKER("CHelloWorldTestWindow::CreateShaderProgram()");
 
-	CString vertexShaderSource =
+	CStringA vertexShaderSource =
 		"#version 330 core\n"
 		"layout (location = 0) in vec3 position;\n"
 		"layout (location = 1) in vec3 colour;\n"
@@ -142,7 +142,7 @@ void CHelloWorldTestWindow::CreateShaderProgram()
 			"vertexColour = colour;\n"
 		"}";
 
-	CString fragmentShaderSource =
+	CStringA fragmentShaderSource =
 		"#version 330 core\n"
 		"in vec3 vertexColour;"
 		"out vec4 color;\n"
@@ -151,7 +151,7 @@ void CHelloWorldTestWindow::CreateShaderProgram()
 			"color = vec4(vertexColour, 1.0f);\n"
 		"}";
 
-	CString vertexShaderSourceWithTexture =
+	CStringA vertexShaderSourceWithTexture =
 		"#version 330 core\n"
 		"layout (location = 0) in vec3 position;\n"
 		"layout (location = 1) in vec3 colour;\n"
@@ -167,7 +167,7 @@ void CHelloWorldTestWindow::CreateShaderProgram()
 			"TexCoord = textureCoord;"
 		"}";
 
-	CString fragmentShaderSourceWithTexture =
+	CStringA fragmentShaderSourceWithTexture =
 		"#version 330 core\n"
 		"in vec3 vertexColour;\n"
 		"in vec2 TexCoord;\n"

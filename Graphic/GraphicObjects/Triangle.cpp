@@ -25,7 +25,7 @@ void CTrianglePrimitive::DrawSelf()
 
 void CTrianglePrimitive::CreateShaderProgram()
 {
-	CString vertexShaderSource =
+	CStringA vertexShaderSource =
 		"#version 330 core\n"
 		"layout (location = 0) in vec3 position;\n"
 		"layout (location = 1) in vec3 colour;\n"
@@ -38,7 +38,7 @@ void CTrianglePrimitive::CreateShaderProgram()
 			"vertexColour = colour;\n"
 		"}";
 
-	CString fragmentShaderSource =
+	CStringA fragmentShaderSource =
 		"#version 330 core\n"
 		"in vec3 vertexColour;"
 		"out vec4 color;\n"

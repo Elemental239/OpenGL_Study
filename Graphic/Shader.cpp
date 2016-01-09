@@ -3,7 +3,7 @@
 
 ///////////////////////////////////////////
 ///CShader
-CShader::CShader(CString source) : m_strSource(source), m_nShaderType(0)
+CShader::CShader(CStringA source) : m_strSource(source), m_nShaderType(0)
 {
 	MARKER("CShader::CShader()");
 }
@@ -47,7 +47,7 @@ void CShader::CheckErrors()
 	}
 }
 
-CString CShader::ShaderType2String(int nShaderType)
+CStringA CShader::ShaderType2String(int nShaderType)
 {
 	if (nShaderType == GL_VERTEX_SHADER)
 		return "VERTEX_SHADER";
@@ -83,7 +83,7 @@ CShaderProgram::CShaderProgram(CVertexShader VertexShader, CFragmentShader Fragm
 	FragmentShader.DeleteShader();
 }
 
-bool CShaderProgram::SetUniform(CString name, int value)
+bool CShaderProgram::SetUniform(CStringA name, int value)
 {
 	//NB! Don't forget to create different SetUniform's for other inputs
 	GLint location = glGetUniformLocation(m_program, name.c_str());
@@ -98,7 +98,7 @@ bool CShaderProgram::SetUniform(CString name, int value)
 	return true;
 }
 
-bool CShaderProgram::SetUniform(CString name, float value)
+bool CShaderProgram::SetUniform(CStringA name, float value)
 {
 	//NB! Don't forget to create different SetUniform's for other inputs
 	GLint location = glGetUniformLocation(m_program, name.c_str());

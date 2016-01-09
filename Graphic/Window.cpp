@@ -39,10 +39,10 @@ void IWindow::RemoveDialog(TDialogRef spDialog)
 CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params), m_bClosed(false)
 {
 	MARKER("CWindow::CWindow()");
-	LOG("%s", LST(params.ToString()));
+	LOG("%s", params.ToString());
 
 	glfwWindowHint(GLFW_RESIZABLE, params.m_bIsResizable ? GL_TRUE : GL_FALSE);
-	m_window = glfwCreateWindow(params.m_nWindowWidth, params.m_nWindowHeight, params.m_strWindowLabel.c_str(), nullptr, nullptr);
+	m_window = glfwCreateWindow(params.m_nWindowWidth, params.m_nWindowHeight, params.m_strWindowLabel.ToString().c_str(), nullptr, nullptr);
 	if (m_window == nullptr)
 	{
 		LOGE("Failed to create GLFW window");

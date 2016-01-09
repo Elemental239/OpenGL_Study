@@ -9,7 +9,7 @@ public:
 	CObject() {}
 	virtual ~CObject() {}
 
-	virtual CString ToString() const { return "CObject"; }
+	virtual CString8 ToString() const { return "CObject"; }
 };
 
 #endif //__Utility_OBJECT_H__
