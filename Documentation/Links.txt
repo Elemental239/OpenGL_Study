@@ -1,0 +1,5 @@
+http://www.learnopengl.com/#!Getting-started/Creating-a-window - main course
+
+GLFW documentation: http://www.glfw.org/docs/latest/window.html
+
+OpenGL wiki: https://www.opengl.org/wiki/
