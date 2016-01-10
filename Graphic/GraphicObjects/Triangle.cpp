@@ -16,8 +16,6 @@ void CTrianglePrimitive::DrawSelf()
 {
 	__super::DrawSelf();
 
-	m_shaderProgram->Use();
-
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, m_points.size() * 3, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);

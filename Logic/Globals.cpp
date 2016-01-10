@@ -50,9 +50,5 @@ void CGlobals::InitGUI()
 
 	CWindowManager::Instance().Init(firstWindowParams);
 	CWindowManager::Instance().StartMainLoop();
-
 #endif
-
-	//CFile file(CString("input.txt"), EFileMode::FILE_MODE_OPEN);
-	//bool bExist = file.IsExist();
 }

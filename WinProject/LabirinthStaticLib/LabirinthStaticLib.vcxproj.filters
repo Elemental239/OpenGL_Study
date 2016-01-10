@@ -112,6 +112,12 @@
     <ClInclude Include="..\..\Libs\UTF8Strings\String.h">
       <Filter>Utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Graphic\GraphicObjects\Circle.h">
+      <Filter>Graphic\GraphicObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Graphic\GraphicObjects\Line.h">
+      <Filter>Graphic\GraphicObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -173,6 +179,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Libs\UTF8Strings\String.cpp">
       <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\GraphicObjects\Circle.cpp">
+      <Filter>Graphic\GraphicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\GraphicObjects\Line.cpp">
+      <Filter>Graphic\GraphicObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

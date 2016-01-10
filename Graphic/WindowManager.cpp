@@ -34,6 +34,7 @@ void opengl_GLFW_framebuffer_size_callback(GLFWwindow* window, int width, int he
 	data.m_pTargetWindow = window;
 	data.m_nNewWidth = width;
 	data.m_nNewHeight = height;
+
 	CWindowManager::Instance().OnSystemEvent(data);
 }
 

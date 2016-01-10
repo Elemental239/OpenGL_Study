@@ -4,7 +4,7 @@
 
 /////////////////////////////////////////
 ///CColor
-CColor::CColor(CString strColor)
+CColor::CColor(CStringA strColor)
 {
 	if (strColor[0] == '#')
 		strColor = strColor.substr(1, strColor.length() - 1);
@@ -19,7 +19,7 @@ CColor::CColor(CString strColor)
 		return;
 	}
 
-	CString substr = strColor.substr(0, 2);
+	CStringA substr = strColor.substr(0, 2);
 	m_nRed = std::stoi(substr, 0, 16);
 	
 	substr = strColor.substr(2, 2);

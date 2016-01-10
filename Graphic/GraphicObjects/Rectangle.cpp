@@ -19,8 +19,6 @@ void CRectanglePrimitive::DrawSelf()
 {
 	__super::DrawSelf();
 
-	m_shaderProgram->Use();
-
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, m_points.size() * 3, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
@@ -103,5 +101,25 @@ CRectangle::CRectangle(CPoint p1, CPoint p2, CColor cColor, CPoint originPoint /
 						CPointWithColor(p2.GetX(), p1.GetY(), p2.GetZ(), cColor),
 						originPoint
 					   )
+{
+}
+
+CRectangle::CRectangle(CPoint p1, int width, int height, CColor cColor, CPoint originPoint /*= CPoint()*/) : 
+	CRectanglePrimitive(CPointWithColor(p1, cColor),
+						CPointWithColor(p1.GetX()        , p1.GetY() + height, p1.GetZ(), cColor),
+						CPointWithColor(p1.GetX() + width, p1.GetY() + height, p1.GetZ(), cColor),
+						CPointWithColor(p1.GetX() + width, p1.GetY()         , p1.GetZ(), cColor),
+						originPoint
+						)
+{
+}
+
+CRectangle::CRectangle(CPoint p1, CSize size, CColor cColor, CPoint originPoint /*= CPoint()*/) : 
+	CRectanglePrimitive(CPointWithColor(p1, cColor),
+						CPointWithColor(p1.GetX()              , p1.GetY() + size.GetY(), p1.GetZ(), cColor),
+						CPointWithColor(p1.GetX() + size.GetX(), p1.GetY() + size.GetY(), p1.GetZ(), cColor),
+						CPointWithColor(p1.GetX() + size.GetX(), p1.GetY()              , p1.GetZ(), cColor),
+						originPoint
+						)
 {
 }

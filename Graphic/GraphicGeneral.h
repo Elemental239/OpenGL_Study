@@ -32,7 +32,11 @@ protected:
 
 typedef CGenericPoint<int> CPoint;
 typedef CGenericPoint<GLfloat> COpenGLPoint;
-typedef CGenericPoint<int> CSize;
+
+struct CSize : public CGenericPoint<int>
+{
+	CSize(int a,int b) : CGenericPoint<int>(a,b) {}
+};
 
 
 typedef unsigned short CColorPart;
@@ -52,7 +56,7 @@ public:
 	CColor() : m_nRed(0), m_nGreen(0), m_nBlue(0), m_nAlpha(MAX_COLOR_PART_VALUE) { }
 	CColor(CColorPart red, CColorPart green, CColorPart blue, CColorPart alpha) : m_nRed(red), m_nGreen(green), m_nBlue(blue), m_nAlpha(alpha) { }
 	CColor(CColorPart red, CColorPart green, CColorPart blue) : m_nRed(red), m_nGreen(green), m_nBlue(blue), m_nAlpha(MAX_COLOR_PART_VALUE) { }
-	CColor(CString strColor);
+	CColor(CStringA strColor);
 
 	float GetPart(ColorPart part) { return (1.0f * GetPartInt(part)) / MAX_COLOR_PART_VALUE; }
 	int GetPartInt(ColorPart part);

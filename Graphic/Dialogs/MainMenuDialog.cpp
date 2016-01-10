@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include "GraphicObjects/Triangle.h"
 #include "GraphicObjects/Rectangle.h"
+#include "GraphicObjects/Line.h"
 
 CMainMenuDialog::CMainMenuDialog()
 {
@@ -29,6 +30,8 @@ CMainMenuDialog::CMainMenuDialog()
 		spCurrentRectangle->AddChild(spRectangle);
 		spCurrentRectangle = spRectangle;
 	};
+
+	AddChild(new CLine(CPointWithColor( 200, 200, 1, CRandomColor()), CPointWithColor( 400, 400, 1, CRandomColor())));
 
 	//TGraphicObjectRef spTopTriangle = new CTrianglePrimitive( 
 	//	CPointWithColor(200,   0, 1, CColor("#227722")),

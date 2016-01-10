@@ -35,6 +35,8 @@ void COpenGLGraphicObject::DrawSelf()
 		glBindVertexArray(0);
 		CreateShaderProgram();
 	}
+
+	m_shaderProgram->Use();
 }
 
 COpenGLPoint COpenGLGraphicObject::TranslatePixelPoint(const CPoint& point) const
