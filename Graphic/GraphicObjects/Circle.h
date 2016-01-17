@@ -3,11 +3,12 @@
 
 #include "OpenGLGraphicObject.h"
 #include <vector>
+#include <GraphicObjects/Line.h>
 
 class CCircle : public COpenGLGraphicObject
 {
 public:
-	static const int CIRCLE_APPROX_LINES_NUMBER = 1000;
+	static const int CIRCLE_APPROX_LINES_NUMBER = 500;
 
 	CCircle(CPoint center, int nRadius, CColor cColor, CPoint originPoint = CPoint());
 	~CCircle();
@@ -24,6 +25,7 @@ private:
 	CPoint m_center;
 	int m_nRadius;
 	CColor m_cColor;
+	std::vector<CPoint> m_CirclePoints;
 };
 
 class CFilledCircle : public CCircle
