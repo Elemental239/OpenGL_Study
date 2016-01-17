@@ -140,7 +140,7 @@ long UTF8::String::Search(const UTF8::String &SubString, unsigned int StartPosit
     unsigned int SubstringLength = SubString.Length();
     int n = StartPosition;
 
-    if (n > Length() - SubstringLength) {
+    if (n > static_cast<int>(Length() - SubstringLength)) {
         if (Direction == SearchDirectionFromLeftToRight) {
             return -1;
         } else {
