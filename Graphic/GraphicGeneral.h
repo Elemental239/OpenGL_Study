@@ -5,6 +5,8 @@
 #include "OpenGL.h"
 #include "Random.h"
 
+struct CSize;
+
 template<class T>
 class CGenericPoint : public CObject
 {
@@ -24,6 +26,8 @@ public:
 	T GetY() const { return m_nY; }
 	T GetZ() const { return m_nZ; }
 
+	CString8 ToString() const override { return CString8("(") + m_nX + ", " + m_nY + ", " + m_nZ + ")"; }
+
 protected:
 	T m_nX;
 	T m_nY;
@@ -33,9 +37,15 @@ protected:
 typedef CGenericPoint<int> CPoint;
 typedef CGenericPoint<GLfloat> COpenGLPoint;
 
-struct CSize : public CGenericPoint<int>
+template<typename T>
+struct CGenericSize : public CGenericPoint<T>
 {
-	CSize(int a,int b) : CGenericPoint<int>(a,b) {}
+	CGenericSize(T a, T b) : CGenericPoint<T>(a,b) {}
+};
+
+struct CSize : public CGenericSize<int>
+{
+	CSize(int a,int b) : CGenericSize<int>(a,b) {}
 };
 
 
@@ -84,10 +94,13 @@ template<class T>
 class CGenericPointWithColor : public CPoint
 {
 public:
+	CGenericPointWithColor() : CGenericPoint(), m_cColor() {}
+	CGenericPointWithColor(T x, T y, CColor color) : CGenericPoint(x, y, 1), m_cColor(color) {}
 	CGenericPointWithColor(T x, T y, T z, CColor color) : CGenericPoint(x, y, z), m_cColor(color) {}
 	CGenericPointWithColor(CGenericPoint<T> p, CColor color) : CGenericPoint(p), m_cColor(color) {}
 	CGenericPointWithColor(const CGenericPointWithColor& other) : CGenericPoint(other), m_cColor(other.GetColor()) {}
 	CGenericPointWithColor& operator=(const CGenericPointWithColor& other);
+	CGenericPointWithColor& operator=(const CGenericPoint& other);
 
 	CColor GetColor() const { return m_cColor; }
 
@@ -110,12 +123,6 @@ CGenericPoint<T>& CGenericPoint<T>::operator=(const CGenericPoint<T>& other)
 	return *this;
 }
 
-//template<class T>
-//const CGenericPoint<T> operator+(const CGenericPoint<T>& left, const CGenericPoint<T>& right)
-//{
-//	return CGenericPoint<T>(left.GetX() + right.GetX(), left.GetY() + right.GetY(), left.GetZ() + right.GetZ());
-//}
-
 /////////////////////////////////////////
 ///CGenericPointWithColor
 template<class T>
@@ -128,6 +135,19 @@ CGenericPointWithColor<T>& CGenericPointWithColor<T>::operator=(const CGenericPo
 	m_nY = other.GetY();
 	m_nZ = other.GetZ();
 	m_cColor = other.GetColor();
+
+	return *this;
+}
+
+template<class T>
+CGenericPointWithColor<T>& CGenericPointWithColor<T>::operator=(const CGenericPoint& other)
+{
+	if (&other == this)
+		return *this;
+
+	m_nX = other.GetX();
+	m_nY = other.GetY();
+	m_nZ = other.GetZ();
 
 	return *this;
 }
