@@ -5,7 +5,6 @@
 ///CShader
 CShader::CShader(CStringA source) : m_strSource(source), m_nShaderType(0)
 {
-	MARKER("CShader::CShader()");
 }
 
 void CShader::DeleteShader()
@@ -22,8 +21,6 @@ void CShader::Compile()
 
 void CShader::CompileShader()
 {
-	MARKER("CVertexShader::CompileShader()");
-
 	if (m_strSource.empty())
 		return;
 

@@ -3,12 +3,10 @@
 
 CGraphicObject::CGraphicObject() : m_pParent(nullptr)
 {
-	MARKER("CGraphicObject::CGraphicObject()");
 }
 
 CGraphicObject::~CGraphicObject()
 {
-	MARKER("CGraphicObject::~CGraphicObject()");
 }
 
 void CGraphicObject::Draw()

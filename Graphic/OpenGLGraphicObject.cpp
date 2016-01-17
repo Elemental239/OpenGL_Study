@@ -5,7 +5,6 @@
 
 COpenGLGraphicObject::COpenGLGraphicObject(CPoint originPoint) : m_origin(originPoint), m_bInited(false)
 {
-	MARKER("COpenGLGraphicObject::COpenGLGraphicObject()");
 
 	glGenBuffers(1, &m_VBO);
 	glGenBuffers(1, &m_EBO);
@@ -14,8 +13,6 @@ COpenGLGraphicObject::COpenGLGraphicObject(CPoint originPoint) : m_origin(origin
 
 COpenGLGraphicObject::~COpenGLGraphicObject()
 {
-	MARKER("COpenGLGraphicObject::~COpenGLGraphicObject()");
-
 	glDeleteVertexArrays(1, &m_VAO);
 	glDeleteBuffers(1, &m_EBO);
 	glDeleteBuffers(1, &m_VBO);
@@ -36,7 +33,8 @@ void COpenGLGraphicObject::DrawSelf()
 		CreateShaderProgram();
 	}
 
-	m_shaderProgram->Use();
+	if (m_shaderProgram)
+		m_shaderProgram->Use();
 }
 
 COpenGLPoint COpenGLGraphicObject::TranslatePixelPoint(const CPoint& point) const
