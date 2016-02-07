@@ -7,6 +7,8 @@
 
 static const int DATA_ROW_LENGTH = 6; // 3 for pos and 3 for color
 
+///////////////////////////////////////////////////////////////////////////////
+///CCircle
 CCircle::CCircle(CPoint center, int nRadius, CColor cColor, CPoint originPoint /*= CPoint()*/) : 
 	COpenGLGraphicObject(originPoint),
 	m_center(center),
@@ -113,4 +115,15 @@ void CCircle::SetupVAOAttributes()
 	// Color attribute
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3* sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+///CFilledCircle
+void CFilledCircle::DrawSelf()
+{
+	COpenGLGraphicObject::DrawSelf();
+
+	glBindVertexArray(m_VAO);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, m_CirclePoints.size());	// Use glDrawArrays cause we have no EBO here
+	glBindVertexArray(0);
 }

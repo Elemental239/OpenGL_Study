@@ -37,7 +37,7 @@ CMainMenuDialog::CMainMenuDialog()
 
 	for (int i = 0; i < 7; i++)
 	{
-		AddChild(new CCircle(CPoint( 100 + i * 50, 100 + i * 50, 1), 50 - 5 * i, CRandomColor()));
+		AddChild(new CFilledCircle(CPoint( 100 + i * 50, 100 + i * 50, 1), 50 - 5 * i, CRandomColor()));
 	}
 }
 

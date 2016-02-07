@@ -16,6 +16,8 @@ public:
 	virtual void DrawSelf() override;
 
 protected:
+	std::vector<CPoint> m_CirclePoints;
+	
 	virtual void CreateShaderProgram() override;
 	virtual void BindVBO() override;
 	virtual void BindEBO() override;
@@ -25,11 +27,14 @@ private:
 	CPoint m_center;
 	int m_nRadius;
 	CColor m_cColor;
-	std::vector<CPoint> m_CirclePoints;
 };
 
 class CFilledCircle : public CCircle
 {
+public:
+	CFilledCircle(CPoint center, int nRadius, CColor cColor, CPoint originPoint = CPoint()) : CCircle(center, nRadius, cColor, originPoint) { }
+
+	virtual void DrawSelf() override;
 };
 
 #endif //__Graphic__Circle__H__
