@@ -47,6 +47,7 @@ void CGlobals::InitGUI()
 	firstWindowParams.m_strWindowLabel = MAIN_WINDOW_LABEL;
 	firstWindowParams.m_colorBase = CColor(0xFF,0xFF,0xFF);
 	firstWindowParams.m_bIsResizable = false;
+	firstWindowParams.m_bUseAntialiasing = false;
 
 	CWindowManager::Instance().Init(firstWindowParams);
 	CWindowManager::Instance().StartMainLoop();

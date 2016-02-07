@@ -41,6 +41,9 @@ CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params), m_bC
 	MARKER("CWindow::CWindow()");
 	LOG("%s", params.ToString());
 
+	if (params.m_bUseAntialiasing)
+		glfwWindowHint(GLFW_SAMPLES, 4);
+
 	glfwWindowHint(GLFW_RESIZABLE, params.m_bIsResizable ? GL_TRUE : GL_FALSE);
 	m_window = glfwCreateWindow(params.m_nWindowWidth, params.m_nWindowHeight, params.m_strWindowLabel.ToString().c_str(), nullptr, nullptr);
 	if (m_window == nullptr)
@@ -50,6 +53,22 @@ CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params), m_bC
 	}
 	SetOpenGLDrawingContext();
 	glViewport(0, 0, GetWidth(), GetHeight());
+
+	if (params.m_bUseAntialiasing)
+	{
+		glEnable(GL_MULTISAMPLE);
+
+		glEnable(GL_LINE_SMOOTH);
+		glEnable(GL_BLEND);
+		glHint(GL_LINE_SMOOTH_HINT, GL_NICEST); //or GL_FASTEST, or GL_DONT_CARE
+		//glEnable(GL_POINT_SMOOTH);
+		//glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
+		//glEnable(GL_POLYGON_SMOOTH);
+		//glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // - for lines
+		//glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE); // - for polygons
+	}
 
 	//Set window-specific callback
 	glfwSetKeyCallback(m_window, opengl_GLFW_key_callback);

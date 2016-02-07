@@ -16,6 +16,7 @@ struct WindowConstructionParams
 	int m_nWindowWidth;		// Pixels
 	int m_nWindowHeight;	// Pixels
 	CColor m_colorBase;
+	bool m_bUseAntialiasing;
 
 	CStringA ToString() const { return ToString8().ToString().c_str(); }
 	CString8 ToString8() const { return "Window params: Label = " + m_strWindowLabel + ", size = " + m_nWindowWidth
