@@ -9,36 +9,35 @@ static const int DATA_ROW_LENGTH = 6; // 3 for pos and 3 for color
 
 ///////////////////////////////////////////////////////////////////////////////
 ///CCircle
-CCircle::CCircle(CPoint center, int nRadius, CColor cColor, CPoint originPoint /*= CPoint()*/) : 
-	COpenGLGraphicObject(originPoint),
-	m_center(center),
+CCircle::CCircle(int nRadius, CColor cColor) : 
+	COpenGLGraphicObject(),
+	//m_center(center),
 	m_nRadius(nRadius),
 	m_cColor(cColor)
 {
 	MARKER("CCircle::CCircle()");
+}
 
-	for (int i = 0; i < CIRCLE_APPROX_LINES_NUMBER; i++)
+
+void CCircle::InitPoints()
+{
+	if (!m_bInited)
 	{
-		CPoint point = center + CPoint(static_cast<int>(sin(i * 2 * M_PI / CIRCLE_APPROX_LINES_NUMBER) * nRadius), 
-									   static_cast<int>(cos(i * 2 * M_PI / CIRCLE_APPROX_LINES_NUMBER) * nRadius));
+		CPoint pointCenter = CPoint(m_nRadius, m_nRadius) + GetOrigin();
+		for (int i = 0; i < CIRCLE_APPROX_LINES_NUMBER; i++)
+		{
+			CPoint point = pointCenter + CPoint(static_cast<int>(sin(i * 2 * M_PI / CIRCLE_APPROX_LINES_NUMBER) * m_nRadius), 
+										        static_cast<int>(cos(i * 2 * M_PI / CIRCLE_APPROX_LINES_NUMBER) * m_nRadius));
 
-		m_CirclePoints.push_back(point);
-		LOG("Add point %s", point.ToString());
-
-		/*TGraphicObjectRef pLine = new CLine(start, finish, originPoint);
-
-		LOG("Add line: %s", pLine->ToString());
-		AddChild(pLine);
-
-		start = finish;*/
+			m_CirclePoints.push_back(point);
+		}
 	}
 }
 
-CCircle::~CCircle() {}
-
-
 void CCircle::DrawSelf()
 {
+	InitPoints();
+
 	__super::DrawSelf();
 
 	glBindVertexArray(m_VAO);
@@ -121,6 +120,8 @@ void CCircle::SetupVAOAttributes()
 ///CFilledCircle
 void CFilledCircle::DrawSelf()
 {
+	InitPoints();
+
 	COpenGLGraphicObject::DrawSelf();
 
 	glBindVertexArray(m_VAO);

@@ -1,9 +1,10 @@
 #include "Triangle.h"
+#include <algorithm>
 
 static const int DATA_ROW_LENGTH = 6; // 3 for pos and 3 for color
 
-CTrianglePrimitive::CTrianglePrimitive(CPointWithColor p1, CPointWithColor p2, CPointWithColor p3, CPoint originPoint /*= CPoint()*/) : 
-	COpenGLGraphicObject(originPoint)
+CTrianglePrimitive::CTrianglePrimitive(CPointWithColor p1, CPointWithColor p2, CPointWithColor p3) : 
+	COpenGLGraphicObject()
 {
 	m_points.push_back(p1);
 	m_points.push_back(p2);
@@ -14,6 +15,13 @@ CTrianglePrimitive::~CTrianglePrimitive() {}
 
 void CTrianglePrimitive::DrawSelf()
 {
+	if (!m_bInited)
+	{
+		std::for_each(m_points.begin(), m_points.end(), [this](CPointWithColor &point){
+			point = point + GetOrigin();
+		});
+	}
+
 	__super::DrawSelf();
 
 	glBindVertexArray(m_VAO);

@@ -18,6 +18,7 @@
     <ClInclude Include="..\..\Graphic\GraphicObjects\Circle.h" />
     <ClInclude Include="..\..\Graphic\GraphicObjects\Line.h" />
     <ClInclude Include="..\..\Graphic\GraphicObjects\Rectangle.h" />
+    <ClInclude Include="..\..\Graphic\GraphicObjects\Texture2D.h" />
     <ClInclude Include="..\..\Graphic\GraphicObjects\Triangle.h" />
     <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h" />
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
@@ -52,6 +53,7 @@
     <ClCompile Include="..\..\Graphic\GraphicObjects\Circle.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObjects\Line.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObjects\Rectangle.cpp" />
+    <ClCompile Include="..\..\Graphic\GraphicObjects\Texture2D.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObjects\Triangle.cpp" />
     <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />

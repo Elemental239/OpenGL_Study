@@ -7,7 +7,7 @@
 class CLine : public COpenGLGraphicObject
 {
 public:
-	CLine(CPointWithColor pointStart, CPointWithColor cFinish, CPoint originPoint = CPoint());
+	CLine(CPointWithColor pointStart, CPointWithColor cFinish);
 	~CLine();
 
 	virtual void DrawSelf() override;

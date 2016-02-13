@@ -13,11 +13,15 @@ class CGraphicObject : public CObject
 {
 public:
 	CGraphicObject();
-	~CGraphicObject();
+	virtual ~CGraphicObject();
 
 	virtual void Draw();
 	virtual void DrawSelf() {}
-	virtual CPoint GetOrigin() { return CPoint(); }
+	
+	///<summary> Origin is the bottom-left point of the object.</summary>
+	void SetOrigin(CPoint point) { m_origin = point; }
+	///<summary> Origin is the bottom-left point of the object.</summary>
+	CPoint GetOrigin() const { return m_origin; }
 
 	void SetParent(CGraphicObject* spParent) { m_pParent = spParent; }
 	void AddChild(TGraphicObjectRef obj);
@@ -27,6 +31,7 @@ public:
 protected:
 	std::vector<TGraphicObjectRef> m_children;
 	CGraphicObject* m_pParent;
+	CPoint m_origin;
 };
 
 #endif //__Graphic_GraphicObject_H__

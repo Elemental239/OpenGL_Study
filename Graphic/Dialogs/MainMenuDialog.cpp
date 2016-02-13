@@ -9,36 +9,22 @@ CMainMenuDialog::CMainMenuDialog()
 {
 	MARKER("CMainMenuDialog::CMainMenuDialog()");
 
-	//TGraphicObjectRef spTopRectangle = new CRectanglePrimitive( 
-	//	CPointWithColor(  0,   0, 1, CRandomColor()),
-	//	CPointWithColor(  0, 600, 1, CRandomColor()),
-	//	CPointWithColor(800, 600, 1, CRandomColor()),
-	//	CPointWithColor(800,   0, 1, CRandomColor())
-	//);
-	//TGraphicObjectRef spCurrentRectangle = spTopRectangle;
-	//AddChild(spTopRectangle);
+	TGraphicObjectRef spRectangle = new CRectanglePrimitive(CSize(400, 400), CRandomColor(), CRandomColor(), CRandomColor(), CRandomColor());
+	spRectangle->SetOrigin(CPoint(10, 10));
+	
+	TGraphicObjectRef spTriangle = new CTrianglePrimitive(
+		CPointWithColor(100, 100, CRandomColor()),
+		CPointWithColor(300, 100, CRandomColor()),
+		CPointWithColor(200, 200, CRandomColor())
+	);
+	spTriangle->SetOrigin(CPoint(30, 30));
 
-	//for (int i = 1; i < 4; i++)
-	//{
-	//	TGraphicObjectRef spRectangle = new CRectangle( 
-	//		CPoint(50, 50, 1),
-	//		CPoint(spCurrentRectangle.static_cast_to<CRectanglePrimitive>()->GetWidth() - 50,
-	//		       spCurrentRectangle.static_cast_to<CRectanglePrimitive>()->GetHeight() - 50, 1),
-	//		CRandomColor(),
-	//		spCurrentRectangle->GetOrigin()
-	//	);
+	TGraphicObjectRef spFilledCircle = new CFilledCircle(50, CRandomColor());
+	spFilledCircle->SetOrigin(CPoint(70, 50));
 
-	//	spCurrentRectangle->AddChild(spRectangle);
-	//	spCurrentRectangle = spRectangle;
-	//};
-
-	//AddChild(new CLine(CPointWithColor( 700, 100, 1, CRandomColor()), CPointWithColor( 100, 500, 1, CRandomColor())));
-	//AddChild(new CLine(CPointWithColor( 100, 100, 1, CRandomColor()), CPointWithColor( 700, 500, 1, CRandomColor())));
-
-	for (int i = 0; i < 7; i++)
-	{
-		AddChild(new CFilledCircle(CPoint( 100 + i * 50, 100 + i * 50, 1), 50 - 5 * i, CRandomColor()));
-	}
+	AddChild(spRectangle);
+	AddChild(spTriangle);
+	AddChild(spFilledCircle);
 }
 
 CMainMenuDialog::~CMainMenuDialog()

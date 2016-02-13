@@ -16,14 +16,12 @@
 class COpenGLGraphicObject : public CGraphicObject
 {
 public:
-	COpenGLGraphicObject(CPoint originPoint);
-	~COpenGLGraphicObject();
+	COpenGLGraphicObject();
+	virtual ~COpenGLGraphicObject();
 
 	virtual void DrawSelf() override;
-	virtual CPoint GetOrigin() override { return CPoint(); }
 
 protected:
-	CPoint m_origin;
 	bool m_bInited;
 
 	//OpenGL related

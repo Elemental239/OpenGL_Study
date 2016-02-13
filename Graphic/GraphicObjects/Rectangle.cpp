@@ -4,19 +4,26 @@ static const int DATA_ROW_LENGTH = 6; // 3 for pos and 3 for color
 
 ////////////////////////////////////////
 ///CRectanglePrimitive
-CRectanglePrimitive::CRectanglePrimitive(CPointWithColor p1, CPointWithColor p2, CPointWithColor p3, CPointWithColor p4, CPoint originPoint /*= CPoint()*/) : 
-	COpenGLGraphicObject(originPoint)
+CRectanglePrimitive::CRectanglePrimitive(CSize size, CColor cColorLeftBottom, CColor cColorLeftTop, CColor cColorRightTop, CColor cColorRightBottom) : 
+	COpenGLGraphicObject(),
+	m_size(size)
 {
-	m_points.push_back(p1);
-	m_points.push_back(p2);
-	m_points.push_back(p3);
-	m_points.push_back(p4);
+	m_colors.push_back(cColorLeftBottom);
+	m_colors.push_back(cColorLeftTop);
+	m_colors.push_back(cColorRightTop);
+	m_colors.push_back(cColorRightBottom);
 }
-
-CRectanglePrimitive::~CRectanglePrimitive() {}
 
 void CRectanglePrimitive::DrawSelf()
 {
+	if (!m_bInited)
+	{
+		m_points.push_back(CPointWithColor(GetOrigin(), m_colors[0]));
+		m_points.push_back(CPointWithColor(GetOrigin() + CPoint(0, m_size.GetY()), m_colors[1]));
+		m_points.push_back(CPointWithColor(GetOrigin() + CPoint(m_size.GetX(), m_size.GetY()), m_colors[2]));
+		m_points.push_back(CPointWithColor(GetOrigin() + CPoint(m_size.GetX(), 0), m_colors[3]));
+	}
+
 	__super::DrawSelf();
 
 	glBindVertexArray(m_VAO);
@@ -90,36 +97,4 @@ void CRectanglePrimitive::SetupVAOAttributes()
 	// Color attribute
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3* sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
-}
-
-////////////////////////////////////////
-///CRectangle
-CRectangle::CRectangle(CPoint p1, CPoint p2, CColor cColor, CPoint originPoint /*= CPoint()*/) : 
-	CRectanglePrimitive(CPointWithColor(p1, cColor),
-						CPointWithColor(p1.GetX(), p2.GetY(), p2.GetZ(), cColor),
-						CPointWithColor(p2, cColor),
-						CPointWithColor(p2.GetX(), p1.GetY(), p2.GetZ(), cColor),
-						originPoint
-					   )
-{
-}
-
-CRectangle::CRectangle(CPoint p1, int width, int height, CColor cColor, CPoint originPoint /*= CPoint()*/) : 
-	CRectanglePrimitive(CPointWithColor(p1, cColor),
-						CPointWithColor(p1.GetX()        , p1.GetY() + height, p1.GetZ(), cColor),
-						CPointWithColor(p1.GetX() + width, p1.GetY() + height, p1.GetZ(), cColor),
-						CPointWithColor(p1.GetX() + width, p1.GetY()         , p1.GetZ(), cColor),
-						originPoint
-						)
-{
-}
-
-CRectangle::CRectangle(CPoint p1, CSize size, CColor cColor, CPoint originPoint /*= CPoint()*/) : 
-	CRectanglePrimitive(CPointWithColor(p1, cColor),
-						CPointWithColor(p1.GetX()              , p1.GetY() + size.GetY(), p1.GetZ(), cColor),
-						CPointWithColor(p1.GetX() + size.GetX(), p1.GetY() + size.GetY(), p1.GetZ(), cColor),
-						CPointWithColor(p1.GetX() + size.GetX(), p1.GetY()              , p1.GetZ(), cColor),
-						originPoint
-						)
-{
 }

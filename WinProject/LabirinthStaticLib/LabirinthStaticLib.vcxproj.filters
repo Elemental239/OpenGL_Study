@@ -118,6 +118,9 @@
     <ClInclude Include="..\..\Graphic\GraphicObjects\Line.h">
       <Filter>Graphic\GraphicObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Graphic\GraphicObjects\Texture2D.h">
+      <Filter>Graphic\GraphicObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -184,6 +187,9 @@
       <Filter>Graphic\GraphicObject</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Graphic\GraphicObjects\Line.cpp">
+      <Filter>Graphic\GraphicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\GraphicObjects\Texture2D.cpp">
       <Filter>Graphic\GraphicObject</Filter>
     </ClCompile>
   </ItemGroup>

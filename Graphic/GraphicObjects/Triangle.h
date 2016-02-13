@@ -7,7 +7,7 @@
 class CTrianglePrimitive : public COpenGLGraphicObject
 {
 public:
-	CTrianglePrimitive(CPointWithColor p1, CPointWithColor p2, CPointWithColor p3, CPoint originPoint = CPoint());
+	CTrianglePrimitive(CPointWithColor p1, CPointWithColor p2, CPointWithColor p3);
 	~CTrianglePrimitive();
 
 	virtual void DrawSelf() override;
@@ -20,6 +20,17 @@ protected:
 
 private:
 	std::vector<CPointWithColor> m_points;
+};
+
+class CTriangle : public CTrianglePrimitive
+{
+public:
+	CTriangle(CPoint p1, CPoint p2, CPoint p3, CColor cColor) : 
+		CTrianglePrimitive(CPointWithColor(p1, cColor),
+						   CPointWithColor(p2, cColor),
+						   CPointWithColor(p3, cColor))
+	{ 
+	}
 };
 
 #endif //__Graphic__Triangle__H__

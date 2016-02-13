@@ -1,7 +1,7 @@
 #include "GraphicObject.h"
 #include "Logger.h"
 
-CGraphicObject::CGraphicObject() : m_pParent(nullptr)
+CGraphicObject::CGraphicObject() : m_pParent(nullptr), m_origin(CPoint())
 {
 }
 

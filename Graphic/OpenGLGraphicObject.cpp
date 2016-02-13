@@ -3,9 +3,8 @@
 #include "WindowManager.h"
 #include "Window.h"
 
-COpenGLGraphicObject::COpenGLGraphicObject(CPoint originPoint) : m_origin(originPoint), m_bInited(false)
+COpenGLGraphicObject::COpenGLGraphicObject() : m_bInited(false)
 {
-
 	glGenBuffers(1, &m_VBO);
 	glGenBuffers(1, &m_EBO);
 	glGenVertexArrays(1, &m_VAO);

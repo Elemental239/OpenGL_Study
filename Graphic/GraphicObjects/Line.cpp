@@ -2,8 +2,8 @@
 
 static const int DATA_ROW_LENGTH = 6; // 3 for pos and 3 for color
 
-CLine::CLine(CPointWithColor pointStart, CPointWithColor pointFinish, CPoint originPoint /*= CPoint()*/) :
-	COpenGLGraphicObject(originPoint),
+CLine::CLine(CPointWithColor pointStart, CPointWithColor pointFinish) :
+	COpenGLGraphicObject(),
 	m_pointStart(pointStart),
 	m_pointFinish(pointFinish)
 {
