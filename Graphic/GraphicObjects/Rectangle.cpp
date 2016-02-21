@@ -12,6 +12,8 @@ CRectanglePrimitive::CRectanglePrimitive(CSize size, CColor cColorLeftBottom, CC
 	m_colors.push_back(cColorLeftTop);
 	m_colors.push_back(cColorRightTop);
 	m_colors.push_back(cColorRightBottom);
+
+	m_rectSize = m_size;
 }
 
 void CRectanglePrimitive::DrawSelf()

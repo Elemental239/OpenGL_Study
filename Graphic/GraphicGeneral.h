@@ -40,11 +40,13 @@ typedef CGenericPoint<GLfloat> COpenGLPoint;
 template<typename T>
 struct CGenericSize : public CGenericPoint<T>
 {
+	CGenericSize() : CGenericPoint<T>() {}
 	CGenericSize(T a, T b) : CGenericPoint<T>(a,b) {}
 };
 
 struct CSize : public CGenericSize<int>
 {
+	CSize() : CGenericSize<int>() {}
 	CSize(int a,int b) : CGenericSize<int>(a,b) {}
 };
 
@@ -79,12 +81,6 @@ private:
 	CColorPart m_nBlue;
 	CColorPart m_nAlpha;
 };
-
-#define COLOR_RED (CColor(0xFF, 0, 0, 0xFF))
-#define COLOR_GREEN (CColor(0, 0xFF, 0, 0xFF))
-#define COLOR_BLUE (CColor(0, 0, 0xFF, 0xFF))
-#define COLOR_BLACK (CColor(0, 0, 0, 0xFF))
-#define COLOR_WHITE (CColor(0xFF, 0xFF, 0xFF, 0xFF))
 
 class CRandomColor : public CColor
 {

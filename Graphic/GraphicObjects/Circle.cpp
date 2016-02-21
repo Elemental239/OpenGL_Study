@@ -11,11 +11,12 @@ static const int DATA_ROW_LENGTH = 6; // 3 for pos and 3 for color
 ///CCircle
 CCircle::CCircle(int nRadius, CColor cColor) : 
 	COpenGLGraphicObject(),
-	//m_center(center),
 	m_nRadius(nRadius),
 	m_cColor(cColor)
 {
 	MARKER("CCircle::CCircle()");
+
+	m_rectSize = CSize(2 * m_nRadius, 2 * m_nRadius);
 }
 
 

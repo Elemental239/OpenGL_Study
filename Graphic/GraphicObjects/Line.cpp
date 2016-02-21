@@ -2,13 +2,15 @@
 
 static const int DATA_ROW_LENGTH = 6; // 3 for pos and 3 for color
 
+#define ABS(a) (((a) > 0) ? (a) : (-(a)))
 CLine::CLine(CPointWithColor pointStart, CPointWithColor pointFinish) :
 	COpenGLGraphicObject(),
 	m_pointStart(pointStart),
 	m_pointFinish(pointFinish)
 {
-
+	m_rectSize = CSize(ABS(pointStart.GetX() - pointFinish.GetX()), ABS(pointStart.GetY() - pointFinish.GetY()));
 }
+#undef ABS
 
 CLine::~CLine() {}
 

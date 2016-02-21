@@ -34,8 +34,9 @@ public:
 	virtual bool OnSystemEvent(const EventData& event) = 0;
 
 	void SetOpenGLDrawingContext();
-	int GetWidth() { return m_params.m_nWindowWidth; }
-	int GetHeight() { return m_params.m_nWindowHeight; }
+	int GetWidth() const { return m_params.m_nWindowWidth; }
+	int GetHeight() const { return m_params.m_nWindowHeight; }
+	CSize GetSize() const { return CSize(m_params.m_nWindowWidth, m_params.m_nWindowHeight); }
 
 	virtual bool IsClosed() const = 0;
 	virtual void Close() = 0;

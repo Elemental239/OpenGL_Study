@@ -3,13 +3,19 @@
 
 static const int DATA_ROW_LENGTH = 6; // 3 for pos and 3 for color
 
+#define MAX2(a, b) ((a) > (b) ? (a) : (b))
+#define MAX3(a, b, c) (MAX2(MAX2((a), (b)), (c)))
 CTrianglePrimitive::CTrianglePrimitive(CPointWithColor p1, CPointWithColor p2, CPointWithColor p3) : 
 	COpenGLGraphicObject()
 {
 	m_points.push_back(p1);
 	m_points.push_back(p2);
 	m_points.push_back(p3);
+
+	m_rectSize = CSize(MAX3(p1.GetX(), p2.GetX(), p3.GetX()), MAX3(p1.GetY(), p2.GetY(), p3.GetY()));
 }
+#undef MAX2
+#undef MAX3
 
 CTrianglePrimitive::~CTrianglePrimitive() {}
 
