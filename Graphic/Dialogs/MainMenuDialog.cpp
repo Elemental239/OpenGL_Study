@@ -25,6 +25,13 @@ CMainMenuDialog::CMainMenuDialog()
 	AddChild(spRectangle);
 	AddChild(spTriangle);
 	AddChild(spFilledCircle);
+
+	//Target: pseudocode
+	//Rect* rect = new Rect(CSize(100, 100));
+	//rect->setAling(Y, top);
+	//rect->setAlign(X, center);
+	//rect->setMargins(1,1,1,1);
+	//Add (rect);
 }
 
 CMainMenuDialog::~CMainMenuDialog()
