@@ -9,14 +9,22 @@
 class CGraphicObject;
 typedef CSharedPtr<CGraphicObject> TGraphicObjectRef;
 
-enum EAlignOption : int
+enum EAlignOption : int32_t
 {
-	NONE,
-	LEFT,
-	RIGHT,
-	CENTER,
-	TOP,
-	BOTTOM
+	NONE		= 0x00000000,
+	LEFT		= 0x00000001,
+	RIGHT		= 0x00000010,
+	TOP			= 0x00000100,
+	BOTTOM		= 0x00001000,
+	CENTER_X	= 0x00010000,
+	CENTER_Y	= 0x00100000
+};
+
+enum ESizeOption : int32_t
+{
+	NONE	= 0x00000000,
+	FILL_X	= 0x00000001,
+	FILL_Y	= 0x00000010
 };
 
 class CGraphicObject : public CObject
@@ -38,10 +46,9 @@ public:
 	///<summary> Origin is the bottom-left point of the object.</summary>
 	CPoint GetOrigin() const { return m_origin; }
 
-	void SetAlignX(EAlignOption option) { m_nAlignOptionX = option; }
-	EAlignOption GetAlignX() const { return m_nAlignOptionX; }
-	void SetAlignY(EAlignOption option) { m_nAlignOptionY = option; }
-	EAlignOption GetAlignY() const { return m_nAlignOptionY; }
+	void SetAlignOptions(int32_t option) { m_nAlignOption = option; }
+	void SetAlign(EAlignOption option) { m_nAlignOption |= option; }
+	int32_t GetAlignOptions() const { return m_nAlignOption; }
 
 	void SetMargins(const std::vector<int> &margins) { m_margins = margins; } //TODO: OPTIMISE: array copy with reserve/std::copy/etc.
 	void SetMargins(int left, int top, int right, int bottom);
@@ -51,8 +58,7 @@ protected:
 	std::vector<TGraphicObjectRef> m_children;
 	CGraphicObject* m_pParent;
 	CPoint m_origin;
-	EAlignOption m_nAlignOptionX;
-	EAlignOption m_nAlignOptionY;
+	int32_t m_nAlignOption;	//Flags
 	std::vector<int> m_margins;
 	CSize m_rectSize;	// Size of containing rectangle
 
