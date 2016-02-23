@@ -96,7 +96,6 @@ void CWindow::Close()
 	MARKER("CWindow::Close()");
 
 	m_bClosed = true;
-	//glfwSetWindowShouldClose(m_window, true);
 }
 
 void CWindow::Draw()
