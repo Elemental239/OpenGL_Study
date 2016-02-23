@@ -121,6 +121,9 @@
     <ClInclude Include="..\..\Graphic\GraphicObjects\Texture2D.h">
       <Filter>Graphic\GraphicObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Utility\InlineFunctions.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">

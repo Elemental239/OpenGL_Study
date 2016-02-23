@@ -35,6 +35,7 @@
     <ClInclude Include="..\..\Resources\ColorsResources.h" />
     <ClInclude Include="..\..\Utility\File.h" />
     <ClInclude Include="..\..\Utility\IFile.h" />
+    <ClInclude Include="..\..\Utility\InlineFunctions.h" />
     <ClInclude Include="..\..\Utility\Listeners.h" />
     <ClInclude Include="..\..\Utility\Logger.h" />
     <ClInclude Include="..\..\Utility\Object.h" />
