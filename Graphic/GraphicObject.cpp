@@ -4,8 +4,7 @@
 CGraphicObject::CGraphicObject() : 
 	m_pParent(nullptr), 
 	m_origin(CPoint()), 
-	m_nAlignOptionX(EAlignOption::NONE),
-	m_nAlignOptionY(EAlignOption::NONE),
+	m_nAlignOption(enumValueToInt(EAlignOption::NONE)),
 	m_rectSize(CSize())
 {
 	m_margins.assign(4, 0);	// Fill with zero margins
