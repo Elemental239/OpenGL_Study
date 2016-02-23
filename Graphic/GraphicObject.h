@@ -9,15 +9,15 @@
 class CGraphicObject;
 typedef CSharedPtr<CGraphicObject> TGraphicObjectRef;
 
-enum EAlignOption : int32_t
+enum EAlignOption : int64_t
 {
-	NONE		= 0x00000000,
-	LEFT		= 0x00000001,
-	RIGHT		= 0x00000010,
-	TOP			= 0x00000100,
-	BOTTOM		= 0x00001000,
-	CENTER_X	= 0x00010000,
-	CENTER_Y	= 0x00100000
+	NONE		= 0x0000000000000000,
+	LEFT		= 0x0000000000000001,
+	RIGHT		= 0x0000000000000010,
+	TOP			= 0x0000000000000100,
+	BOTTOM		= 0x0000000000001000,
+	CENTER_X	= 0x0000000000010000,
+	CENTER_Y	= 0x0000000000100000
 };
 
 enum ESizeOption : int32_t
@@ -46,9 +46,9 @@ public:
 	///<summary> Origin is the bottom-left point of the object.</summary>
 	CPoint GetOrigin() const { return m_origin; }
 
-	void SetAlignOptions(int32_t option) { m_nAlignOption = option; }
+	void SetAlignOptions(int64_t option) { m_nAlignOption = option; }
 	void SetAlign(EAlignOption option) { m_nAlignOption |= option; }
-	int32_t GetAlignOptions() const { return m_nAlignOption; }
+	int64_t GetAlignOptions() const { return m_nAlignOption; }
 
 	void SetMargins(const std::vector<int> &margins) { m_margins = margins; } //TODO: OPTIMISE: array copy with reserve/std::copy/etc.
 	void SetMargins(int left, int top, int right, int bottom);
@@ -58,7 +58,7 @@ protected:
 	std::vector<TGraphicObjectRef> m_children;
 	CGraphicObject* m_pParent;
 	CPoint m_origin;
-	int32_t m_nAlignOption;	//Flags
+	int64_t m_nAlignOption;	//Flags
 	std::vector<int> m_margins;
 	CSize m_rectSize;	// Size of containing rectangle
 
