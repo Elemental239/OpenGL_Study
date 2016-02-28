@@ -7,6 +7,14 @@
 
 struct CSize;
 
+enum class EAxis
+{
+	NONE,
+	X,
+	Y,
+	Z
+};
+
 template<class T>
 class CGenericPoint : public CObject
 {
@@ -21,7 +29,7 @@ public:
 	{
 		return CGenericPoint<T>(left.GetX() + right.GetX(), left.GetY() + right.GetY(), left.GetZ() + right.GetZ());
 	}
-	
+
 	T GetX() const { return m_nX; }
 	T GetY() const { return m_nY; }
 	T GetZ() const { return m_nZ; }
@@ -29,6 +37,33 @@ public:
 	void SetX(T newX) { m_nX = newX; }
 	void SetY(T newY) { m_nY = newY; }
 	void SetZ(T newZ) { m_nZ = newZ; }
+
+	T Get(EAxis axis) const 
+	{
+		switch (axis)
+		{
+			case EAxis::X:
+				return GetX();
+			case EAxis::Y:
+				return GetY();
+			case EAxis::Z:
+				return GetZ();
+			default:
+				return 0;
+		}
+	}
+	void Set(EAxis axis, T newValue) 
+	{ 
+		switch (axis)
+		{
+			case EAxis::X:
+				return SetX(newValue);
+			case EAxis::Y:
+				return SetY(newValue);
+			case EAxis::Z:
+				return SetZ(newValue);
+		}
+	}
 
 	CString8 ToString() const override { return CString8("(") + m_nX + ", " + m_nY + ", " + m_nZ + ")"; }
 
