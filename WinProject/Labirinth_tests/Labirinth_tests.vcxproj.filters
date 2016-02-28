@@ -36,5 +36,8 @@
     <ClCompile Include="..\..\Utility\Tests\File_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Utility\Tests\InlineFunctions_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -13,4 +13,15 @@ template<typename E>
    return static_cast<typename std::underlying_type<E>::type>(e);
 }
 
+///<summary>Position from left to right in BigEndian flags</summary>
+inline bool GetFlagWithPosition(unsigned int flags, unsigned int position)
+{
+	return (flags & (1 << position)) != 0;
+}
+
+inline bool GetFlag(unsigned int flags, unsigned int flag)
+{
+	return (flags & flag) != 0;
+}
+
 #endif //__Utility_InlineFunctions_H__
