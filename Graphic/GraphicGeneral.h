@@ -26,6 +26,10 @@ public:
 	T GetY() const { return m_nY; }
 	T GetZ() const { return m_nZ; }
 
+	void SetX(T newX) { m_nX = newX; }
+	void SetY(T newY) { m_nY = newY; }
+	void SetZ(T newZ) { m_nZ = newZ; }
+
 	CString8 ToString() const override { return CString8("(") + m_nX + ", " + m_nY + ", " + m_nZ + ")"; }
 
 protected:
