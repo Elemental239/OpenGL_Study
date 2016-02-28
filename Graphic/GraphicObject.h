@@ -13,10 +13,10 @@ typedef CSharedPtr<CGraphicObject> TGraphicObjectRef;
 enum class EAlignOption : int64_t
 {
 	NONE		= 0x0000000000000000,
-	LEFT		= 0x0000000000000001,
+	LEFT		= 0x0000000000000001, // The same as NONE for X
 	RIGHT		= 0x0000000000000010,
 	TOP			= 0x0000000000000100,
-	BOTTOM		= 0x0000000000001000,
+	BOTTOM		= 0x0000000000001000, // The same as NONE for Y
 	CENTER_X	= 0x0000000000010000,
 	CENTER_Y	= 0x0000000000100000
 };
@@ -57,6 +57,8 @@ public:
 
 	void SetMargins(const std::vector<int> &margins) { m_margins = margins; } //TODO: OPTIMISE: array copy with reserve/std::copy/etc.
 	void SetMargins(int left, int top, int right, int bottom);
+
+	///<summary>Left, top, right, bottom</summary>
 	std::vector<int> GetMargins() const { return m_margins; } //TODO: OPTIMISE: array copy with reserve/std::copy/etc.
 
 protected:
@@ -71,10 +73,14 @@ protected:
 	///<summary> Get size of minimal containing rect</summary>
 	CSize GetRectSize() const { return m_rectSize; }
 	///<summary> Set size of minimal containing rect</summary>
-	void SetRectSize(CSize size) { m_rectSize = size; }
+	virtual void SetRectSize(CSize size) { m_rectSize = size; }		// TODO: overload for all graphic primitives to adjust their points to new size
 
-	CPoint CalcChildOriginPoint(TGraphicObjectRef child);
+	void CalcAndSetNewChildParams(TGraphicObjectRef child) const;
 
+	// Help functions for CalcAndSetNewChildParams
+	void DoStretch(EAxis axis, int childMarginBefore, int childMarginAfter, CPoint& resultPoint, CSize& resultSize) const;
+	void DoMoveToOppositeSide(EAxis axis, int childMarginBefore, int childMarginAfter, const CSize childRect, CPoint& resultPoint) const; // Right or Top
+	void DoMoveToCenter(EAxis axis, int childMarginBefore, int childMarginAfter, const CSize childRect, CPoint& resultPoint) const;
 };
 
 #endif //__Graphic_GraphicObject_H__
