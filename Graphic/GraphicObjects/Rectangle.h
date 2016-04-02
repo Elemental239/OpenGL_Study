@@ -11,8 +11,8 @@ public:
 	CRectanglePrimitive(CSize size, CColor cColorLeftBottom, CColor cColorLeftTop, CColor cColorRightTop, CColor cColorRightBottom);
 
 	virtual void DrawSelf() override;
-	int GetHeight() { return m_size.GetY(); }
-	int GetWidth() { return m_size.GetX(); }
+	int GetHeight() { return GetRectSize().GetY(); }
+	int GetWidth() { return GetRectSize().GetX(); }
 
 protected:
 	virtual void CreateShaderProgram() override;
@@ -21,7 +21,6 @@ protected:
 	virtual void SetupVAOAttributes() override;
 
 private:
-	CSize m_size;
 	std::vector<CColor> m_colors;
 	std::vector<CPointWithColor> m_points;
 };

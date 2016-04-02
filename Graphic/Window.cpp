@@ -19,6 +19,9 @@ void IWindow::SetOpenGLDrawingContext()
 
 void IWindow::AddDialog(TDialogRef spDialog)
 {
+	CSize windowSize = CSize(GetWidth(), GetHeight());
+	spDialog->SetRectSize(windowSize);
+	spDialog->InitChildren();
 	m_dialogs.push(spDialog);
 }
 

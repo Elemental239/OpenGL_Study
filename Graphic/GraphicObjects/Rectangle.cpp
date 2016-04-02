@@ -5,25 +5,25 @@ static const int DATA_ROW_LENGTH = 6; // 3 for pos and 3 for color
 ////////////////////////////////////////
 ///CRectanglePrimitive
 CRectanglePrimitive::CRectanglePrimitive(CSize size, CColor cColorLeftBottom, CColor cColorLeftTop, CColor cColorRightTop, CColor cColorRightBottom) : 
-	COpenGLGraphicObject(),
-	m_size(size)
+	COpenGLGraphicObject()
 {
 	m_colors.push_back(cColorLeftBottom);
 	m_colors.push_back(cColorLeftTop);
 	m_colors.push_back(cColorRightTop);
 	m_colors.push_back(cColorRightBottom);
 
-	m_rectSize = m_size;
+	SetRectSize(size);
 }
 
 void CRectanglePrimitive::DrawSelf()
 {
 	if (!m_bInited)
 	{
-		m_points.push_back(CPointWithColor(GetOrigin(), m_colors[0]));
-		m_points.push_back(CPointWithColor(GetOrigin() + CPoint(0, m_size.GetY()), m_colors[1]));
-		m_points.push_back(CPointWithColor(GetOrigin() + CPoint(m_size.GetX(), m_size.GetY()), m_colors[2]));
-		m_points.push_back(CPointWithColor(GetOrigin() + CPoint(m_size.GetX(), 0), m_colors[3]));
+		CSize siez = GetRectSize();
+		m_points.push_back(CPointWithColor(CPoint(), m_colors[0]));
+		m_points.push_back(CPointWithColor(CPoint(0, GetRectSize().GetY()), m_colors[1]));
+		m_points.push_back(CPointWithColor(CPoint(GetRectSize().GetX(), GetRectSize().GetY()), m_colors[2]));
+		m_points.push_back(CPointWithColor(CPoint(GetRectSize().GetX(), 0), m_colors[3]));
 	}
 
 	__super::DrawSelf();

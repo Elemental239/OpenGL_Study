@@ -17,15 +17,19 @@ enum class EAlignOption : int64_t
 	RIGHT		= 0x0000000000000010,
 	TOP			= 0x0000000000000100,
 	BOTTOM		= 0x0000000000001000, // The same as NONE for Y
-	CENTER_X	= 0x0000000000010000,
-	CENTER_Y	= 0x0000000000100000
+	FRONT		= 0x0000000000010000,
+	BACK		= 0x0000000000100000,
+	CENTER_X	= 0x0000000001000000,
+	CENTER_Y	= 0x0000000010000000,
+	CENTER_Z	= 0x0000000100000000,
 };
 
 enum class ESizeOption : int32_t
 {
 	NONE	= 0x00000000,
 	FILL_X	= 0x00000001,
-	FILL_Y	= 0x00000010
+	FILL_Y	= 0x00000010,
+	FILL_Z	= 0x00000100,
 };
 
 class CGraphicObject : public CObject
@@ -62,6 +66,15 @@ public:
 	std::vector<int> GetMargins() const { return m_margins; } //TODO: OPTIMISE: array copy with reserve/std::copy/etc.
 
 protected:
+	enum class UseMarginsMode
+	{
+		NONE,
+		AFFECT_SIZE,			// for stretched object modify size and position
+		AFFECT_POSITION_BEFORE,	// Use left or bottom
+		AFFECT_POSITION_AFTER,	// Use right or top
+		AFFECT_POSITION_CENTER	// for centered objects
+	};
+
 	std::vector<TGraphicObjectRef> m_children;
 	CGraphicObject* m_pParent;
 	CPoint m_origin;
@@ -78,9 +91,11 @@ protected:
 	void CalcAndSetNewChildParams(TGraphicObjectRef child) const;
 
 	// Help functions for CalcAndSetNewChildParams
-	void DoStretch(EAxis axis, int childMarginBefore, int childMarginAfter, CPoint& resultPoint, CSize& resultSize) const;
-	void DoMoveToOppositeSide(EAxis axis, int childMarginBefore, int childMarginAfter, const CSize childRect, CPoint& resultPoint) const; // Right or Top
-	void DoMoveToCenter(EAxis axis, int childMarginBefore, int childMarginAfter, const CSize childRect, CPoint& resultPoint) const;
+	void CalcAndSetNewChildAxisParam(EAxis axis, TGraphicObjectRef child, const int nMarginBefore, const int nMarginAfter, CPoint& resultPoint, CSize& resultSize) const;
+	void DoStretch(EAxis axis, CPoint& resultPoint, CSize& resultSize) const;
+	void DoMoveToOppositeSide(EAxis axis, const CSize childRect, CPoint& resultPoint) const; // Right or Top
+	void DoMoveToCenter(EAxis axis, const CSize childRect, CPoint& resultPoint) const;
+	void DoUseMargins(EAxis axis, UseMarginsMode nMarginsUsageMode, const int nMarginBefore, const int nMarginAfter, CPoint& resultPoint, CSize& resultSize) const;
 };
 
 #endif //__Graphic_GraphicObject_H__

@@ -25,6 +25,10 @@ public:
 	bool IsClosed() const { return m_bClosed; }
 	void Close() { m_bClosed = true; }
 
+	virtual void InitChildren() = 0;
+
+	friend IWindow; // Window sets size to dialog, but I don't want to have public method for this
+
 private:
 	bool m_bClosed;
 };
@@ -38,6 +42,13 @@ public:
 
 	virtual bool OnSystemEvent(const EventData& event) override;
 	virtual void OnLifetimeEvent(EDialogLifetimeEvent event) override;
+
+	virtual void InitChildren() override;
+
+private:
+	bool m_bChildrenInited;
+
+	virtual void CreateChildren() = 0;
 };
 
 #endif //__Graphic_Dialog_H__

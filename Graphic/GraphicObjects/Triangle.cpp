@@ -20,7 +20,7 @@ void CTrianglePrimitive::DrawSelf()
 	if (!m_bInited)
 	{
 		std::for_each(m_points.begin(), m_points.end(), [this](CPointWithColor &point){
-			point = point + GetOrigin();
+			point = point;
 		});
 	}
 

@@ -24,7 +24,7 @@ void CCircle::InitPoints()
 {
 	if (!m_bInited)
 	{
-		CPoint pointCenter = CPoint(m_nRadius, m_nRadius) + GetOrigin();
+		CPoint pointCenter = CPoint(m_nRadius, m_nRadius);
 		for (int i = 0; i < CIRCLE_APPROX_LINES_NUMBER; i++)
 		{
 			CPoint point = pointCenter + CPoint(static_cast<int>(sin(i * 2 * M_PI / CIRCLE_APPROX_LINES_NUMBER) * m_nRadius), 

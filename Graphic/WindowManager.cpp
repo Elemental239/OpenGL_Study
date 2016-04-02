@@ -61,7 +61,7 @@ void CWindowManager::Init(WindowConstructionParams& firstWindowParams)
 	CreateFirstWindow(firstWindowParams);
 	InitOpenGLDriverLibrary();
 
-	CSharedPtr<IDialog> spDialog = new CMainMenuDialog; 
+	CSharedPtr<IDialog> spDialog = new CMainMenuDialog;
 	m_windows[0]->AddDialog(spDialog);
 
 	m_bInited = true;

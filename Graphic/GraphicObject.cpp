@@ -51,84 +51,110 @@ void CGraphicObject::RemoveChild(TGraphicObjectRef obj)
 
 void CGraphicObject::SetMargins(int left, int top, int right, int bottom)
 {
+	m_margins.clear();
 	m_margins.push_back(left);
 	m_margins.push_back(top);
 	m_margins.push_back(right);
 	m_margins.push_back(bottom);
 }
 
-void CGraphicObject::CalcAndSetNewChildParams(TGraphicObjectRef spChild) const //TODO: implement the function
+void CGraphicObject::CalcAndSetNewChildParams(TGraphicObjectRef spChild) const
 {
 	if (!spChild)
 		return;
-
-	//Get all we want
-	auto childMargins = spChild->GetMargins();
-	auto childAlignOptions = spChild->GetAlignOptions();
-	auto childSizeOptions = spChild->GetSizeOptions();
 
 	//Prepare result variables
 	CPoint resultPoint = GetOrigin();
 	CSize resultSize = spChild->GetRectSize();
 
-	//Local variables
-	bool bNeedToCorrectOriginX = false;
-	bool bNeedToCorrectOriginY = false;
-	bool bStretchedByX = GetFlag(childSizeOptions, enumValueToInt(ESizeOption::FILL_X));
-	bool bStretchedByY = GetFlag(childSizeOptions, enumValueToInt(ESizeOption::FILL_Y));
+	auto childMargins = spChild->GetMargins();
 
-	//Process X-axis
-	if (bStretchedByX)
-	{
-		DoStretch(EAxis::X, childMargins[0], childMargins[2], resultPoint, resultSize);
-	}
-
-	if (GetFlag(childAlignOptions, enumValueToInt(EAlignOption::RIGHT)) && !bStretchedByX)	// don't check LEFT cause it is the same as default
-	{
-		DoMoveToOppositeSide(EAxis::X, childMargins[0], childMargins[2], spChild->GetRectSize(), resultPoint);
-	}
-
-	if (GetFlag(childAlignOptions, enumValueToInt(EAlignOption::CENTER_X)) && !bStretchedByX)
-	{
-		DoMoveToCenter(EAxis::X, childMargins[0], childMargins[2], spChild->GetRectSize(), resultPoint);
-	}
-
-	//Process Y-axis
-	if (bStretchedByY)
-	{
-		DoStretch(EAxis::Y, childMargins[3], childMargins[1], resultPoint, resultSize);
-	}
-
-	if (GetFlag(childAlignOptions, enumValueToInt(EAlignOption::TOP)) && !bStretchedByY)	// don't check BOTTOM cause it is the same as default
-	{
-		DoMoveToOppositeSide(EAxis::Y, childMargins[3], childMargins[1], spChild->GetRectSize(), resultPoint);
-	}
-
-	if (GetFlag(childAlignOptions, enumValueToInt(EAlignOption::CENTER_Y)) && !bStretchedByY)
-	{
-		DoMoveToCenter(EAxis::Y, childMargins[3], childMargins[1], spChild->GetRectSize(), resultPoint);
-	}
+	CalcAndSetNewChildAxisParam(EAxis::X, spChild, childMargins[0], childMargins[2], resultPoint, resultSize);
+	CalcAndSetNewChildAxisParam(EAxis::Y, spChild, childMargins[3], childMargins[1], resultPoint, resultSize);
 
 	spChild->SetRectSize(resultSize);
-	spChild->SetOrigin(resultPoint) // TODO: test me!
+	spChild->SetOrigin(resultPoint); // TODO: test me!
 }
 
-void CGraphicObject::DoStretch(EAxis axis, int childMarginBefore, int childMarginAfter, CPoint& resultPoint, CSize& resultSize) const
+void CGraphicObject::CalcAndSetNewChildAxisParam(EAxis axis, TGraphicObjectRef spChild, const int nMarginBefore, const int nMarginAfter, CPoint& resultPoint, CSize& resultSize) const
 {
-	int newSize = GetRectSize().Get(axis) - childMarginBefore - childMarginAfter;
+	//Get all we want
+	auto childAlignOptions = spChild->GetAlignOptions();
+	auto childSizeOptions = spChild->GetSizeOptions();
+
+	//Local variables
+	bool bStretched = GetFlag(childSizeOptions, enumValueToInt(axis == EAxis::X ? ESizeOption::FILL_X : axis == EAxis::Y ? ESizeOption::FILL_Y : ESizeOption::FILL_Z));
+
+	//Process X-axis
+	if (bStretched)
+	{
+		DoStretch(axis, resultPoint, resultSize);
+		DoUseMargins(axis, UseMarginsMode::AFFECT_SIZE, nMarginBefore, nMarginAfter, resultPoint, resultSize);
+	}
+	else
+	{
+		if (GetFlag(childAlignOptions, enumValueToInt(axis == EAxis::X ? EAlignOption::RIGHT : axis == EAxis::Y ? EAlignOption::TOP : EAlignOption::FRONT)))	// don't check LEFT, BOTTOM, BACK cause it is the same as default
+		{
+			DoMoveToOppositeSide(EAxis::X, spChild->GetRectSize(), resultPoint);
+			DoUseMargins(axis, UseMarginsMode::AFFECT_POSITION_AFTER, nMarginBefore, nMarginAfter, resultPoint, resultSize);
+		}
+		else if (GetFlag(childAlignOptions, enumValueToInt(axis == EAxis::X ? EAlignOption::CENTER_X : axis == EAxis::Y ? EAlignOption::CENTER_Y : EAlignOption::CENTER_Z)))
+		{
+			DoMoveToCenter(axis, spChild->GetRectSize(), resultPoint);
+			DoUseMargins(axis, UseMarginsMode::AFFECT_POSITION_CENTER, nMarginBefore, nMarginAfter, resultPoint, resultSize);
+		}
+		else
+		{
+			DoUseMargins(axis, UseMarginsMode::AFFECT_POSITION_BEFORE, nMarginBefore, nMarginAfter, resultPoint, resultSize);
+		}
+	}
+}
+
+void CGraphicObject::DoStretch(EAxis axis, CPoint& resultPoint, CSize& resultSize) const
+{
+	int newSize = GetRectSize().Get(axis);
 
 	resultSize.Set(axis, newSize);
-	resultPoint.Set(axis, resultPoint.Get(axis) + childMarginBefore);
 }
 
-void CGraphicObject::DoMoveToOppositeSide(EAxis axis, int childMarginBefore, int childMarginAfter, const CSize childRect, CPoint& resultPoint) const
+void CGraphicObject::DoMoveToOppositeSide(EAxis axis, const CSize childRect, CPoint& resultPoint) const
 {
-	resultPoint.Set(axis, resultPoint.Get(axis) + GetRectSize().Get(axis) - childRect.Get(axis) - childMarginAfter);
+	resultPoint.Set(axis, resultPoint.Get(axis) + GetRectSize().Get(axis) - childRect.Get(axis));
 }
 
-void CGraphicObject::DoMoveToCenter(EAxis axis, int childMarginBefore, int childMarginAfter, const CSize childRect, CPoint& resultPoint) const
+void CGraphicObject::DoMoveToCenter(EAxis axis, const CSize childRect, CPoint& resultPoint) const
 {
-	int clearLength =  GetRectSize().Get(axis) - childMarginBefore - childMarginAfter;
-	int result = (clearLength - childRect.Get(axis)) / 2;
+	int result = (GetRectSize().Get(axis) - childRect.Get(axis)) / 2;
 	resultPoint.Set(axis, resultPoint.Get(axis) + result);
+}
+
+void CGraphicObject::DoUseMargins(EAxis axis, UseMarginsMode nMarginsUsageMode, const int nMarginBefore, const int nMarginAfter, CPoint& resultPoint, CSize& resultSize) const
+{
+	switch (nMarginsUsageMode)
+	{
+		case UseMarginsMode::NONE:  
+			LOGW("CGraphicObject::DoUseMargins() no margins mode");
+			break;
+
+		case UseMarginsMode::AFFECT_SIZE:
+			resultPoint.Set(axis, resultPoint.Get(axis) + nMarginBefore);
+			resultSize.Set(axis, resultSize.Get(axis) - nMarginAfter - nMarginBefore);
+			break;
+
+		case UseMarginsMode::AFFECT_POSITION_BEFORE:
+			resultPoint.Set(axis, resultPoint.Get(axis) + nMarginBefore);
+			break;
+
+		case UseMarginsMode::AFFECT_POSITION_AFTER:
+			resultPoint.Set(axis, resultPoint.Get(axis) - nMarginAfter);
+			break;
+
+		case UseMarginsMode::AFFECT_POSITION_CENTER:
+			resultPoint.Set(axis, resultPoint.Get(axis) - nMarginAfter + nMarginBefore);
+			break;
+
+		default:
+			LOGE("CGraphicObject::DoUseMargins() unknown margins mode");
+			break;
+	}
 }
