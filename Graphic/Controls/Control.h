@@ -21,7 +21,7 @@ public:
 	virtual ~IControl() {}
 
 	virtual void SetVisualRepresentation(TGraphicObjectRef graphicObject) = 0;
-	virtual TGraphicObjectRef GetVisualRepresentation() = 0;
+	virtual TGraphicObjectRef GetVisualRepresentation() const = 0;
 
 	virtual void SetParent(IControl* spParent) = 0;
 	virtual void AddChild(TControlRef obj) = 0;
@@ -29,6 +29,7 @@ public:
 	virtual void RemoveChildren() = 0;
 
 	virtual bool OnSystemEvent(const EventData& event) = 0;
+	virtual bool OnSignal(const SignalData& signal) = 0;
 	virtual void Draw() = 0;
 
 protected:
@@ -41,20 +42,23 @@ public:
 	CControl(TGraphicObjectRef representation = new CGraphicObject());
 	virtual ~CControl() {}
 
-	virtual void Draw();
-	virtual bool OnSystemEvent(const EventData& event);
+	virtual void Draw() override;
+	virtual bool OnSystemEvent(const EventData& event) override;
+	virtual bool OnSignal(const SignalData& signal) override;
 
 	virtual void SetVisualRepresentation(TGraphicObjectRef graphicObject) override;
-	virtual TGraphicObjectRef GetVisualRepresentation() override { return m_spVisualRepresentation; }
+	virtual TGraphicObjectRef GetVisualRepresentation() const override { return m_spVisualRepresentation; }
 
 	virtual void SetParent(IControl* spParent) override { m_pParent = spParent; }
 	virtual void AddChild(TControlRef obj) override;
 	virtual void RemoveChild(TControlRef obj) override;
 	virtual void RemoveChildren() override;
 
-private:
+protected:
 	std::vector<TControlRef> m_children;
 	IControl* m_pParent;
+
+	bool IsPointInsideMyBounds(const CPoint& point) const;
 };
 
 #endif //__Controls_Control_H__

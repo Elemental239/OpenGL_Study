@@ -2,6 +2,15 @@
 #include "Logger.h"
 #include "StringImpl.h"
 
+CGenericPoint<int> FloatPointToIntPoint(CGenericPoint<double> point)
+{
+	return CGenericPoint<int>(
+		static_cast<int>(point.GetX()),
+		static_cast<int>(point.GetY()),
+		static_cast<int>(point.GetZ())
+		);
+}
+
 /////////////////////////////////////////
 ///CColor
 CColor::CColor(CStringA strColor)

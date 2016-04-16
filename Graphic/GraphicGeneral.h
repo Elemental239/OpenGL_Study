@@ -73,6 +73,8 @@ protected:
 	T m_nZ;
 };
 
+CGenericPoint<int> FloatPointToIntPoint(CGenericPoint<double> point);
+
 typedef CGenericPoint<int> CPoint;
 typedef CGenericPoint<GLfloat> COpenGLPoint;
 

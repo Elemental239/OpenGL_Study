@@ -12,6 +12,7 @@ public:
 	~CMainMenuDialog();
 
 	virtual bool OnSystemEvent(const EventData& event) override;
+	virtual bool OnSignal(const SignalData& signal) override;
 
 	virtual void CreateChildren() override;
 };

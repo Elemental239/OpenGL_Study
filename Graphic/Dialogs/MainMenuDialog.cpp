@@ -4,6 +4,8 @@
 #include "GraphicObjects/Rectangle.h"
 #include "GraphicObjects/Line.h"
 #include "GraphicObjects/Circle.h"
+#include "Controls/Button.h"
+#include "../Resources/Commands.h"
 
 CMainMenuDialog::CMainMenuDialog()
 {
@@ -24,18 +26,29 @@ void CMainMenuDialog::CreateChildren()
 	spRectangle->SetAlignOption(EAlignOption::CENTER_Y);
 	spRectangle->SetAlignOption(EAlignOption::CENTER_X);
 
-	TControlRef childControl = new CControl(spRectangle);
+	TControlRef childControl = new CButton(CMD_OPEN_LIFE_GAME_WINDOW, spRectangle);
 	AddChild(childControl);
 }
 
 bool CMainMenuDialog::OnSystemEvent(const EventData& event)
 {
-	MARKER("CMainMenuDialog::OnSystemEvent()");
-
 	if (event.m_nEventType == EVT_CURSOR_POSITION)
 	{
 		LOG("cursor position = %s", event.m_cursorPosition.ToString());
 	}
 
 	return __super::OnSystemEvent(event);
+}
+
+bool CMainMenuDialog::OnSignal(const SignalData& signal)
+{
+	MARKER("CMainMenuDialog::OnSignal()");
+
+	if (signal.m_nCommand == CMD_OPEN_LIFE_GAME_WINDOW)
+	{
+		LOG("HOORAY!");
+		return true;
+	}
+
+	return __super::OnSignal(signal);
 }

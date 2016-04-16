@@ -41,6 +41,9 @@ public:
 	virtual void DrawSelf() {}
 	void CalcAndSetNewChildParams(TGraphicObjectRef child) const;
 	
+	///<summary> Get size of minimal containing rect</summary>
+	CSize GetRectSize() const { return m_rectSize; }
+
 	///<summary> Origin is the bottom-left point of the object.</summary>
 	void SetOrigin(CPoint point) { m_origin = point; }
 	///<summary> Origin is the bottom-left point of the object.</summary>
@@ -76,8 +79,6 @@ protected:
 	std::vector<int> m_margins;
 	CSize m_rectSize;	// Size of containing rectangle
 
-	///<summary> Get size of minimal containing rect</summary>
-	CSize GetRectSize() const { return m_rectSize; }
 	///<summary> Set size of minimal containing rect</summary>
 	virtual void SetRectSize(CSize size) { m_rectSize = size; }		// TODO: overload for all graphic primitives to adjust their points to new size
 

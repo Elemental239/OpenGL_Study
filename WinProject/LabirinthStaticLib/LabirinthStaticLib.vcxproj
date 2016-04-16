@@ -36,6 +36,7 @@
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\PlatformSpecific\Headers\WinFunctions.h" />
     <ClInclude Include="..\..\Resources\ColorsResources.h" />
+    <ClInclude Include="..\..\Resources\Commands.h" />
     <ClInclude Include="..\..\Utility\File.h" />
     <ClInclude Include="..\..\Utility\IFile.h" />
     <ClInclude Include="..\..\Utility\InlineFunctions.h" />

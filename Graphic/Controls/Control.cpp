@@ -67,3 +67,19 @@ bool CControl::OnSystemEvent(const EventData& event)
 {
 	return false;
 }
+
+bool CControl::OnSignal(const SignalData& signal)
+{
+	return false;
+}
+
+bool CControl::IsPointInsideMyBounds(const CPoint& point) const
+{
+	CPoint originPoint = GetVisualRepresentation()->GetOrigin();
+	CPoint otherPoint = originPoint + GetVisualRepresentation()->GetRectSize();
+	bool bXInside = point.GetX() >= originPoint.GetX() && point.GetX() <= otherPoint.GetX();  
+	bool bYInside = point.GetY() >= originPoint.GetY() && point.GetY() <= otherPoint.GetY();
+	bool bZInside = point.GetZ() >= originPoint.GetZ() && point.GetZ() <= otherPoint.GetZ();
+
+	return (bXInside && bYInside && bZInside);
+}

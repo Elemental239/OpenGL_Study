@@ -64,5 +64,9 @@ struct EventData
 	};
 };
 
+struct SignalData
+{
+	int m_nCommand;
+};
 
 #endif //__Graphic__WindowEvents_H__

@@ -23,7 +23,11 @@ void CDialog::InitChildren()
 
 bool CDialog::OnSystemEvent(const EventData& event)
 {
-	MARKER("CDialog::OnSystemEvent()");
+	for (auto iter = m_children.begin(); iter != m_children.end(); ++iter)
+	{
+		if ((*iter)->OnSystemEvent(event))
+			return true;
+	}
 
 	switch (event.m_nEventType)
 	{
@@ -56,7 +60,7 @@ bool CDialog::OnSystemEvent(const EventData& event)
 
 bool CDialog::ProcessButtonEvent(const EventData& event)
 {
-	if (event.m_nKeyboardKey == GLFW_KEY_ESCAPE && event.m_nAction == GLFW_PRESS)
+	if (event.m_nKeyboardKey == GLFW_KEY_ESCAPE && event.m_nAction == GLFW_RELEASE)
 	{
 		Close();
 	}

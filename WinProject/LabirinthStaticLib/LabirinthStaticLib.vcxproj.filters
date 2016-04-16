@@ -136,6 +136,9 @@
     <ClInclude Include="..\..\Graphic\Controls\Control.h">
       <Filter>Graphic\Controls</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Resources\Commands.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
