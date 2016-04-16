@@ -38,6 +38,28 @@ void opengl_GLFW_framebuffer_size_callback(GLFWwindow* window, int width, int he
 	CWindowManager::Instance().OnSystemEvent(data);
 }
 
+void opengl_GLFW_mouse_callback(GLFWwindow* window, int nButton, int nEvent, int nAdditionalFlags)
+{
+	EventData data;
+	data.m_nEventType = EVT_MOUSE;
+	data.m_pTargetWindow = window;
+	data.m_nMouseEventType = nEvent == GLFW_PRESS ? MOUSE_EVENT_TYPE::PRESS : MOUSE_EVENT_TYPE::RELEASE;
+	data.m_nMouseEventModeFlags = nAdditionalFlags;
+	data.m_nMouseEventButton = static_cast<MOUSE_EVENT_BUTTON>(nButton); //El239: enum is the same as GLFW
+
+	CWindowManager::Instance().OnSystemEvent(data);
+}
+
+void opengl_GLFW_cursor_position_callback(GLFWwindow* window, double xPos, double yPos)
+{
+	EventData data;
+	data.m_nEventType = EVT_CURSOR_POSITION;
+	data.m_pTargetWindow = window;
+	data.m_cursorPosition = CGenericPoint<double>(xPos, yPos);
+
+	CWindowManager::Instance().OnSystemEvent(data);
+}
+
 ///////////////////////////////////////////////////
 ///CWindowManager
 CWindowManager::CWindowManager() : m_bInited(false)
@@ -139,7 +161,13 @@ void CWindowManager::OnSystemEvent(const EventData& event)
 	{
 		if ((*iter)->m_window == event.m_pTargetWindow)
 		{
-			(*iter)->OnSystemEvent(event);
+			EventData evt = event;
+			if (event.m_nEventType == EVT_CURSOR_POSITION)	// Coordinate system of this event is different from system of app, so correct it
+			{
+				evt.m_cursorPosition.SetY(static_cast<double>((*iter)->GetHeight()) - event.m_cursorPosition.GetY());
+			}
+
+			(*iter)->OnSystemEvent(evt);
 			break;
 		}
 	}

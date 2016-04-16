@@ -26,6 +26,7 @@
     <ClInclude Include="..\..\Graphic\OpenGLGraphicObject.h" />
     <ClInclude Include="..\..\Graphic\Shader.h" />
     <ClInclude Include="..\..\Graphic\Window.h" />
+    <ClInclude Include="..\..\Graphic\WindowEvents.h" />
     <ClInclude Include="..\..\Graphic\WindowManager.h" />
     <ClInclude Include="..\..\Libs\UTF8Strings\Exception.h" />
     <ClInclude Include="..\..\Libs\UTF8Strings\String.h" />

@@ -4,6 +4,8 @@
 
 void opengl_GLFW_key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void opengl_GLFW_framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void opengl_GLFW_mouse_callback(GLFWwindow* window, int nButton, int nEvent, int nAdditionalFlags);
+void opengl_GLFW_cursor_position_callback(GLFWwindow* window, double xPos, double yPos);
 
 /////////////////////////////////////////////
 ///IWindow
@@ -76,6 +78,8 @@ CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params), m_bC
 	//Set window-specific callback
 	glfwSetKeyCallback(m_window, opengl_GLFW_key_callback);
 	glfwSetFramebufferSizeCallback(m_window, opengl_GLFW_framebuffer_size_callback);
+	glfwSetMouseButtonCallback(m_window, opengl_GLFW_mouse_callback);
+	glfwSetCursorPosCallback(m_window, opengl_GLFW_cursor_position_callback);
 }
 
 CWindow::~CWindow()

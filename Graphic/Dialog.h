@@ -49,6 +49,12 @@ private:
 	bool m_bChildrenInited;
 
 	virtual void CreateChildren() = 0;
+
+	bool ProcessButtonEvent(const EventData& event);
+	bool ProcessMouseEvent(const EventData& event);
+
+	void ActionOnButtonEvent(const EventData& event);
+	void ActionOnMouseEvent(const EventData& event);
 };
 
 #endif //__Graphic_Dialog_H__

@@ -11,50 +11,11 @@
 #include <vector>
 #include "Singleton.h"
 #include "SharedPtr.h"
+#include "WindowEvents.h"
 
 class IWindow;
 struct GLFWwindow;
 struct WindowConstructionParams;
-
-enum EVENT_TYPE
-{
-	EVT_MOUSE,
-	EVT_RESIZE,
-	EVT_BUTTON
-};
-
-enum MOUSE_EVENT_TYPE
-{
-	EVT_MOUSE_DOWN,
-	EVT_MOUSE_UP
-};
-
-struct EventData
-{
-	EVENT_TYPE m_nEventType;
-	GLFWwindow* m_pTargetWindow;
-
-	union {
-		struct //EVT_MOUSE
-		{
-			MOUSE_EVENT_TYPE m_nMouseEventType;
-		};
-
-		struct //EVT_BUTTON
-		{
-			int m_nKeyboardKey;
-			int m_nScancode;
-			int m_nAction;
-			int m_nMode;
-		};
-
-		struct //EVT_RESIZE
-		{
-			int m_nNewHeight;
-			int m_nNewWidth;
-		};
-	};
-};
 
 class CWindowManager : public CObject
 {
