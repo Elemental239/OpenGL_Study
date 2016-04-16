@@ -32,11 +32,6 @@ void CMainMenuDialog::CreateChildren()
 
 bool CMainMenuDialog::OnSystemEvent(const EventData& event)
 {
-	if (event.m_nEventType == EVT_CURSOR_POSITION)
-	{
-		LOG("cursor position = %s", event.m_cursorPosition.ToString());
-	}
-
 	return __super::OnSystemEvent(event);
 }
 

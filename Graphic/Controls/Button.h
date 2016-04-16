@@ -9,6 +9,8 @@ public:
 	CButton(int nCommand, TGraphicObjectRef representation = new CGraphicObject(), TGraphicObjectRef pressedRepresentation = nullptr);
 	virtual ~CButton() {}
 
+	virtual void Draw() override;
+
 	virtual bool OnSystemEvent(const EventData& event) override;
 
 private:
