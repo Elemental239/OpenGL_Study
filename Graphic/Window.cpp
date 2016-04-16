@@ -1,5 +1,7 @@
 #include "Window.h"
 #include "Logger.h"
+#include "GraphicObjects/Rectangle.h"
+#include "../Resources/ColorsResources.h"
 #include "glfw-3.1.1/include/GLFW/glfw3.h"
 
 void opengl_GLFW_key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -22,7 +24,8 @@ void IWindow::SetOpenGLDrawingContext()
 void IWindow::AddDialog(TDialogRef spDialog)
 {
 	CSize windowSize = CSize(GetWidth(), GetHeight());
-	spDialog->SetRectSize(windowSize);
+	TGraphicObjectRef spDialogGraphicRepresentation = new CRectangle(windowSize, COLOR_WHITE);
+	spDialog->SetVisualRepresentation(spDialogGraphicRepresentation);
 	spDialog->InitChildren();
 	m_dialogs.push(spDialog);
 }
@@ -71,7 +74,7 @@ CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params), m_bC
 		//glEnable(GL_POLYGON_SMOOTH);
 		//glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
 
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // - for lines
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // - for lines
 		//glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE); // - for polygons
 	}
 

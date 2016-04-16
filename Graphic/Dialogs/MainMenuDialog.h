@@ -14,9 +14,6 @@ public:
 	virtual bool OnSystemEvent(const EventData& event) override;
 
 	virtual void CreateChildren() override;
-
-private:
-	virtual void DrawSelf() override;
 };
 
 #endif //__Graphic_StartMenuDialog__

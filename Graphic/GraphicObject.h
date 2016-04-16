@@ -38,14 +38,9 @@ public:
 	CGraphicObject();
 	virtual ~CGraphicObject();
 
-	virtual void Draw();
 	virtual void DrawSelf() {}
+	void CalcAndSetNewChildParams(TGraphicObjectRef child) const;
 	
-	void SetParent(CGraphicObject* spParent) { m_pParent = spParent; }
-	void AddChild(TGraphicObjectRef obj);
-	void RemoveChild(TGraphicObjectRef obj);
-	void RemoveChildren() { m_children.erase(m_children.begin(), m_children.end()); }
-
 	///<summary> Origin is the bottom-left point of the object.</summary>
 	void SetOrigin(CPoint point) { m_origin = point; }
 	///<summary> Origin is the bottom-left point of the object.</summary>
@@ -75,8 +70,6 @@ protected:
 		AFFECT_POSITION_CENTER	// for centered objects
 	};
 
-	std::vector<TGraphicObjectRef> m_children;
-	CGraphicObject* m_pParent;
 	CPoint m_origin;
 	int64_t m_nAlignOption;	//Flags
 	int32_t m_nSizeOption;	//Flags
@@ -87,8 +80,6 @@ protected:
 	CSize GetRectSize() const { return m_rectSize; }
 	///<summary> Set size of minimal containing rect</summary>
 	virtual void SetRectSize(CSize size) { m_rectSize = size; }		// TODO: overload for all graphic primitives to adjust their points to new size
-
-	void CalcAndSetNewChildParams(TGraphicObjectRef child) const;
 
 	// Help functions for CalcAndSetNewChildParams
 	void CalcAndSetNewChildAxisParam(EAxis axis, TGraphicObjectRef child, const int nMarginBefore, const int nMarginAfter, CPoint& resultPoint, CSize& resultSize) const;

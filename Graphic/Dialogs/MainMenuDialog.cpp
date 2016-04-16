@@ -19,12 +19,13 @@ void CMainMenuDialog::CreateChildren()
 {
 	MARKER("CMainMenuDialog::CreateChildren()");
 
-	TGraphicObjectRef spRectangle = new CRectanglePrimitive(CSize(200, 200), CRandomColor(), CRandomColor(), CRandomColor(), CRandomColor());
-	spRectangle->SetMargins(20, 40, 20, 40);
+	TGraphicObjectRef spRectangle = new CRectanglePrimitive(CSize(200, 100), CRandomColor(), CRandomColor(), CRandomColor(), CRandomColor());
+	spRectangle->SetMargins(20, 20, 20, 20);
 	spRectangle->SetAlignOption(EAlignOption::CENTER_Y);
-	spRectangle->SetSizeOption(ESizeOption::FILL_X);
+	spRectangle->SetAlignOption(EAlignOption::CENTER_X);
 
-	AddChild(spRectangle);
+	TControlRef childControl = new CControl(spRectangle);
+	AddChild(childControl);
 }
 
 bool CMainMenuDialog::OnSystemEvent(const EventData& event)
@@ -37,9 +38,4 @@ bool CMainMenuDialog::OnSystemEvent(const EventData& event)
 	}
 
 	return __super::OnSystemEvent(event);
-}
-
-void CMainMenuDialog::DrawSelf()
-{
-	//MARKER("CMainMenuDialog::DrawSelf()");
 }

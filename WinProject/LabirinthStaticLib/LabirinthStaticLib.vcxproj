@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Graphic\Controls\Button.h" />
+    <ClInclude Include="..\..\Graphic\Controls\Control.h" />
     <ClInclude Include="..\..\Graphic\Dialog.h" />
     <ClInclude Include="..\..\Graphic\Dialogs\MainMenuDialog.h" />
     <ClInclude Include="..\..\Graphic\GraphicGeneral.h" />
@@ -48,6 +50,8 @@
     <ClInclude Include="..\..\Utility\UtilityMacros.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Graphic\Controls\Button.cpp" />
+    <ClCompile Include="..\..\Graphic\Controls\Control.cpp" />
     <ClCompile Include="..\..\Graphic\Dialog.cpp" />
     <ClCompile Include="..\..\Graphic\Dialogs\MainMenuDialog.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp" />

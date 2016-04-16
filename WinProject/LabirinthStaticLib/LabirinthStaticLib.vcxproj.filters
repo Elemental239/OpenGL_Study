@@ -20,6 +20,9 @@
     <Filter Include="Graphic\GraphicObject">
       <UniqueIdentifier>{494565cd-b0a6-4f21-9ef4-6c3f7d367707}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphic\Controls">
+      <UniqueIdentifier>{63525d53-dfd7-4357-b9de-fb1a0d1deea4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Utility\Listeners.h">
@@ -127,6 +130,12 @@
     <ClInclude Include="..\..\Graphic\WindowEvents.h">
       <Filter>Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Graphic\Controls\Button.h">
+      <Filter>Graphic\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Graphic\Controls\Control.h">
+      <Filter>Graphic\Controls</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -197,6 +206,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Graphic\GraphicObjects\Texture2D.cpp">
       <Filter>Graphic\GraphicObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\Controls\Button.cpp">
+      <Filter>Graphic\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\Controls\Control.cpp">
+      <Filter>Graphic\Controls</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

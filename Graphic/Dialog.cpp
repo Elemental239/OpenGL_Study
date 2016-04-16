@@ -1,7 +1,7 @@
 #include "Dialog.h"
 #include "Logger.h"
 
-CDialog::CDialog() : m_bChildrenInited(false)
+CDialog::CDialog(): m_bChildrenInited(false)
 {
 	MARKER("CDialog::CDialog()");
 }

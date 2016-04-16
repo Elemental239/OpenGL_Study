@@ -1,7 +1,7 @@
 #ifndef __Graphic_Dialog_H__
 #define __Graphic_Dialog_H__
 
-#include "GraphicObject.h"
+#include "Controls/Control.h"
 #include <vector>
 #include "WindowManager.h"
 #include "SharedPtr.h"
@@ -14,10 +14,10 @@ enum EDialogLifetimeEvent
 	DIALOG_LIFETIME_EVENT_AFTER_HIDE
 };
 
-class IDialog : public CGraphicObject
+class IDialog : public CControl
 {
 public:
-	IDialog() : m_bClosed(false) {}
+	IDialog(): m_bClosed(false) {}
 
 	virtual bool OnSystemEvent(const EventData& event) = 0;
 	virtual void OnLifetimeEvent(EDialogLifetimeEvent event) = 0;
