@@ -19,14 +19,26 @@ void CControl::SetVisualRepresentation(TGraphicObjectRef graphicObject)
 	m_spVisualRepresentation = graphicObject;
 }
 
+TGraphicObjectRef CControl::GetVisualRepresentation(int index) const
+{
+	if (index != 0 )
+		return nullptr;
+
+	 return m_spVisualRepresentation;
+}
+
 void CControl::AddChild(TControlRef obj)
 {
 	MARKER("CControl::AddChildren()");
 
-	if (!obj || !obj->GetVisualRepresentation())
+	if (!obj || !obj->GetVisualRepresentation(0))
 		return;
 
-	GetVisualRepresentation()->CalcAndSetNewChildParams(obj->GetVisualRepresentation());
+	for (int i = 0; i < obj->GetVisualRepresentationNumber(); i++)
+	{
+		GetVisualRepresentation(0)->CalcAndSetNewChildParams(obj->GetVisualRepresentation(i));
+	}
+
 	obj->SetParent(this);
 	m_children.push_back(obj);
 }
@@ -56,7 +68,7 @@ void CControl::RemoveChildren()
 
 void CControl::Draw()
 {
-	GetVisualRepresentation()->DrawSelf();
+	GetVisualRepresentation(0)->DrawSelf();
 	for (auto iter = m_children.begin(); iter != m_children.end(); ++iter)
 	{
 		(*iter)->Draw();
@@ -75,8 +87,8 @@ bool CControl::OnSignal(const SignalData& signal)
 
 bool CControl::IsPointInsideMyBounds(const CPoint& point) const
 {
-	CPoint originPoint = GetVisualRepresentation()->GetOrigin();
-	CPoint otherPoint = originPoint + GetVisualRepresentation()->GetRectSize();
+	CPoint originPoint = GetVisualRepresentation(0)->GetOrigin();
+	CPoint otherPoint = originPoint + GetVisualRepresentation(0)->GetRectSize();
 	bool bXInside = point.GetX() >= originPoint.GetX() && point.GetX() <= otherPoint.GetX();  
 	bool bYInside = point.GetY() >= originPoint.GetY() && point.GetY() <= otherPoint.GetY();
 	bool bZInside = point.GetZ() >= originPoint.GetZ() && point.GetZ() <= otherPoint.GetZ();

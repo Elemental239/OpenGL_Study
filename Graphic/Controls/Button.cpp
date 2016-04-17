@@ -7,6 +7,14 @@ CButton::CButton(int nCommand, TGraphicObjectRef representation/* = new CGraphic
 	m_spPressedRepresentation = pressedRepresentation != nullptr ? pressedRepresentation : representation;
 }
 
+TGraphicObjectRef CButton::GetVisualRepresentation(int index) const
+{
+	if (index < 0 || index > 1)
+		return nullptr;
+
+	return index == 0 ? m_spVisualRepresentation : m_spPressedRepresentation;
+}
+
 void CButton::EmitOnPressedSignal()
 {
 	SignalData signal;
@@ -65,12 +73,10 @@ bool CButton::ProcessCursorPositionEvent(const EventData& event)
 {
 	if (IsPointInsideMyBounds(FloatPointToIntPoint(event.m_cursorPosition)))
 	{
-		m_state = BUTTON_STATE::IN_FOCUS;
-
-		/*CPoint origin = GetVisualRepresentation()->GetOrigin();
-		CPoint point = origin + GetVisualRepresentation()->GetRectSize();
-		LOG("cursor position = %s, my position = %s - %s", event.m_cursorPosition.ToString().ToCharPtr(), 
-			origin.ToString().ToCharPtr(), point.ToString().ToCharPtr());*/
+		if (m_state != BUTTON_STATE::PRESSED)
+		{
+			m_state = BUTTON_STATE::IN_FOCUS;
+		}
 
 		return true;
 	}
@@ -89,16 +95,12 @@ bool CButton::ProcessMouseButtonEvent(const EventData& event)
 
 	if (event.m_nMouseEventType == MOUSE_EVENT_TYPE::PRESS)
 	{
-		LOG("Button pressed");
 		m_state = BUTTON_STATE::PRESSED;
 	}
 	else if (event.m_nMouseEventType == MOUSE_EVENT_TYPE::RELEASE)
 	{
-		LOG("Button released");
-
 		if (m_state != BUTTON_STATE::PRESSED)
 		{
-			LOG("Do nothing, wrong state");
 			return true;
 		}
 

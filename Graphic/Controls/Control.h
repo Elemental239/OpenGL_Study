@@ -21,7 +21,8 @@ public:
 	virtual ~IControl() {}
 
 	virtual void SetVisualRepresentation(TGraphicObjectRef graphicObject) = 0;
-	virtual TGraphicObjectRef GetVisualRepresentation() const = 0;
+	virtual int GetVisualRepresentationNumber() const = 0;
+	virtual TGraphicObjectRef GetVisualRepresentation(int index) const = 0;
 
 	virtual void SetParent(IControl* spParent) = 0;
 	virtual void AddChild(TControlRef obj) = 0;
@@ -45,9 +46,10 @@ public:
 	virtual void Draw() override;
 	virtual bool OnSystemEvent(const EventData& event) override;
 	virtual bool OnSignal(const SignalData& signal) override;
-
+	
 	virtual void SetVisualRepresentation(TGraphicObjectRef graphicObject) override;
-	virtual TGraphicObjectRef GetVisualRepresentation() const override { return m_spVisualRepresentation; }
+	virtual int GetVisualRepresentationNumber() const override { return 1; }
+	virtual TGraphicObjectRef GetVisualRepresentation(int index) const override;
 
 	virtual void SetParent(IControl* spParent) override { m_pParent = spParent; }
 	virtual void AddChild(TControlRef obj) override;

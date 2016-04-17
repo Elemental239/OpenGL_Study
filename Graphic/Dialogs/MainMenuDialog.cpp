@@ -6,6 +6,7 @@
 #include "GraphicObjects/Circle.h"
 #include "Controls/Button.h"
 #include "../Resources/Commands.h"
+#include "../Resources/ColorsResources.h"
 
 CMainMenuDialog::CMainMenuDialog()
 {
@@ -26,7 +27,12 @@ void CMainMenuDialog::CreateChildren()
 	spRectangle->SetAlignOption(EAlignOption::CENTER_Y);
 	spRectangle->SetAlignOption(EAlignOption::CENTER_X);
 
-	TControlRef childControl = new CButton(CMD_OPEN_LIFE_GAME_WINDOW, spRectangle);
+	TGraphicObjectRef spRectanglePressed = new CRectangle(CSize(200, 100), COLOR_GREEN);
+	spRectanglePressed->SetMargins(20, 20, 20, 20);
+	spRectanglePressed->SetAlignOption(EAlignOption::CENTER_Y);
+	spRectanglePressed->SetAlignOption(EAlignOption::CENTER_X);
+
+	TControlRef childControl = new CButton(CMD_OPEN_LIFE_GAME_WINDOW, spRectangle, spRectanglePressed);
 	AddChild(childControl);
 }
 

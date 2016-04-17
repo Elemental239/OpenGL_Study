@@ -11,6 +11,9 @@ public:
 
 	virtual void Draw() override;
 
+	virtual int GetVisualRepresentationNumber() const override { return 2; }
+	virtual TGraphicObjectRef GetVisualRepresentation(int index) const override;
+
 	virtual bool OnSystemEvent(const EventData& event) override;
 
 private:
