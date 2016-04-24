@@ -5,8 +5,9 @@
 #include "GraphicObjects/Line.h"
 #include "GraphicObjects/Circle.h"
 #include "Controls/Button.h"
-#include "../Resources/Commands.h"
-#include "../Resources/ColorsResources.h"
+#include "Commands.h"
+#include "ColorsResources.h"
+#include "ConveyLifeGameDialog.h"
 
 CMainMenuDialog::CMainMenuDialog()
 {
@@ -48,7 +49,8 @@ bool CMainMenuDialog::OnSignal(const SignalData& signal)
 	if (signal.m_nCommand == CMD_OPEN_LIFE_GAME_WINDOW)
 	{
 		LOG("Open ConveyGameDialog");
-
+		CSharedPtr<IDialog> spDialog = CSharedPtr<IDialog>(new CConveyLifeGameDialog());
+		WINDOW_MANAGER_PTR->AddDialog(GetContainingWindow(), spDialog);
 
 		return true;
 	}

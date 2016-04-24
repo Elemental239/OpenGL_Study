@@ -14,6 +14,7 @@
 #include "WindowEvents.h"
 
 class IWindow;
+class IDialog;
 struct GLFWwindow;
 struct WindowConstructionParams;
 
@@ -27,6 +28,8 @@ public:
 
 	virtual void AddWindow(CSharedPtr<IWindow> spWindow) = 0;
 	virtual void RemoveWindow(CSharedPtr<IWindow> spWindow) = 0;
+
+	virtual void AddDialog(IWindow* pWindow, CSharedPtr<IDialog> spDialog) = 0;
 
 	virtual CSharedPtr<IWindow> GetActiveWindow() = 0;
 };
@@ -61,6 +64,8 @@ public:
 	virtual void AddWindow(CSharedPtr<IWindow> spWindow) override;
 	virtual void RemoveWindow(CSharedPtr<IWindow> spWindow) override;
 
+	virtual void AddDialog(IWindow* pWindow, CSharedPtr<IDialog> spDialog) override;
+
 	void SetActiveWindow(CSharedPtr<IWindow> spWindow) { m_activeWindow = spWindow; }
 	virtual CSharedPtr<IWindow> GetActiveWindow() override { return m_activeWindow; }
 
@@ -73,5 +78,7 @@ private:
 	void CreateFirstWindow(WindowConstructionParams& firstWindowParams);
 	void InitOpenGLDriverLibrary(); //GLEW
 };
+
+#define WINDOW_MANAGER_PTR CWindowManagerProvider::Instance().GetWindowManager()
 
 #endif //__Graphic_WindowManager_H__

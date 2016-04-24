@@ -63,9 +63,10 @@ bool CDialog::ProcessButtonEvent(const EventData& event)
 	if (event.m_nKeyboardKey == GLFW_KEY_ESCAPE && event.m_nAction == GLFW_RELEASE)
 	{
 		Close();
+		return false; // If ESC was pressed, return false to move event deeper => close all dialogs
 	}
 
-	return true;
+	return false;
 }
 
 bool CDialog::ProcessMouseEvent(const EventData& event)

@@ -27,10 +27,14 @@ public:
 
 	virtual void InitChildren() = 0;
 
-	friend IWindow; // Window sets size to dialog, but I don't want to have public method for this
+	void SetContainingWindow(IWindow* pWindow) { m_pWindow = pWindow; }
 
+protected:
+	IWindow* GetContainingWindow() { return m_pWindow; }
+	
 private:
 	bool m_bClosed;
+	IWindow* m_pWindow;
 };
 typedef CSharedPtr<IDialog> TDialogRef;
 

@@ -27,6 +27,7 @@ void IWindow::AddDialog(TDialogRef spDialog)
 	TGraphicObjectRef spDialogGraphicRepresentation = new CRectangle(windowSize, COLOR_WHITE);
 	spDialog->SetVisualRepresentation(spDialogGraphicRepresentation);
 	spDialog->InitChildren();
+	spDialog->SetContainingWindow(this);
 	m_dialogs.push(spDialog);
 }
 
@@ -47,7 +48,7 @@ void IWindow::RemoveDialog(TDialogRef spDialog)
 CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params), m_bClosed(false)
 {
 	MARKER("CWindow::CWindow()");
-	LOG("%s", params.ToString());
+	LOG("%s", params.ToString8());
 
 	if (params.m_bUseAntialiasing)
 		glfwWindowHint(GLFW_SAMPLES, 4);

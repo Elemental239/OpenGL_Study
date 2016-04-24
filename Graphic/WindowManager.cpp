@@ -196,7 +196,10 @@ void CWindowManager::OnSystemEvent(const EventData& event)
 void CWindowManager::AddWindow(CSharedPtr<IWindow> spWindow)
 {
 	if (m_windows.size() > 0)
+	{
+		LOGE("Attempts to add second window are restricted until multiwindow mode will be enabled");
 		return; // See the note at the top of .h file
+	}
 
 	m_windows.push_back(spWindow);
 }
@@ -209,4 +212,11 @@ void CWindowManager::RemoveWindow(CSharedPtr<IWindow> spWindow)
 			m_windows.erase(iter);
 			break;
 		}
+}
+
+void CWindowManager::AddDialog(IWindow* pWindow, CSharedPtr<IDialog> spDialog)
+{
+	MARKER("CWindowManager::AddDialog()");
+
+	pWindow->AddDialog(spDialog);
 }
