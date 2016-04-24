@@ -14,6 +14,7 @@
     <ClInclude Include="..\..\Graphic\Controls\Button.h" />
     <ClInclude Include="..\..\Graphic\Controls\Control.h" />
     <ClInclude Include="..\..\Graphic\Dialog.h" />
+    <ClInclude Include="..\..\Graphic\Dialogs\ConveyLifeGameDialog.h" />
     <ClInclude Include="..\..\Graphic\Dialogs\MainMenuDialog.h" />
     <ClInclude Include="..\..\Graphic\GraphicGeneral.h" />
     <ClInclude Include="..\..\Graphic\GraphicObject.h" />
@@ -54,6 +55,7 @@
     <ClCompile Include="..\..\Graphic\Controls\Button.cpp" />
     <ClCompile Include="..\..\Graphic\Controls\Control.cpp" />
     <ClCompile Include="..\..\Graphic\Dialog.cpp" />
+    <ClCompile Include="..\..\Graphic\Dialogs\ConveyLifeGameDialog.cpp" />
     <ClCompile Include="..\..\Graphic\Dialogs\MainMenuDialog.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
@@ -117,7 +119,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/../PlatformSpecific;$(SolutionDir)/../Libs;$(SolutionDir)/../Logic;$(SolutionDir)/../Graphic;$(SolutionDir)/../Network;$(SolutionDir)/../Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../PlatformSpecific;$(SolutionDir)/../Libs;$(SolutionDir)/../Logic;$(SolutionDir)/../Graphic;$(SolutionDir)/../Network;$(SolutionDir)/../Utility;$(SolutionDir)/../Resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -53,7 +53,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)/../Libs/glfw-3.1.1/include/GLFW;$(SolutionDir)/../Libs/glew-1.13.0/include/GL;$(SolutionDir)/../Libs;$(SolutionDir)/../PlatformSpecific;$(SolutionDir)/../Logic;$(SolutionDir)/../Graphic;$(SolutionDir)/../Network;$(SolutionDir)/../Utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../Libs/glfw-3.1.1/include/GLFW;$(SolutionDir)/../Libs/glew-1.13.0/include/GL;$(SolutionDir)/../Libs;$(SolutionDir)/../PlatformSpecific;$(SolutionDir)/../Logic;$(SolutionDir)/../Graphic;$(SolutionDir)/../Network;$(SolutionDir)/../Utility;$(SolutionDir)/../Resources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

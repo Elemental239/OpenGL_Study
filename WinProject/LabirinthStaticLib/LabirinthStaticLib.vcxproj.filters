@@ -139,6 +139,9 @@
     <ClInclude Include="..\..\Resources\Commands.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Graphic\Dialogs\ConveyLifeGameDialog.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -215,6 +218,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Graphic\Controls\Control.cpp">
       <Filter>Graphic\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\Dialogs\ConveyLifeGameDialog.cpp">
+      <Filter>Graphic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
