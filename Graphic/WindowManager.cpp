@@ -24,7 +24,7 @@ void opengl_GLFW_key_callback(GLFWwindow* window, int key, int scancode, int act
 	data.m_nScancode = scancode;
 	data.m_nMode = mode;
 
-	CWindowManager::Instance().OnSystemEvent(data);
+	CWindowManagerProvider::Instance().GetWindowManager()->OnSystemEvent(data);
 }
 
 void opengl_GLFW_framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -35,7 +35,7 @@ void opengl_GLFW_framebuffer_size_callback(GLFWwindow* window, int width, int he
 	data.m_nNewWidth = width;
 	data.m_nNewHeight = height;
 
-	CWindowManager::Instance().OnSystemEvent(data);
+	CWindowManagerProvider::Instance().GetWindowManager()->OnSystemEvent(data);
 }
 
 void opengl_GLFW_mouse_callback(GLFWwindow* window, int nButton, int nEvent, int nAdditionalFlags)
@@ -47,7 +47,7 @@ void opengl_GLFW_mouse_callback(GLFWwindow* window, int nButton, int nEvent, int
 	data.m_nMouseEventModeFlags = nAdditionalFlags;
 	data.m_nMouseEventButton = static_cast<MOUSE_EVENT_BUTTON>(nButton); //El239: enum is the same as GLFW
 
-	CWindowManager::Instance().OnSystemEvent(data);
+	CWindowManagerProvider::Instance().GetWindowManager()->OnSystemEvent(data);
 }
 
 void opengl_GLFW_cursor_position_callback(GLFWwindow* window, double xPos, double yPos)
@@ -57,7 +57,27 @@ void opengl_GLFW_cursor_position_callback(GLFWwindow* window, double xPos, doubl
 	data.m_pTargetWindow = window;
 	data.m_cursorPosition = CGenericPoint<double>(xPos, yPos);
 
-	CWindowManager::Instance().OnSystemEvent(data);
+	CWindowManagerProvider::Instance().GetWindowManager()->OnSystemEvent(data);
+}
+
+///////////////////////////////////////////////////
+///CWindowManagerProvider
+CWindowManagerProvider::CWindowManagerProvider()
+{
+	MARKER("CWindowManagerProvider::CWindowManagerProvider()");
+}
+
+CWindowManagerProvider::~CWindowManagerProvider()
+{
+	MARKER("CWindowManagerProvider::~CWindowManagerProvider()");
+}
+
+CSharedPtr<IWindowManager> CWindowManagerProvider::GetWindowManager() //TODO: mutex this
+{
+	if (!m_spWindowManager)
+		m_spWindowManager = new CWindowManager();
+
+	return m_spWindowManager;
 }
 
 ///////////////////////////////////////////////////

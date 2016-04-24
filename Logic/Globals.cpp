@@ -49,7 +49,7 @@ void CGlobals::InitGUI()
 	firstWindowParams.m_bIsResizable = false;
 	firstWindowParams.m_bUseAntialiasing = false;
 
-	CWindowManager::Instance().Init(firstWindowParams);
-	CWindowManager::Instance().StartMainLoop();
+	CWindowManagerProvider::Instance().GetWindowManager()->Init(firstWindowParams);
+	CWindowManagerProvider::Instance().GetWindowManager()->StartMainLoop();
 #endif
 }

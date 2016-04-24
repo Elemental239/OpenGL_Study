@@ -47,7 +47,9 @@ bool CMainMenuDialog::OnSignal(const SignalData& signal)
 
 	if (signal.m_nCommand == CMD_OPEN_LIFE_GAME_WINDOW)
 	{
-		LOG("HOORAY!");
+		LOG("Open ConveyGameDialog");
+
+
 		return true;
 	}
 

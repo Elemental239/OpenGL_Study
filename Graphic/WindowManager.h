@@ -17,21 +17,52 @@ class IWindow;
 struct GLFWwindow;
 struct WindowConstructionParams;
 
-class CWindowManager : public CObject
+class IWindowManager : public CObject
 {
 public:
-	SINGLETON(CWindowManager, CWindowManager())
+	virtual void Init(WindowConstructionParams& firstWindowParams) = 0;
 
-	void Init(WindowConstructionParams& firstWindowParams);
-	void StartMainLoop();
+	virtual void StartMainLoop() = 0;
+	virtual void OnSystemEvent(const EventData& event) = 0;
 
-	void OnSystemEvent(const EventData& event);
+	virtual void AddWindow(CSharedPtr<IWindow> spWindow) = 0;
+	virtual void RemoveWindow(CSharedPtr<IWindow> spWindow) = 0;
 
-	void AddWindow(CSharedPtr<IWindow> spWindow);
-	void RemoveWindow(CSharedPtr<IWindow> spWindow);
+	virtual CSharedPtr<IWindow> GetActiveWindow() = 0;
+};
+
+class IWindowManagerProvider : public CObject
+{
+public:
+	virtual CSharedPtr<IWindowManager> GetWindowManager() = 0;
+};
+
+class CWindowManagerProvider : public IWindowManagerProvider
+{
+	SINGLETON(CWindowManagerProvider, CWindowManagerProvider());
+
+	virtual CSharedPtr<IWindowManager> GetWindowManager() override;
+
+private:
+	CSharedPtr<IWindowManager> m_spWindowManager;
+};
+
+class CWindowManager : public IWindowManager
+{
+public:
+	CWindowManager();
+	~CWindowManager();
+
+	virtual void Init(WindowConstructionParams& firstWindowParams) override;
+	virtual void StartMainLoop() override;
+
+	virtual void OnSystemEvent(const EventData& event) override;
+
+	virtual void AddWindow(CSharedPtr<IWindow> spWindow) override;
+	virtual void RemoveWindow(CSharedPtr<IWindow> spWindow) override;
 
 	void SetActiveWindow(CSharedPtr<IWindow> spWindow) { m_activeWindow = spWindow; }
-	CSharedPtr<IWindow> GetActiveWindow() { return m_activeWindow; }
+	virtual CSharedPtr<IWindow> GetActiveWindow() override { return m_activeWindow; }
 
 private:
 	std::vector<CSharedPtr<IWindow> > m_windows;

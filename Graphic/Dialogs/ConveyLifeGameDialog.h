@@ -7,6 +7,9 @@ class CConveyLifeGameDialog : public CDialog
 {
 public:
 	CConveyLifeGameDialog();
+	virtual ~CConveyLifeGameDialog();
+
+	virtual void CreateChildren() override;
 
 private:
 };
