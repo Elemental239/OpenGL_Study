@@ -77,6 +77,13 @@ private:
 	void InitOpenGLWindowLibrary(); //GLFW
 	void CreateFirstWindow(WindowConstructionParams& firstWindowParams);
 	void InitOpenGLDriverLibrary(); //GLEW
+
+	void ProcessWindowEvent(CSharedPtr<IWindow> spWindow, const EventData& event);
+	bool IsEventForAllDialogs(const EventData& event) const;
+	bool IsEventForAllWindows(const EventData& event) const;
+
+	void SendEventForAllWindows(const EventData& event);
+	void SendEventForTargetWindow(const EventData& event);
 };
 
 #define WINDOW_MANAGER_PTR CWindowManagerProvider::Instance().GetWindowManager()

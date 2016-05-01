@@ -45,6 +45,8 @@ public:
 	void AddDialog(TDialogRef spDialog);
 	void RemoveDialog(TDialogRef spDialog);
 
+	void BroadcastEventToAllDialogs(const EventData& event);
+
 	friend class CWindowManager;
 
 protected:

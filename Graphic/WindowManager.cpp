@@ -177,20 +177,75 @@ void CWindowManager::StartMainLoop()
 
 void CWindowManager::OnSystemEvent(const EventData& event)
 {
+	if (IsEventForAllWindows(event))
+	{
+		SendEventForAllWindows(event);
+	}
+	else
+	{
+		SendEventForTargetWindow(event);
+	}
+}
+
+void CWindowManager::SendEventForAllWindows(const EventData& event)
+{
+	for (auto iter = m_windows.begin(); iter != m_windows.end(); iter++)
+	{
+		ProcessWindowEvent(*iter, event);
+		break;
+	}
+}
+
+void CWindowManager::SendEventForTargetWindow(const EventData& event)
+{
 	for (auto iter = m_windows.begin(); iter != m_windows.end(); iter++)
 	{
 		if ((*iter)->m_window == event.m_pTargetWindow)
 		{
-			EventData evt = event;
-			if (event.m_nEventType == EVT_CURSOR_POSITION)	// Coordinate system of this event is different from system of app, so correct it
-			{
-				evt.m_cursorPosition.SetY(static_cast<double>((*iter)->GetHeight()) - event.m_cursorPosition.GetY());
-			}
-
-			(*iter)->OnSystemEvent(evt);
+			ProcessWindowEvent(*iter, event);
 			break;
 		}
 	}
+}
+
+void CWindowManager::ProcessWindowEvent(CSharedPtr<IWindow> spWindow, const EventData& event)
+{
+	EventData evt = event;
+
+	switch (event.m_nEventType)
+	{
+		case EVT_CURSOR_POSITION:
+			evt.m_cursorPosition.SetY(static_cast<double>(spWindow->GetHeight()) - event.m_cursorPosition.GetY());
+			break;
+
+		case EVT_RESIZE:
+			LOG("Event params: new width = %d, height = %d", event.m_nNewWidth, event.m_nNewHeight);
+			spWindow->m_params.m_nWindowWidth = event.m_nNewWidth;
+			spWindow->m_params.m_nWindowHeight = event.m_nNewHeight;
+			break;
+
+		default:
+			break;
+	} //switch (event.m_nEventType)
+
+	if (IsEventForAllDialogs(event))
+	{
+		spWindow->BroadcastEventToAllDialogs(event);
+	}
+	else
+	{
+		spWindow->OnSystemEvent(evt);
+	}
+}
+
+bool CWindowManager::IsEventForAllDialogs(const EventData& event) const
+{
+	return event.m_nEventType == EVT_BUTTON && event.m_nKeyboardKey == GLFW_KEY_ESCAPE && event.m_nAction == GLFW_RELEASE;
+}
+
+bool CWindowManager::IsEventForAllWindows(const EventData& event) const
+{
+	return false;
 }
 
 void CWindowManager::AddWindow(CSharedPtr<IWindow> spWindow)

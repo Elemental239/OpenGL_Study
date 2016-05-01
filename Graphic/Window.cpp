@@ -43,6 +43,14 @@ void IWindow::RemoveDialog(TDialogRef spDialog)
 	}
 }
 
+void IWindow::BroadcastEventToAllDialogs(const EventData& event)
+{
+	for (int i = 0; i < m_dialogs.size(); i++)
+	{
+		m_dialogs[i]->OnSystemEvent(event);
+	}
+}
+
 /////////////////////////////////////////////
 ///CWindow
 CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params), m_bClosed(false)
@@ -93,11 +101,8 @@ CWindow::~CWindow()
 
 bool CWindow::OnSystemEvent(const EventData& event)
 {
-	for (int i = m_dialogs.size() - 1; i >= 0; i--)
-	{
-		if (m_dialogs[i]->OnSystemEvent(event))
+	if (m_dialogs[m_dialogs.size() - 1]->OnSystemEvent(event))
 			return true;
-	}
 
 	return false;
 }
