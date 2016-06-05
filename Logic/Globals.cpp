@@ -46,7 +46,7 @@ void CGlobals::InitGUI()
 	firstWindowParams.m_nWindowHeight = 600;
 	firstWindowParams.m_strWindowLabel = MAIN_WINDOW_LABEL;
 	firstWindowParams.m_colorBase = CColor(0xFF,0xFF,0xFF);
-	firstWindowParams.m_bIsResizable = false;
+	firstWindowParams.m_bIsResizable = true;
 	firstWindowParams.m_bUseAntialiasing = false;
 
 	CWindowManagerProvider::Instance().GetWindowManager()->Init(firstWindowParams);

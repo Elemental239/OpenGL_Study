@@ -4,15 +4,16 @@
 CButton::CButton(int nCommand, TGraphicObjectRef representation/* = new CGraphicObject()*/, TGraphicObjectRef pressedRepresentation/* = nullptr()*/) :
 	CControl(representation), m_nCommand(nCommand), m_state(BUTTON_STATE::NONE)
 {
-	m_spPressedRepresentation = pressedRepresentation != nullptr ? pressedRepresentation : representation;
+	auto spPressedRepresentation = pressedRepresentation != nullptr ? pressedRepresentation : representation;
+	m_VisualPresentations.push_back(spPressedRepresentation);
 }
 
-TGraphicObjectRef CButton::GetVisualRepresentation(int index) const
+TGraphicObjectRef CButton::GetVisualPresentation(int index) const
 {
 	if (index < 0 || index > 1)
 		return nullptr;
 
-	return index == 0 ? m_spVisualRepresentation : m_spPressedRepresentation;
+	return m_VisualPresentations[index];
 }
 
 void CButton::EmitOnPressedSignal()
@@ -28,7 +29,7 @@ void CButton::EmitOnPressedSignal()
 
 void CButton::Draw()
 {
-	TGraphicObjectRef currentRepresentation = m_state == BUTTON_STATE::PRESSED ? m_spPressedRepresentation : m_spVisualRepresentation;
+	TGraphicObjectRef currentRepresentation = m_state == BUTTON_STATE::PRESSED ? m_VisualPresentations[1] : m_VisualPresentations[0];
 	currentRepresentation->DrawSelf();
 	for (auto iter = m_children.begin(); iter != m_children.end(); ++iter)
 	{

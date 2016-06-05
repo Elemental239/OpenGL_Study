@@ -8,6 +8,7 @@
 #include "InlineFunctions.h"
 
 class CGraphicObject;
+class IControl;
 typedef CSharedPtr<CGraphicObject> TGraphicObjectRef;
 
 enum class EAlignOption : int64_t
@@ -38,8 +39,10 @@ public:
 	CGraphicObject();
 	virtual ~CGraphicObject();
 
-	virtual void DrawSelf() {}
-	void CalcAndSetNewChildParams(TGraphicObjectRef child) const;
+	virtual void DrawSelf();
+	void AdjustSizeAndPosition();
+	void SetOwner(IControl* pControl) { m_pOwnerControl = pControl; }
+	void SetContainerParams(CPoint origin, CSize size) { m_containerOrigin = origin; m_containerSize = size; }
 	
 	///<summary> Get size of minimal containing rect</summary>
 	CSize GetRectSize() const { return m_rectSize; }
@@ -64,30 +67,18 @@ public:
 	std::vector<int> GetMargins() const { return m_margins; } //TODO: OPTIMISE: array copy with reserve/std::copy/etc.
 
 protected:
-	enum class UseMarginsMode
-	{
-		NONE,
-		AFFECT_SIZE,			// for stretched object modify size and position
-		AFFECT_POSITION_BEFORE,	// Use left or bottom
-		AFFECT_POSITION_AFTER,	// Use right or top
-		AFFECT_POSITION_CENTER	// for centered objects
-	};
-
 	CPoint m_origin;
 	int64_t m_nAlignOption;	//Flags
 	int32_t m_nSizeOption;	//Flags
 	std::vector<int> m_margins;
 	CSize m_rectSize;	// Size of containing rectangle
+	IControl* m_pOwnerControl;
+	CPoint m_containerOrigin;
+	CSize m_containerSize;
 
 	///<summary> Set size of minimal containing rect</summary>
 	virtual void SetRectSize(CSize size) { m_rectSize = size; }		// TODO: overload for all graphic primitives to adjust their points to new size
-
-	// Help functions for CalcAndSetNewChildParams
-	void CalcAndSetNewChildAxisParam(EAxis axis, TGraphicObjectRef child, const int nMarginBefore, const int nMarginAfter, CPoint& resultPoint, CSize& resultSize) const;
-	void DoStretch(EAxis axis, CPoint& resultPoint, CSize& resultSize) const;
-	void DoMoveToOppositeSide(EAxis axis, const CSize childRect, CPoint& resultPoint) const; // Right or Top
-	void DoMoveToCenter(EAxis axis, const CSize childRect, CPoint& resultPoint) const;
-	void DoUseMargins(EAxis axis, UseMarginsMode nMarginsUsageMode, const int nMarginBefore, const int nMarginAfter, CPoint& resultPoint, CSize& resultSize) const;
+	virtual void PrepareInitiation() { AdjustSizeAndPosition(); }
 };
 
 #endif //__Graphic_GraphicObject_H__

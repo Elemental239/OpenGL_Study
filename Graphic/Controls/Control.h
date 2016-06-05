@@ -20,9 +20,10 @@ public:
 	IControl(TGraphicObjectRef representation);
 	virtual ~IControl() {}
 
-	virtual void SetVisualRepresentation(TGraphicObjectRef graphicObject) = 0;
-	virtual int GetVisualRepresentationNumber() const = 0;
-	virtual TGraphicObjectRef GetVisualRepresentation(int index) const = 0;
+	virtual void SetVisualPresentation(TGraphicObjectRef graphicObject, int nOrdinal = 0) = 0;
+	virtual int GetVisualPresentationNumber() const = 0;
+	virtual TGraphicObjectRef GetVisualPresentation(int index) const = 0;
+	virtual void AdjustGraphicPresentations(CPoint origin, CSize size) = 0;
 
 	virtual void SetParent(IControl* spParent) = 0;
 	virtual void AddChild(TControlRef obj) = 0;
@@ -34,7 +35,7 @@ public:
 	virtual void Draw() = 0;
 
 protected:
-	TGraphicObjectRef m_spVisualRepresentation;
+	std::vector<TGraphicObjectRef> m_VisualPresentations;
 };
 
 class CControl : public IControl
@@ -47,10 +48,11 @@ public:
 	virtual bool OnSystemEvent(const EventData& event) override;
 	virtual bool OnSignal(const SignalData& signal) override;
 	
-	virtual void SetVisualRepresentation(TGraphicObjectRef graphicObject) override;
-	virtual int GetVisualRepresentationNumber() const override { return 1; }
-	virtual TGraphicObjectRef GetVisualRepresentation(int index) const override;
-
+	virtual void SetVisualPresentation(TGraphicObjectRef graphicObject, int nOrdinal = 0) override;
+	virtual int GetVisualPresentationNumber() const override { return 1; }
+	virtual TGraphicObjectRef GetVisualPresentation(int index) const override;
+	virtual void AdjustGraphicPresentations(CPoint origin, CSize size) override;
+		
 	virtual void SetParent(IControl* spParent) override { m_pParent = spParent; }
 	virtual void AddChild(TControlRef obj) override;
 	virtual void RemoveChild(TControlRef obj) override;
@@ -61,6 +63,10 @@ protected:
 	IControl* m_pParent;
 
 	bool IsPointInsideMyBounds(const CPoint& point) const;
+	virtual TGraphicObjectRef GetCurrentVisualPresentation() const { return m_VisualPresentations[0]; }
+
+private:
+	void DrawChild(TControlRef spControl);
 };
 
 #endif //__Controls_Control_H__

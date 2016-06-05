@@ -19,7 +19,12 @@ void CRectanglePrimitive::DrawSelf()
 {
 	if (!m_bInited)
 	{
-		CSize siez = GetRectSize();
+		PrepareInitiation();
+
+		if (!m_points.empty())
+			m_points.clear();
+		
+		CSize size = GetRectSize();
 		m_points.push_back(CPointWithColor(CPoint(), m_colors[0]));
 		m_points.push_back(CPointWithColor(CPoint(0, GetRectSize().GetY()), m_colors[1]));
 		m_points.push_back(CPointWithColor(CPoint(GetRectSize().GetX(), GetRectSize().GetY()), m_colors[2]));

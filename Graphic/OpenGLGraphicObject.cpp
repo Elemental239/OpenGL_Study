@@ -19,6 +19,8 @@ COpenGLGraphicObject::~COpenGLGraphicObject()
 
 void COpenGLGraphicObject::DrawSelf()
 {
+	__super::DrawSelf();
+
 	if (!m_bInited)
 	{
 		m_bInited = true;

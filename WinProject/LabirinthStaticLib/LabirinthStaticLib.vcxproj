@@ -19,6 +19,7 @@
     <ClInclude Include="..\..\Graphic\Dialogs\MainMenuDialog.h" />
     <ClInclude Include="..\..\Graphic\GraphicGeneral.h" />
     <ClInclude Include="..\..\Graphic\GraphicObject.h" />
+    <ClInclude Include="..\..\Graphic\GraphicObjectPositionCalculator.h" />
     <ClInclude Include="..\..\Graphic\GraphicObjects\Circle.h" />
     <ClInclude Include="..\..\Graphic\GraphicObjects\Line.h" />
     <ClInclude Include="..\..\Graphic\GraphicObjects\Rectangle.h" />
@@ -61,6 +62,7 @@
     <ClCompile Include="..\..\Graphic\Dialogs\MainMenuDialog.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicGeneral.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp" />
+    <ClCompile Include="..\..\Graphic\GraphicObjectPositionCalculator.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObjects\Circle.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObjects\Line.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObjects\Rectangle.cpp" />

@@ -3,6 +3,6 @@
 
 //El239: first 100 are reserved commands
 
-#define CMD_OPEN_LIFE_GAME_WINDOW 101
+#define CMD_OPEN_LIFE_GAME_WINDOW 1001
 
 #endif //__Resources_Commands_H__

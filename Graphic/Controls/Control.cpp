@@ -5,7 +5,8 @@
 ///IControl
 IControl::IControl(TGraphicObjectRef representation)
 {
-	m_spVisualRepresentation = representation;
+	representation->SetOwner(this);
+	m_VisualPresentations.push_back(representation);
 }
 
 ///////////////////////////////////////////////////////
@@ -14,30 +15,39 @@ CControl::CControl(TGraphicObjectRef representation /* = new CGraphicObject()*/)
 {
 }
 
-void CControl::SetVisualRepresentation(TGraphicObjectRef graphicObject)
+void CControl::SetVisualPresentation(TGraphicObjectRef graphicObject, int nOrdinal/* = 0*/)
 {
-	m_spVisualRepresentation = graphicObject;
+	if (nOrdinal >= m_VisualPresentations.size())
+	{
+		m_VisualPresentations.push_back(graphicObject);
+		return;
+	}
+
+	m_VisualPresentations[nOrdinal] = graphicObject;
 }
 
-TGraphicObjectRef CControl::GetVisualRepresentation(int index) const
+TGraphicObjectRef CControl::GetVisualPresentation(int index) const
 {
 	if (index != 0 )
 		return nullptr;
 
-	 return m_spVisualRepresentation;
+	 return m_VisualPresentations[0];
+}
+
+void CControl::AdjustGraphicPresentations(CPoint origin, CSize size)
+{
+	for (auto iter = m_VisualPresentations.begin(); iter != m_VisualPresentations.end(); ++iter)
+	{
+		(*iter)->SetContainerParams(origin, size);
+	}
 }
 
 void CControl::AddChild(TControlRef obj)
 {
 	MARKER("CControl::AddChildren()");
 
-	if (!obj || !obj->GetVisualRepresentation(0))
+	if (!obj || !obj->GetVisualPresentation(0))
 		return;
-
-	for (int i = 0; i < obj->GetVisualRepresentationNumber(); i++)
-	{
-		GetVisualRepresentation(0)->CalcAndSetNewChildParams(obj->GetVisualRepresentation(i));
-	}
 
 	obj->SetParent(this);
 	m_children.push_back(obj);
@@ -68,15 +78,33 @@ void CControl::RemoveChildren()
 
 void CControl::Draw()
 {
-	GetVisualRepresentation(0)->DrawSelf();
+	GetVisualPresentation(0)->DrawSelf();
 	for (auto iter = m_children.begin(); iter != m_children.end(); ++iter)
 	{
-		(*iter)->Draw();
+		DrawChild(*iter);
 	}
+}
+
+void CControl::DrawChild(TControlRef spControl)
+{
+	auto spCurrentVisualPresentation = GetCurrentVisualPresentation();
+
+	for (int i = 0; i < spControl->GetVisualPresentationNumber(); i++)
+	{
+		spControl->AdjustGraphicPresentations(spCurrentVisualPresentation->GetOrigin(), spCurrentVisualPresentation->GetRectSize());
+	}
+
+	spControl->Draw();
 }
 
 bool CControl::OnSystemEvent(const EventData& event)
 {
+	if (event.m_nEventType == EVT_RESIZE)
+	{
+		LOG("Resize event");
+
+	}
+
 	return false;
 }
 
@@ -87,8 +115,8 @@ bool CControl::OnSignal(const SignalData& signal)
 
 bool CControl::IsPointInsideMyBounds(const CPoint& point) const
 {
-	CPoint originPoint = GetVisualRepresentation(0)->GetOrigin();
-	CPoint otherPoint = originPoint + GetVisualRepresentation(0)->GetRectSize();
+	CPoint originPoint = GetCurrentVisualPresentation()->GetOrigin();
+	CPoint otherPoint = originPoint + GetCurrentVisualPresentation()->GetRectSize();
 	bool bXInside = point.GetX() >= originPoint.GetX() && point.GetX() <= otherPoint.GetX();  
 	bool bYInside = point.GetY() >= originPoint.GetY() && point.GetY() <= otherPoint.GetY();
 	bool bZInside = point.GetZ() >= originPoint.GetZ() && point.GetZ() <= otherPoint.GetZ();
