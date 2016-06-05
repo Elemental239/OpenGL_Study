@@ -29,6 +29,8 @@ class CRectangle : public CRectanglePrimitive
 {
 public:
 	CRectangle(CSize size, CColor cColor) : CRectanglePrimitive(size, cColor, cColor, cColor, cColor) { }
+
+	void SetSize(CSize size) { SetRectSize(size); }
 };
 
 #endif //__Graphic__Rectangle__H__

@@ -1,5 +1,6 @@
 #include "Dialog.h"
 #include "Logger.h"
+#include "GraphicObjects/Rectangle.h"
 
 CDialog::CDialog(): m_bChildrenInited(false)
 {
@@ -23,12 +24,6 @@ void CDialog::InitChildren()
 
 bool CDialog::OnSystemEvent(const EventData& event)
 {
-	for (auto iter = m_children.begin(); iter != m_children.end(); ++iter)
-	{
-		if ((*iter)->OnSystemEvent(event))
-			return true;
-	}
-
 	switch (event.m_nEventType)
 	{
 		case EVT_BUTTON:
@@ -51,9 +46,24 @@ bool CDialog::OnSystemEvent(const EventData& event)
 			break;
 		}
 
+		case EVT_RESIZE:
+		{
+			if (ProcessResizeEvent(event))
+			{
+				//Do nothing
+			}
+			break;
+		}
+
 		default: 
 			break;
 	} //switch (event.m_nEventType)
+
+	for (auto iter = m_children.begin(); iter != m_children.end(); ++iter)
+	{
+		if ((*iter)->OnSystemEvent(event))
+			return true;
+	}
 
 	return false;
 }
@@ -72,6 +82,18 @@ bool CDialog::ProcessButtonEvent(const EventData& event)
 bool CDialog::ProcessMouseEvent(const EventData& event)
 {
 	return false;
+}
+
+bool CDialog::ProcessResizeEvent(const EventData& event)
+{
+	for (int i = 0; i < GetVisualPresentationNumber(); i++)
+	{
+		auto spVisualPresentation = GetVisualPresentation(i).static_cast_to<CRectangle>();
+		CSize newSize = CSize(event.m_nNewWidth, event.m_nNewHeight);
+		spVisualPresentation->SetSize(newSize);
+	}
+
+	return false; // Pass event to all children cause whole UI should change size
 }
 
 void CDialog::ActionOnButtonEvent(const EventData& event)

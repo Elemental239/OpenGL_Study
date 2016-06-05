@@ -3,7 +3,7 @@
 #include "WindowManager.h"
 #include "Window.h"
 
-COpenGLGraphicObject::COpenGLGraphicObject() : m_bInited(false)
+COpenGLGraphicObject::COpenGLGraphicObject()
 {
 	glGenBuffers(1, &m_VBO);
 	glGenBuffers(1, &m_EBO);

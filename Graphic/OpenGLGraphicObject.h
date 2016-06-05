@@ -22,8 +22,6 @@ public:
 	virtual void DrawSelf() override;
 
 protected:
-	bool m_bInited;
-
 	//OpenGL related
 	TShaderProgramRef m_shaderProgram;
 	GLuint m_VAO; // VertexArrayObject

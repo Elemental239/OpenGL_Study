@@ -56,6 +56,7 @@ private:
 
 	bool ProcessButtonEvent(const EventData& event);
 	bool ProcessMouseEvent(const EventData& event);
+	bool ProcessResizeEvent(const EventData& event);
 
 	void ActionOnButtonEvent(const EventData& event);
 	void ActionOnMouseEvent(const EventData& event);

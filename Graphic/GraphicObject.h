@@ -43,6 +43,7 @@ public:
 	void AdjustSizeAndPosition();
 	void SetOwner(IControl* pControl) { m_pOwnerControl = pControl; }
 	void SetContainerParams(CPoint origin, CSize size) { m_containerOrigin = origin; m_containerSize = size; }
+	void Reinitialize() { m_bInited = false; };
 	
 	///<summary> Get size of minimal containing rect</summary>
 	CSize GetRectSize() const { return m_rectSize; }
@@ -75,6 +76,7 @@ protected:
 	IControl* m_pOwnerControl;
 	CPoint m_containerOrigin;
 	CSize m_containerSize;
+	bool m_bInited;
 
 	///<summary> Set size of minimal containing rect</summary>
 	virtual void SetRectSize(CSize size) { m_rectSize = size; }		// TODO: overload for all graphic primitives to adjust their points to new size
