@@ -35,32 +35,30 @@ struct EventData
 	EVENT_TYPE m_nEventType;
 	GLFWwindow* m_pTargetWindow;
 
-	union {
-		struct //EVT_MOUSE
-		{
-			MOUSE_EVENT_TYPE m_nMouseEventType;
-			MOUSE_EVENT_BUTTON m_nMouseEventButton;
-			int m_nMouseEventModeFlags;
-		};
+	struct //EVT_MOUSE
+	{
+		MOUSE_EVENT_TYPE m_nMouseEventType;
+		MOUSE_EVENT_BUTTON m_nMouseEventButton;
+		int m_nMouseEventModeFlags;
+	};
 
-		struct // CURSOR_POSITION
-		{
-			CGenericPoint<double> m_cursorPosition;
-		};
+	struct // CURSOR_POSITION
+	{
+		CGenericPoint<double> m_cursorPosition;
+	};
 
-		struct //EVT_BUTTON
-		{
-			int m_nKeyboardKey;
-			int m_nScancode;
-			int m_nAction;
-			int m_nMode;
-		};
+	struct //EVT_BUTTON
+	{
+		int m_nKeyboardKey;
+		int m_nScancode;
+		int m_nAction;
+		int m_nMode;
+	};
 
-		struct //EVT_RESIZE
-		{
-			int m_nNewHeight;
-			int m_nNewWidth;
-		};
+	struct //EVT_RESIZE
+	{
+		int m_nNewHeight;
+		int m_nNewWidth;
 	};
 };
 
