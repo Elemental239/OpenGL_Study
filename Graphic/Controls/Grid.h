@@ -7,6 +7,8 @@ class CGridControl : public CControl
 {
 public:
 	CGridControl();
+
+	//void SetSpace()
 };
 
 #endif //__Graphic_Grid_H__

@@ -20,8 +20,8 @@ public:
 	IControl(TGraphicObjectRef representation);
 	virtual ~IControl() {}
 
-	virtual void SetSize(CSize size) { m_size = size; }
-	virtual CSize GetSize() const { return m_size; }
+	virtual CSize GetSize() = 0;
+	virtual CPoint GetOrigin() = 0;
 	virtual void SetVisualPresentation(TGraphicObjectRef graphicObject, int nOrdinal = 0) = 0;
 	virtual int GetVisualPresentationNumber() const = 0;
 	virtual TGraphicObjectRef GetVisualPresentation(int index) const = 0;
@@ -38,7 +38,6 @@ public:
 
 protected:
 	std::vector<TGraphicObjectRef> m_visualPresentations;
-	CSize m_size;
 };
 
 class CControl : public IControl
@@ -60,6 +59,9 @@ public:
 	virtual void AddChild(TControlRef obj) override;
 	virtual void RemoveChild(TControlRef obj) override;
 	virtual void RemoveChildren() override;
+
+	virtual CSize GetSize() override { return GetCurrentVisualPresentation()->GetRectSize(); }
+	virtual CPoint GetOrigin() override { return GetCurrentVisualPresentation()->GetOrigin(); }
 
 protected:
 	std::vector<TControlRef> m_children;

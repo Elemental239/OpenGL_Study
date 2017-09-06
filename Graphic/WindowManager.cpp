@@ -275,6 +275,6 @@ void CWindowManager::RemoveWindow(CSharedPtr<IWindow> spWindow)
 void CWindowManager::AddDialog(IWindow* pWindow, CSharedPtr<IDialog> spDialog)
 {
 	MARKER("CWindowManager::AddDialog()");
-
+	
 	pWindow->AddDialog(spDialog);
 }

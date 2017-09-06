@@ -5,6 +5,7 @@
 #include <vector>
 #include "WindowManager.h"
 #include "SharedPtr.h"
+#include "ColorsResources.h"
 
 enum EDialogLifetimeEvent
 {
@@ -28,6 +29,7 @@ public:
 	virtual void InitChildren() = 0;
 
 	void SetContainingWindow(IWindow* pWindow) { m_pWindow = pWindow; }
+	virtual CColor GetBackgroundColor() { return COLOR_WHITE; }
 
 protected:
 	IWindow* GetContainingWindow() { return m_pWindow; }

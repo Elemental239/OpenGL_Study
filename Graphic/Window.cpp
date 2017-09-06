@@ -23,17 +23,23 @@ void IWindow::SetOpenGLDrawingContext()
 
 void IWindow::AddDialog(TDialogRef spDialog)
 {
+	spDialog->OnLifetimeEvent(DIALOG_LIFETIME_EVENT_BEFORE_SHOW);
+
 	CSize windowSize = CSize(GetWidth(), GetHeight());
-	TGraphicObjectRef spDialogGraphicRepresentation = new CRectangle(windowSize, COLOR_WHITE);
+	TGraphicObjectRef spDialogGraphicRepresentation = new CRectangle(windowSize, spDialog->GetBackgroundColor());
 	spDialogGraphicRepresentation->SetContainerParams(CPoint(), windowSize);
 	spDialog->SetVisualPresentation(spDialogGraphicRepresentation);
 	spDialog->InitChildren();
 	spDialog->SetContainingWindow(this);
 	m_dialogs.push(spDialog);
+
+	spDialog->OnLifetimeEvent(DIALOG_LIFETIME_EVENT_AFTER_SHOW);
 }
 
 void IWindow::RemoveDialog(TDialogRef spDialog)
 {
+	spDialog->OnLifetimeEvent(DIALOG_LIFETIME_EVENT_BEFORE_HIDE);
+
 	if (m_dialogs.size() > 0)
 	{
 		for (int i = 0; i < m_dialogs.size(); i++)
@@ -42,6 +48,8 @@ void IWindow::RemoveDialog(TDialogRef spDialog)
 				m_dialogs[i]->Close();
 		}
 	}
+
+	spDialog->OnLifetimeEvent(DIALOG_LIFETIME_EVENT_AFTER_HIDE);
 }
 
 void IWindow::BroadcastEventToAllDialogs(const EventData& event)

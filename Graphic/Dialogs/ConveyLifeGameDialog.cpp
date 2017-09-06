@@ -24,3 +24,14 @@ void CConveyLifeGameDialog::CreateChildren()
 	
 	AddChild(spSimpleControl);
 }
+
+void CConveyLifeGameDialog::OnLifetimeEvent(EDialogLifetimeEvent event)
+{
+	MARKER("CConveyLifeGameDialog::OnLifetimeEvent()");
+
+	CDialog::OnLifetimeEvent(event);
+}
+
+
+
+
