@@ -148,6 +148,9 @@
     <ClInclude Include="..\..\Graphic\GraphicObjectPositionCalculator.h">
       <Filter>Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Logic\CommonGame.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -233,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Graphic\GraphicObjectPositionCalculator.cpp">
       <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Logic\CommonGame.cpp">
+      <Filter>Logic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

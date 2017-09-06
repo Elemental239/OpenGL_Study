@@ -36,6 +36,7 @@
     <ClInclude Include="..\..\Libs\UTF8Strings\Exception.h" />
     <ClInclude Include="..\..\Libs\UTF8Strings\String.h" />
     <ClInclude Include="..\..\Logic\ApplicationInfo.h" />
+    <ClInclude Include="..\..\Logic\CommonGame.h" />
     <ClInclude Include="..\..\Logic\Globals.h" />
     <ClInclude Include="..\..\PlatformSpecific\Headers\WinFunctions.h" />
     <ClInclude Include="..\..\Resources\ColorsResources.h" />
@@ -76,6 +77,7 @@
     <ClCompile Include="..\..\Graphic\WindowManager.cpp" />
     <ClCompile Include="..\..\Libs\UTF8Strings\Exception.cpp" />
     <ClCompile Include="..\..\Libs\UTF8Strings\String.cpp" />
+    <ClCompile Include="..\..\Logic\CommonGame.cpp" />
     <ClCompile Include="..\..\Logic\Globals.cpp" />
     <ClCompile Include="..\..\PlatformSpecific\Windows\WinFunctions.cpp" />
     <ClCompile Include="..\..\Utility\File.cpp" />

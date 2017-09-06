@@ -1,6 +1,6 @@
 #include <windows.h>
 #include "Logger.h"
-#include "Globals.h"
+#include "CommonGame.h"
 
 //void main(void)
 int WINAPI WinMain(HINSTANCE hInstance,
@@ -10,8 +10,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 {
 	LOG("WinMain");	
 	
-	GLOBALS.Init();
-	GLOBALS.InitGUI();
+	CCommonGame game;
+
+	game.Init();
+	game.Start();
 
 	return 0;
 }
