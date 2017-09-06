@@ -20,6 +20,8 @@ public:
 	IControl(TGraphicObjectRef representation);
 	virtual ~IControl() {}
 
+	virtual void SetSize(CSize size) { m_size = size; }
+	virtual CSize GetSize() const { return m_size; }
 	virtual void SetVisualPresentation(TGraphicObjectRef graphicObject, int nOrdinal = 0) = 0;
 	virtual int GetVisualPresentationNumber() const = 0;
 	virtual TGraphicObjectRef GetVisualPresentation(int index) const = 0;
@@ -35,7 +37,8 @@ public:
 	virtual void Draw() = 0;
 
 protected:
-	std::vector<TGraphicObjectRef> m_VisualPresentations;
+	std::vector<TGraphicObjectRef> m_visualPresentations;
+	CSize m_size;
 };
 
 class CControl : public IControl
@@ -63,7 +66,7 @@ protected:
 	IControl* m_pParent;
 
 	bool IsPointInsideMyBounds(const CPoint& point) const;
-	virtual TGraphicObjectRef GetCurrentVisualPresentation() const { return m_VisualPresentations[0]; }
+	virtual TGraphicObjectRef GetCurrentVisualPresentation() const { return m_visualPresentations[0]; }
 
 private:
 	void DrawChild(TControlRef spControl);

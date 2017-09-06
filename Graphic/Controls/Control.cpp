@@ -6,7 +6,7 @@
 IControl::IControl(TGraphicObjectRef representation)
 {
 	representation->SetOwner(this);
-	m_VisualPresentations.push_back(representation);
+	m_visualPresentations.push_back(representation);
 }
 
 ///////////////////////////////////////////////////////
@@ -17,13 +17,13 @@ CControl::CControl(TGraphicObjectRef representation /* = new CGraphicObject()*/)
 
 void CControl::SetVisualPresentation(TGraphicObjectRef graphicObject, int nOrdinal/* = 0*/)
 {
-	if (nOrdinal >= m_VisualPresentations.size())
+	if (nOrdinal >= static_cast<int>(m_visualPresentations.size()))
 	{
-		m_VisualPresentations.push_back(graphicObject);
+		m_visualPresentations.push_back(graphicObject);
 		return;
 	}
 
-	m_VisualPresentations[nOrdinal] = graphicObject;
+	m_visualPresentations[nOrdinal] = graphicObject;
 }
 
 TGraphicObjectRef CControl::GetVisualPresentation(int index) const
@@ -31,12 +31,12 @@ TGraphicObjectRef CControl::GetVisualPresentation(int index) const
 	if (index != 0 )
 		return nullptr;
 
-	 return m_VisualPresentations[0];
+	 return m_visualPresentations[0];
 }
 
 void CControl::AdjustGraphicPresentations(CPoint origin, CSize size)
 {
-	for (auto iter = m_VisualPresentations.begin(); iter != m_VisualPresentations.end(); ++iter)
+	for (auto iter = m_visualPresentations.begin(); iter != m_visualPresentations.end(); ++iter)
 	{
 		(*iter)->SetContainerParams(origin, size);
 	}

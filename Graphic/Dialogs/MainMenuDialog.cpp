@@ -50,7 +50,7 @@ bool CMainMenuDialog::OnSignal(const SignalData& signal)
 	{
 		LOG("Open ConveyGameDialog");
 		CSharedPtr<IDialog> spDialog = CSharedPtr<IDialog>(new CConveyLifeGameDialog());
-		WINDOW_MANAGER_PTR->AddDialog(GetContainingWindow(), spDialog);
+		WINDOW_MANAGER->AddDialog(GetContainingWindow(), spDialog);
 
 		return true;
 	}
