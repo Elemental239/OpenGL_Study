@@ -68,6 +68,7 @@ CWindow::CWindow(const WindowConstructionParams& params) : IWindow(params), m_bC
 		LOGE("Failed to create GLFW window");
 		return;
 	}
+
 	SetOpenGLDrawingContext();
 	glViewport(0, 0, GetWidth(), GetHeight());
 

@@ -30,6 +30,7 @@ public:
 	virtual void RemoveWindow(CSharedPtr<IWindow> spWindow) = 0;
 
 	virtual void AddDialog(IWindow* pWindow, CSharedPtr<IDialog> spDialog) = 0;
+	virtual void AddDialogToActiveWindow(CSharedPtr<IDialog> spDialog) { AddDialog(GetActiveWindow(), spDialog); }
 
 	virtual CSharedPtr<IWindow> GetActiveWindow() = 0;
 };
@@ -49,6 +50,8 @@ class CWindowManagerProvider : public IWindowManagerProvider
 private:
 	CSharedPtr<IWindowManager> m_spWindowManager;
 };
+
+#define WINDOW_MANAGER CWindowManagerProvider::Instance().GetWindowManager()
 
 class CWindowManager : public IWindowManager
 {

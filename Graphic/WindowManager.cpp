@@ -4,7 +4,6 @@
 #include "glfw-3.1.1/include/GLFW/glfw3.h"
 #include "MainWindow.h"
 #include "Window.h"
-#include "Dialogs/MainMenuDialog.h"
 
 ///////////////////////////////////////////////////
 ///Various OpenGL global callbacks
@@ -94,17 +93,17 @@ CWindowManager::~CWindowManager()
 
 void CWindowManager::Init(WindowConstructionParams& firstWindowParams)
 {
-	if (m_bInited)
-		return;
-
 	MARKER("CWindowManager::Init()");
+
+	if (m_bInited)
+	{
+		LOGE("CWindowManager::Init(): double initialization attempt");
+		return;
+	}
 
 	InitOpenGLWindowLibrary();
 	CreateFirstWindow(firstWindowParams);
 	InitOpenGLDriverLibrary();
-
-	CSharedPtr<IDialog> spDialog = new CMainMenuDialog;
-	m_windows[0]->AddDialog(spDialog);
 
 	m_bInited = true;
 }
@@ -262,11 +261,13 @@ void CWindowManager::AddWindow(CSharedPtr<IWindow> spWindow)
 void CWindowManager::RemoveWindow(CSharedPtr<IWindow> spWindow)
 {
 	for (auto iter = m_windows.begin(); iter != m_windows.end(); iter++)
+	{
 		if (*iter == spWindow)
 		{
 			m_windows.erase(iter);
 			break;
 		}
+	}
 }
 
 void CWindowManager::AddDialog(IWindow* pWindow, CSharedPtr<IDialog> spDialog)
