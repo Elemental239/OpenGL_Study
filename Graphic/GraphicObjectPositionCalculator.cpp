@@ -42,7 +42,7 @@ void CGraphicObjectPositionCalculator::CalcAndSetNewChildAxisParam(EAxis axis, c
 	{
 		if (GetFlag(childAlignOptions, enumValueToInt(axis == EAxis::X ? EAlignOption::RIGHT : axis == EAxis::Y ? EAlignOption::TOP : EAlignOption::FRONT)))	// don't check LEFT, BOTTOM, BACK cause it is the same as default
 		{
-			DoMoveToOppositeSide(EAxis::X, m_obj->GetRectSize(), resultPoint);
+			DoMoveToOppositeSide(axis, m_obj->GetRectSize(), resultPoint);
 			DoUseMargins(axis, UseMarginsMode::AFFECT_POSITION_AFTER, nMarginBefore, nMarginAfter, resultPoint, resultSize);
 		}
 		else if (GetFlag(childAlignOptions, enumValueToInt(axis == EAxis::X ? EAlignOption::CENTER_X : axis == EAxis::Y ? EAlignOption::CENTER_Y : EAlignOption::CENTER_Z)))

@@ -25,6 +25,7 @@ void IWindow::AddDialog(TDialogRef spDialog)
 {
 	CSize windowSize = CSize(GetWidth(), GetHeight());
 	TGraphicObjectRef spDialogGraphicRepresentation = new CRectangle(windowSize, COLOR_WHITE);
+	spDialogGraphicRepresentation->SetContainerParams(CPoint(), windowSize);
 	spDialog->SetVisualPresentation(spDialogGraphicRepresentation);
 	spDialog->InitChildren();
 	spDialog->SetContainingWindow(this);
