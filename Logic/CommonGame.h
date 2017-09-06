@@ -18,9 +18,6 @@ public:
 	virtual void Init() override;
 	virtual void Start() override;
 
-protected:
-	CSharedPtr<IWindowManager> CreateWindowManager();
-
 private:
 	void CreateMainWindow();
 };

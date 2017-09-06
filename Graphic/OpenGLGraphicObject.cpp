@@ -35,7 +35,9 @@ void COpenGLGraphicObject::DrawSelf()
 	}
 
 	if (m_shaderProgram)
+	{
 		m_shaderProgram->Use();
+	}
 }
 
 COpenGLPoint COpenGLGraphicObject::TranslatePixelPoint(const CPoint& point) const
