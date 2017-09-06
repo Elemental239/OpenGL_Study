@@ -25,7 +25,6 @@
     <ClInclude Include="..\..\Graphic\GraphicObjects\Rectangle.h" />
     <ClInclude Include="..\..\Graphic\GraphicObjects\Texture2D.h" />
     <ClInclude Include="..\..\Graphic\GraphicObjects\Triangle.h" />
-    <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h" />
     <ClInclude Include="..\..\Graphic\MainWindow.h" />
     <ClInclude Include="..\..\Graphic\OpenGL.h" />
     <ClInclude Include="..\..\Graphic\OpenGLGraphicObject.h" />
@@ -69,7 +68,6 @@
     <ClCompile Include="..\..\Graphic\GraphicObjects\Rectangle.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObjects\Texture2D.cpp" />
     <ClCompile Include="..\..\Graphic\GraphicObjects\Triangle.cpp" />
-    <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp" />
     <ClCompile Include="..\..\Graphic\MainWindow.cpp" />
     <ClCompile Include="..\..\Graphic\OpenGLGraphicObject.cpp" />
     <ClCompile Include="..\..\Graphic\Shader.cpp" />

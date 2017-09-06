@@ -52,9 +52,6 @@
     <ClInclude Include="..\..\Graphic\MainWindow.h">
       <Filter>Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Graphic\HelloWorldTestWindow.h">
-      <Filter>Graphic</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Utility\IFile.h">
       <Filter>Utility</Filter>
     </ClInclude>
@@ -163,9 +160,6 @@
       <Filter>Graphic</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Graphic\MainWindow.cpp">
-      <Filter>Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Graphic\HelloWorldTestWindow.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Utility\File.cpp">
