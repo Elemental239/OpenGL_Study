@@ -35,6 +35,8 @@ void opengl_GLFW_framebuffer_size_callback(GLFWwindow* window, int width, int he
 	data.m_nNewHeight = height;
 
 	CWindowManagerProvider::Instance().GetWindowManager()->OnSystemEvent(data);
+
+	glViewport(0, 0, width, height);
 }
 
 void opengl_GLFW_mouse_callback(GLFWwindow* window, int nButton, int nEvent, int nAdditionalFlags)
