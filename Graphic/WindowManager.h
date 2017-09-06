@@ -35,6 +35,7 @@ public:
 	virtual CSharedPtr<IWindow> GetActiveWindow() = 0;
 };
 
+
 class IWindowManagerProvider : public CObject
 {
 public:
@@ -50,6 +51,7 @@ class CWindowManagerProvider : public IWindowManagerProvider
 private:
 	CSharedPtr<IWindowManager> m_spWindowManager;
 };
+
 
 class CWindowManager : public IWindowManager
 {

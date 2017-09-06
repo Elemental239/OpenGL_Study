@@ -6,6 +6,7 @@
 #include <vector>
 #include "GraphicGeneral.h"
 #include "InlineFunctions.h"
+#include "Controls/Control.h"
 
 class CGraphicObject;
 class IControl;
@@ -33,26 +34,15 @@ enum class ESizeOption : int32_t
 	FILL_Z	= 0x00000100,
 };
 
-class CGraphicObject : public CObject
+class CGraphicObject : public CControl
 {
 public:
 	CGraphicObject();
-	virtual ~CGraphicObject();
 
-	virtual void DrawSelf();
-	void AdjustSizeAndPosition();
-	void SetOwner(IControl* pControl) { m_pOwnerControl = pControl; }
-	void SetContainerParams(CPoint origin, CSize size) { m_containerOrigin = origin; m_containerSize = size; }
-	void Reinitialize() { m_bInited = false; };
+	//void AdjustSizeAndPosition();
+	//void SetContainerParams(CPoint origin, CSize size) { m_containerOrigin = origin; m_containerSize = size; }
+	//void Reinitialize() { m_bInited = false; };
 	
-	///<summary> Get size of minimal containing rect</summary>
-	CSize GetRectSize() const { return m_rectSize; }
-
-	///<summary> Origin is the bottom-left point of the object.</summary>
-	void SetOrigin(CPoint point) { m_origin = point; }
-	///<summary> Origin is the bottom-left point of the object.</summary>
-	CPoint GetOrigin() const { return m_origin; }
-
 	void SetAlignOptions(int64_t option) { m_nAlignOption = option; }
 	void SetAlignOption(EAlignOption option) { m_nAlignOption = (m_nAlignOption | enumValueToInt(option)); }
 	int64_t GetAlignOptions() const { return m_nAlignOption; }
@@ -68,19 +58,14 @@ public:
 	std::vector<int> GetMargins() const { return m_margins; } //TODO: OPTIMISE: array copy with reserve/std::copy/etc.
 
 protected:
-	CPoint m_origin;
+	bool m_bInited;
 	int64_t m_nAlignOption;	//Flags
 	int32_t m_nSizeOption;	//Flags
 	std::vector<int> m_margins;
-	CSize m_rectSize;	// Size of containing rectangle
-	IControl* m_pOwnerControl;
-	CPoint m_containerOrigin;
-	CSize m_containerSize;
-	bool m_bInited;
+	//CPoint m_containerOrigin;
+	//CSize m_containerSize;
 
-	///<summary> Set size of minimal containing rect</summary>
-	virtual void SetRectSize(CSize size) { m_rectSize = size; }		// TODO: overload for all graphic primitives to adjust their points to new size
-	virtual void PrepareInitiation() { AdjustSizeAndPosition(); }
+	//virtual void PrepareInitiation() { AdjustSizeAndPosition(); }
 };
 
 #endif //__Graphic_GraphicObject_H__

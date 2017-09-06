@@ -49,9 +49,6 @@
     <ClInclude Include="..\..\Graphic\GraphicObject.h">
       <Filter>Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Graphic\MainWindow.h">
-      <Filter>Graphic</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Utility\IFile.h">
       <Filter>Utility</Filter>
     </ClInclude>
@@ -148,6 +145,9 @@
     <ClInclude Include="..\..\Logic\CommonGame.h">
       <Filter>Logic</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Graphic\Controls\ControlsContainer.h">
+      <Filter>Graphic\Controls</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Utility\Logger.cpp">
@@ -157,9 +157,6 @@
       <Filter>Logic</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Graphic\GraphicObject.cpp">
-      <Filter>Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Graphic\MainWindow.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Utility\File.cpp">
@@ -233,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Logic\CommonGame.cpp">
       <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Graphic\Controls\ControlsContainer.cpp">
+      <Filter>Graphic\Controls</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

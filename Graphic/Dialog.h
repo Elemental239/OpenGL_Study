@@ -1,11 +1,11 @@
 #ifndef __Graphic_Dialog_H__
 #define __Graphic_Dialog_H__
 
-#include "Controls/Control.h"
 #include <vector>
 #include "WindowManager.h"
 #include "SharedPtr.h"
 #include "ColorsResources.h"
+#include "Controls/ControlsContainer.h"
 
 enum EDialogLifetimeEvent
 {
@@ -15,20 +15,20 @@ enum EDialogLifetimeEvent
 	DIALOG_LIFETIME_EVENT_AFTER_HIDE
 };
 
-class IDialog : public CControl
+class IDialog : public CObject, public CControlsContainer
 {
+	friend class IWindow;
 public:
 	IDialog(): m_bClosed(false) {}
 
 	virtual bool OnSystemEvent(const EventData& event) = 0;
 	virtual void OnLifetimeEvent(EDialogLifetimeEvent event) = 0;
 
+	virtual void InitChildren() = 0;
+
 	bool IsClosed() const { return m_bClosed; }
 	void Close() { m_bClosed = true; }
 
-	virtual void InitChildren() = 0;
-
-	void SetContainingWindow(IWindow* pWindow) { m_pWindow = pWindow; }
 	virtual CColor GetBackgroundColor() { return COLOR_WHITE; }
 
 protected:
@@ -37,6 +37,8 @@ protected:
 private:
 	bool m_bClosed;
 	IWindow* m_pWindow;
+
+	void SetContainingWindow(IWindow* pWindow) { m_pWindow = pWindow; }
 };
 typedef CSharedPtr<IDialog> TDialogRef;
 

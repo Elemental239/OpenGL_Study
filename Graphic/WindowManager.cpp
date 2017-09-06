@@ -129,7 +129,7 @@ void CWindowManager::CreateFirstWindow(WindowConstructionParams& firstWindowPara
 {
 	MARKER("CWindowManager::CreateFirstWindow()");
 
-	TWindowRef spWindow = new CMainWindow(firstWindowParams);
+	TWindowRef spWindow = new CWindow(firstWindowParams);
 	AddWindow(spWindow);
 	SetActiveWindow(spWindow);
 }
