@@ -51,8 +51,6 @@ private:
 	CSharedPtr<IWindowManager> m_spWindowManager;
 };
 
-#define WINDOW_MANAGER CWindowManagerProvider::Instance().GetWindowManager()
-
 class CWindowManager : public IWindowManager
 {
 public:
@@ -89,6 +87,6 @@ private:
 	void SendEventForTargetWindow(const EventData& event);
 };
 
-#define WINDOW_MANAGER_PTR CWindowManagerProvider::Instance().GetWindowManager()
+#define WINDOW_MANAGER CWindowManagerProvider::Instance().GetWindowManager()
 
 #endif //__Graphic_WindowManager_H__
