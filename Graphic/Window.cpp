@@ -28,8 +28,8 @@ void IWindow::AddDialog(TDialogRef spDialog)
 	//TGraphicObjectRef spDialogGraphicRepresentation = new CRectangle(windowSize, spDialog->GetBackgroundColor());
 	//spDialogGraphicRepresentation->SetContainerParams(CPoint(), windowSize);
 	//spDialog->SetVisualPresentation(spDialogGraphicRepresentation);
-	spDialog->InitChildren();
 	spDialog->SetContainingWindow(this);
+	spDialog->InitChildren();
 	m_dialogs.push(spDialog);
 
 	spDialog->OnLifetimeEvent(DIALOG_LIFETIME_EVENT_AFTER_SHOW);
@@ -111,6 +111,12 @@ CWindow::~CWindow()
 
 bool CWindow::OnSystemEvent(const EventData& event)
 {
+	if (!m_dialogs.size())
+	{
+		LOG("Seems like window is closing, do nothing");
+		return true;
+	}
+
 	if (m_dialogs[m_dialogs.size() - 1]->OnSystemEvent(event))
 			return true;
 
