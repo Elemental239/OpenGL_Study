@@ -57,20 +57,6 @@ void CControl::DrawChild(TControlRef spControl)
 	spControl->Draw();
 }
 
-bool CControl::OnSystemEvent(const EventData& event)
-{
-	if (event.m_nEventType == EVT_RESIZE)
-	{
-		LOG("Resize event");
-		//for (int i = 0; i < GetVisualPresentationNumber(); i++)
-		//{
-		//	GetVisualPresentation(i)->Reinitialize();
-		//}
-	}
-
-	return false;
-}
-
 bool CControl::OnSignal(const SignalData& signal)
 {
 	return false;

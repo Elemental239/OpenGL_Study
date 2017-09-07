@@ -47,7 +47,6 @@ public:
 	CControl();
 
 	virtual void Draw() override;
-	virtual bool OnSystemEvent(const EventData& event) override;
 	virtual bool OnSignal(const SignalData& signal) override;
 	
 	

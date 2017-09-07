@@ -36,3 +36,25 @@ void CGraphicObject::AdjustPositionAndSize()
 	SetOrigin(calculator.GetResultOriginPoint()); // TODO: test me!
 }
 
+bool CGraphicObject::OnSystemEvent(const EventData& event)
+{
+	if (event.m_nEventType == EVT_RESIZE)
+	{
+		LOG("Resize event");
+		ProcessResizeEvent(event);
+		return true;
+	}
+
+	return false;
+}
+
+void CGraphicObject::ProcessResizeEvent(const EventData& event)
+{
+	Reinitialize();
+
+	for (size_t i = 0; i < m_children.size(); i++)
+	{
+		m_children[i]->OnSystemEvent(event);
+	}
+}
+

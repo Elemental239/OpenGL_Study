@@ -26,31 +26,36 @@ void CMainMenuDialog::CreateChildren()
 
 	RemoveChildren();
 
-	for (int i = 0; i < 2; i++)
-	{
-		auto size = CSize(RANDOM.GetIntII(1, 1200), RANDOM.GetIntII(1, 800));
-		auto leftMargin = RANDOM.GetIntII(0, 1200 - size.GetX());
-		auto bottomMargin = RANDOM.GetIntII(0, 800 - size.GetY());
+	//for (int i = 0; i < 2; i++)
+	//{
+	//	auto size = CSize(RANDOM.GetIntII(1, 1200), RANDOM.GetIntII(1, 800));
+	//	auto leftMargin = RANDOM.GetIntII(0, 1200 - size.GetX());
+	//	auto bottomMargin = RANDOM.GetIntII(0, 800 - size.GetY());
 
-		TGraphicObjectRef spRectangle = std::make_shared<CRandomColorRectangle>(size);
-		spRectangle->SetMargins(leftMargin, 0, 0, bottomMargin);
-		spRectangle->SetAlignOption(EAlignOption::BOTTOM);
-		spRectangle->SetAlignOption(EAlignOption::LEFT);
-		AddChild(spRectangle);
-	}
+	//	TGraphicObjectRef spRectangle = std::make_shared<CRandomColorRectangle>(size);
+	//	spRectangle->SetMargins(leftMargin, 0, 0, bottomMargin);
+	//	spRectangle->SetAlignOption(EAlignOption::BOTTOM);
+	//	spRectangle->SetAlignOption(EAlignOption::LEFT);
+	//	AddChild(spRectangle);
+	//}
 
-	//TGraphicObjectRef spRectangle = std::make_shared<CRandomColorRectangle>(CSize(400, 400));
+	TGraphicObjectRef spRectangle = std::make_shared<CRandomColorRectangle>(CSize(400, 400));
 	//spRectangle->SetMargins(20, 0, 0, 0);
-	//spRectangle->SetAlignOption(EAlignOption::CENTER_Y);
-	//spRectangle->SetAlignOption(EAlignOption::LEFT);
-	//AddChild(spRectangle);
+	spRectangle->SetAlignOption(EAlignOption::CENTER_Y);
+	spRectangle->SetAlignOption(EAlignOption::CENTER_X);
+	AddChild(spRectangle);
 
-	//TGraphicObjectRef spRectangle2 = std::make_shared<CRandomColorRectangle>(CSize(250, 300));
+	TGraphicObjectRef spRectangle2 = std::make_shared<CRandomColorRectangle>(CSize(300, 300));
 	//spRectangle2->SetMargins(100, 0, 0, 10);
-	////spRectangle->SetMargins(20, 20, 20, 20);
-	////spRectangle->SetAlignOption(EAlignOption::CENTER_Y);
-	////spRectangle->SetAlignOption(EAlignOption::CENTER_X);
-	//spRectangle->AddChild(spRectangle2);
+	spRectangle2->SetAlignOption(EAlignOption::CENTER_Y);
+	spRectangle2->SetAlignOption(EAlignOption::CENTER_X);
+	spRectangle->AddChild(spRectangle2);
+
+	TGraphicObjectRef spRectangle3 = std::make_shared<CRandomColorRectangle>(CSize(200, 200));
+	//spRectangle2->SetMargins(100, 0, 0, 10);
+	spRectangle3->SetAlignOption(EAlignOption::CENTER_Y);
+	spRectangle3->SetAlignOption(EAlignOption::CENTER_X);
+	spRectangle2->AddChild(spRectangle3);
 }
 
 bool CMainMenuDialog::OnSystemEvent(const EventData& event)
@@ -62,7 +67,7 @@ bool CMainMenuDialog::OnSystemEvent(const EventData& event)
 		return true;
 	}
 
-	return __super::OnSystemEvent(event);
+	return CDialog::OnSystemEvent(event);
 }
 
 bool CMainMenuDialog::OnSignal(const SignalData& signal)

@@ -240,7 +240,10 @@ void CWindowManager::ProcessWindowEvent(CSharedPtr<IWindow> spWindow, const Even
 
 bool CWindowManager::IsEventForAllDialogs(const EventData& event) const
 {
-	return event.m_nEventType == EVT_BUTTON && event.m_nKeyboardKey == GLFW_KEY_ESCAPE && event.m_nAction == GLFW_RELEASE;
+	bool bCloseEvent = event.m_nEventType == EVT_BUTTON && event.m_nKeyboardKey == GLFW_KEY_ESCAPE && event.m_nAction == GLFW_RELEASE;
+	bool bResizeEvent = event.m_nEventType == EVT_RESIZE;
+
+	return bCloseEvent;
 }
 
 bool CWindowManager::IsEventForAllWindows(const EventData& event) const

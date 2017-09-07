@@ -40,7 +40,7 @@ public:
 
 	//void AdjustSizeAndPosition();
 	//void SetContainerParams(CPoint origin, CSize size) { m_containerOrigin = origin; m_containerSize = size; }
-	//void Reinitialize() { m_bInited = false; };
+	virtual bool OnSystemEvent(const EventData& event) override;
 	
 	void SetAlignOptions(int64_t option) { m_nAlignOption = option; }
 	void SetAlignOption(EAlignOption option) { m_nAlignOption = (m_nAlignOption | enumValueToInt(option)); }
@@ -69,7 +69,10 @@ protected:
 	int32_t m_nSizeOption;	//Flags
 	std::vector<int> m_margins;
 
-	//virtual void PrepareInitiation() { AdjustSizeAndPosition(); }
+	void ProcessResizeEvent(const EventData& event);
+
+private:
+	void Reinitialize() { m_bInited = false; };
 };
 
 #endif //__Graphic_GraphicObject_H__
