@@ -1,6 +1,7 @@
 #include "ControlsContainer.h"
+#include "Control.h"
 
-void CControlsContainer::AddChild(TControlRef obj)
+void CControlsContainer::AddChild(CSharedPtr<IControl> obj)
 {
 	if (!obj)
 		return;
@@ -9,7 +10,7 @@ void CControlsContainer::AddChild(TControlRef obj)
 	m_children.push_back(obj);
 }
 
-void CControlsContainer::RemoveChild(TControlRef obj)
+void CControlsContainer::RemoveChild(CSharedPtr<IControl> obj)
 {
 	for (auto iter = m_children.end(); iter-- != m_children.begin(); )
 	{

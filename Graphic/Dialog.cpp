@@ -22,6 +22,14 @@ void CDialog::InitChildren()
 	}
 }
 
+void CDialog::Draw()
+{
+	for (size_t i = 0; i < m_children.size(); i++)
+	{
+		m_children[i]->Draw();
+	}
+}
+
 bool CDialog::OnSystemEvent(const EventData& event)
 {
 	switch (event.m_nEventType)
@@ -86,12 +94,12 @@ bool CDialog::ProcessMouseEvent(const EventData& event)
 
 bool CDialog::ProcessResizeEvent(const EventData& event)
 {
-	for (int i = 0; i < GetVisualPresentationNumber(); i++)
-	{
-		auto spVisualPresentation = GetVisualPresentation(i).static_cast_to<CRectangle>();
-		CSize newSize = CSize(event.m_nNewWidth, event.m_nNewHeight);
-		spVisualPresentation->SetSize(newSize);
-	}
+	//for (int i = 0; i < GetVisualPresentationNumber(); i++)
+	//{
+	//	auto spVisualPresentation = GetVisualPresentation(i).static_cast_to<CRectangle>();
+	//	CSize newSize = CSize(event.m_nNewWidth, event.m_nNewHeight);
+	//	spVisualPresentation->SetSize(newSize);
+	//}
 
 	return false; // Pass event to all children cause whole UI should change size
 }
@@ -110,4 +118,9 @@ void CDialog::OnLifetimeEvent(EDialogLifetimeEvent event)
 {
 	MARKER("CDialog::OnLifetimeEvent()");
 	return;
+}
+
+bool CDialog::OnSignal(const SignalData & signal)
+{
+	return false;
 }

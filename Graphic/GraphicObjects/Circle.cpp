@@ -16,7 +16,7 @@ CCircle::CCircle(int nRadius, CColor cColor) :
 {
 	MARKER("CCircle::CCircle()");
 
-	m_rectSize = CSize(2 * m_nRadius, 2 * m_nRadius);
+	SetSize(CSize(2 * m_nRadius, 2 * m_nRadius));
 }
 
 
@@ -72,7 +72,7 @@ void CCircle::CreateShaderProgram()
 			"color = vec4(vertexColour, 1.0f);\n"
 		"}";
 
-	m_shaderProgram = new CShaderProgram(CVertexShader(vertexShaderSource), CFragmentShader(fragmentShaderSource));
+	m_spShaderProgram = new CShaderProgram(CVertexShader(vertexShaderSource), CFragmentShader(fragmentShaderSource));
 }
 
 void CCircle::BindVBO()

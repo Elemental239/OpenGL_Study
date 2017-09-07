@@ -10,7 +10,7 @@ CTrianglePrimitive::CTrianglePrimitive(CPointWithColor p1, CPointWithColor p2, C
 	m_points.push_back(p2);
 	m_points.push_back(p3);
 
-	m_rectSize = CSize(MAX3(p1.GetX(), p2.GetX(), p3.GetX()), MAX3(p1.GetY(), p2.GetY(), p3.GetY()));
+	SetSize(CSize(MAX3(p1.GetX(), p2.GetX(), p3.GetX()), MAX3(p1.GetY(), p2.GetY(), p3.GetY())));
 }
 
 CTrianglePrimitive::~CTrianglePrimitive() {}
@@ -55,7 +55,7 @@ void CTrianglePrimitive::CreateShaderProgram()
 			"color = vec4(vertexColour, 1.0f);\n"
 		"}";
 
-	m_shaderProgram = new CShaderProgram(CVertexShader(vertexShaderSource), CFragmentShader(fragmentShaderSource));
+	m_spShaderProgram = new CShaderProgram(CVertexShader(vertexShaderSource), CFragmentShader(fragmentShaderSource));
 }
 
 void CTrianglePrimitive::BindVBO()

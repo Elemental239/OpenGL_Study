@@ -17,7 +17,7 @@ void CGraphicObjectPositionCalculator::Calculate()
 	auto margins = m_obj->GetMargins();
 
 	m_resultPoint = m_containerOriginPoint;
-	m_resultSize = m_obj->GetRectSize();
+	m_resultSize = m_obj->GetSize();
 
 	CalcAndSetNewChildAxisParam(EAxis::X, margins[0], margins[2], m_resultPoint, m_resultSize);
 	CalcAndSetNewChildAxisParam(EAxis::Y, margins[3], margins[1], m_resultPoint, m_resultSize);
@@ -42,12 +42,12 @@ void CGraphicObjectPositionCalculator::CalcAndSetNewChildAxisParam(EAxis axis, c
 	{
 		if (GetFlag(childAlignOptions, enumValueToInt(axis == EAxis::X ? EAlignOption::RIGHT : axis == EAxis::Y ? EAlignOption::TOP : EAlignOption::FRONT)))	// don't check LEFT, BOTTOM, BACK cause it is the same as default
 		{
-			DoMoveToOppositeSide(axis, m_obj->GetRectSize(), resultPoint);
+			DoMoveToOppositeSide(axis, m_obj->GetSize(), resultPoint);
 			DoUseMargins(axis, UseMarginsMode::AFFECT_POSITION_AFTER, nMarginBefore, nMarginAfter, resultPoint, resultSize);
 		}
 		else if (GetFlag(childAlignOptions, enumValueToInt(axis == EAxis::X ? EAlignOption::CENTER_X : axis == EAxis::Y ? EAlignOption::CENTER_Y : EAlignOption::CENTER_Z)))
 		{
-			DoMoveToCenter(axis, m_obj->GetRectSize(), resultPoint);
+			DoMoveToCenter(axis, m_obj->GetSize(), resultPoint);
 			DoUseMargins(axis, UseMarginsMode::AFFECT_POSITION_CENTER, nMarginBefore, nMarginAfter, resultPoint, resultSize);
 		}
 		else

@@ -12,26 +12,26 @@ CRectanglePrimitive::CRectanglePrimitive(CSize size, CColor cColorLeftBottom, CC
 	m_colors.push_back(cColorRightTop);
 	m_colors.push_back(cColorRightBottom);
 
-	SetRectSize(size);
+	SetSize(size);
 }
 
 void CRectanglePrimitive::DrawSelf()
 {
 	if (!m_bInited)
 	{
-		PrepareInitiation();
+		//PrepareInitiation();
 
 		if (!m_points.empty())
 			m_points.clear();
 		
-		CSize size = GetRectSize();
+		CSize size = GetSize();
 		m_points.push_back(CPointWithColor(CPoint(), m_colors[0]));
-		m_points.push_back(CPointWithColor(CPoint(0, GetRectSize().GetY()), m_colors[1]));
-		m_points.push_back(CPointWithColor(CPoint(GetRectSize().GetX(), GetRectSize().GetY()), m_colors[2]));
-		m_points.push_back(CPointWithColor(CPoint(GetRectSize().GetX(), 0), m_colors[3]));
+		m_points.push_back(CPointWithColor(CPoint(0, GetSize().GetY()), m_colors[1]));
+		m_points.push_back(CPointWithColor(CPoint(GetSize().GetX(), GetSize().GetY()), m_colors[2]));
+		m_points.push_back(CPointWithColor(CPoint(GetSize().GetX(), 0), m_colors[3]));
 	}
 
-	__super::DrawSelf();
+	COpenGLGraphicObject::DrawSelf();
 
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, m_points.size() * 3, GL_UNSIGNED_INT, 0);
@@ -62,7 +62,7 @@ void CRectanglePrimitive::CreateShaderProgram()
 			"color = vec4(vertexColour, 1.0f);\n"
 		"}";
 
-	m_shaderProgram = new CShaderProgram(CVertexShader(vertexShaderSource), CFragmentShader(fragmentShaderSource));
+	m_spShaderProgram = new CShaderProgram(CVertexShader(vertexShaderSource), CFragmentShader(fragmentShaderSource));
 }
 
 void CRectanglePrimitive::BindVBO()

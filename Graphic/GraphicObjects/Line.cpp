@@ -8,7 +8,7 @@ CLine::CLine(CPointWithColor pointStart, CPointWithColor pointFinish) :
 	m_pointStart(pointStart),
 	m_pointFinish(pointFinish)
 {
-	m_rectSize = CSize(ABS(pointStart.GetX() - pointFinish.GetX()), ABS(pointStart.GetY() - pointFinish.GetY()));
+	SetSize(CSize(ABS(pointStart.GetX() - pointFinish.GetX()), ABS(pointStart.GetY() - pointFinish.GetY())));
 }
 
 CLine::~CLine() {}
@@ -47,7 +47,7 @@ void CLine::CreateShaderProgram()
 			"color = vec4(vertexColour, 1.0f);\n"
 		"}";
 
-	m_shaderProgram = new CShaderProgram(CVertexShader(vertexShaderSource), CFragmentShader(fragmentShaderSource));
+	m_spShaderProgram = new CShaderProgram(CVertexShader(vertexShaderSource), CFragmentShader(fragmentShaderSource));
 }
 
 void CLine::BindVBO()

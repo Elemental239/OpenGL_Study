@@ -2,7 +2,6 @@
 #define __Logic_CGlobals_H__
 
 #include <memory>
-#include "MainWindow.h"
 #include "SharedPtr.h"
 #include "Object.h"
 #include "Singleton.h"
@@ -23,7 +22,6 @@ public:
 
 private:
 	CString8 m_strAppFilepath;
-	CSharedPtr<CMainWindow> m_spMainWindow;
 };
 
 #define GLOBALS CGlobals::Instance()

@@ -9,7 +9,6 @@
 #include "Controls/Control.h"
 
 class CGraphicObject;
-class IControl;
 typedef CSharedPtr<CGraphicObject> TGraphicObjectRef;
 
 enum class EAlignOption : int64_t

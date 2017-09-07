@@ -1,13 +1,15 @@
 #pragma once
-#include "Control.h"
+#include "SharedPtr.h"
+
+class IControl;
 
 class CControlsContainer
 {
 public:
-	void AddChild(TControlRef obj);
-	void RemoveChild(TControlRef obj);
+	void AddChild(CSharedPtr<IControl> obj);
+	void RemoveChild(CSharedPtr<IControl> obj);
 	void RemoveChildren();
 
 protected:
-	std::vector<TControlRef> m_children;
+	std::vector<CSharedPtr<IControl> > m_children;
 };

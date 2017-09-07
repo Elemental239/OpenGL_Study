@@ -25,9 +25,9 @@ void IWindow::AddDialog(TDialogRef spDialog)
 	spDialog->OnLifetimeEvent(DIALOG_LIFETIME_EVENT_BEFORE_SHOW);
 
 	CSize windowSize = CSize(GetWidth(), GetHeight());
-	TGraphicObjectRef spDialogGraphicRepresentation = new CRectangle(windowSize, spDialog->GetBackgroundColor());
-	spDialogGraphicRepresentation->SetContainerParams(CPoint(), windowSize);
-	spDialog->SetVisualPresentation(spDialogGraphicRepresentation);
+	//TGraphicObjectRef spDialogGraphicRepresentation = new CRectangle(windowSize, spDialog->GetBackgroundColor());
+	//spDialogGraphicRepresentation->SetContainerParams(CPoint(), windowSize);
+	//spDialog->SetVisualPresentation(spDialogGraphicRepresentation);
 	spDialog->InitChildren();
 	spDialog->SetContainingWindow(this);
 	m_dialogs.push(spDialog);

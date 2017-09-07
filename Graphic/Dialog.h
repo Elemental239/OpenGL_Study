@@ -23,8 +23,10 @@ public:
 
 	virtual bool OnSystemEvent(const EventData& event) = 0;
 	virtual void OnLifetimeEvent(EDialogLifetimeEvent event) = 0;
+	virtual bool OnSignal(const SignalData& signal) = 0;
 
 	virtual void InitChildren() = 0;
+	virtual void Draw() = 0;
 
 	bool IsClosed() const { return m_bClosed; }
 	void Close() { m_bClosed = true; }
@@ -50,8 +52,10 @@ public:
 
 	virtual bool OnSystemEvent(const EventData& event) override;
 	virtual void OnLifetimeEvent(EDialogLifetimeEvent event) override;
+	virtual bool OnSignal(const SignalData& signal) override;
 
 	virtual void InitChildren() override;
+	virtual void Draw() override;
 
 private:
 	bool m_bChildrenInited;

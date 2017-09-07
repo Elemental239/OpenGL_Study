@@ -2,7 +2,6 @@
 #include "Logger.h"
 #include "OpenGL.h"
 #include "glfw-3.1.1/include/GLFW/glfw3.h"
-#include "MainWindow.h"
 #include "Window.h"
 
 ///////////////////////////////////////////////////

@@ -2,7 +2,6 @@
 #define __Controls_Control_H__
 
 #include "Object.h"
-#include "GraphicObject.h"
 #include "SharedPtr.h"
 #include "WindowEvents.h"
 #include "ControlsContainer.h"
@@ -20,16 +19,17 @@ public:
 	virtual void Draw() = 0;
 
 	///<summary> Origin is the bottom-left point of the object.</summary>
-	void SetOrigin(CPoint point) { m_origin = point; }
+	virtual void SetOrigin(CPoint point) { m_origin = point; }
 	///<summary> Origin is the bottom-left point of the object.</summary>
 	CPoint GetOrigin() const { return m_origin; }
-
-	virtual void SetSize(CSize size) const { m_size = size; }
+	virtual void SetSize(CSize size) { m_size = size; }
 	virtual CSize GetSize() const { return m_size; }
+	void SetParent(CControlsContainer* spParent) { m_pParent = spParent; }
 
 private:
 	CPoint m_origin;
 	CSize m_size;
+	CControlsContainer* m_pParent;
 };
 
 class CControl : public IControl
@@ -43,15 +43,11 @@ public:
 	
 	//virtual void AdjustGraphicPresentations(CPoint origin, CSize size) override;
 		
-	virtual void SetParent(IControlsContainer* spParent) override { m_pParent = spParent; }
-
 	//virtual CSize GetSize() override { return GetCurrentVisualPresentation()->GetRectSize(); }
 	//virtual CPoint GetOrigin() override { return GetCurrentVisualPresentation()->GetOrigin(); }
 
 protected:
-	IControlsContainer* m_pParent;
-
-	virtual void DrawSelf() = 0;
+	virtual void DrawSelf() {}
 	bool IsPointInsideMyBounds(const CPoint& point) const;
 
 private:

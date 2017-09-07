@@ -19,7 +19,7 @@ COpenGLGraphicObject::~COpenGLGraphicObject()
 
 void COpenGLGraphicObject::DrawSelf()
 {
-	__super::DrawSelf();
+	CControl::DrawSelf();
 
 	if (!m_bInited)
 	{
@@ -31,12 +31,20 @@ void COpenGLGraphicObject::DrawSelf()
 			BindEBO();
 			SetupVAOAttributes();
 		glBindVertexArray(0);
-		CreateShaderProgram();
+		
+		if (!m_spShaderProgram)
+		{
+			CreateShaderProgram();
+		}
 	}
 
-	if (m_shaderProgram)
+	if (m_spShaderProgram)
 	{
-		m_shaderProgram->Use();
+		m_spShaderProgram->Use();
+	}
+	else
+	{
+		LOGE("No shader program for COpenGLGraphicObject");
 	}
 }
 
@@ -44,8 +52,8 @@ COpenGLPoint COpenGLGraphicObject::TranslatePixelPoint(const CPoint& point) cons
 {
 	CSize szWindowSize = CWindowManagerProvider::Instance().GetWindowManager()->GetActiveWindow()->GetSize();
 
-	GLfloat xFloat = (2.0f * (point.GetX() + m_origin.GetX())) / szWindowSize.GetX() - 1;
-	GLfloat yFloat = (2.0f * (point.GetY() + m_origin.GetY())) / szWindowSize.GetY() - 1;
+	GLfloat xFloat = (2.0f * (point.GetX() + GetOrigin().GetX())) / szWindowSize.GetX() - 1;
+	GLfloat yFloat = (2.0f * (point.GetY() + GetOrigin().GetY())) / szWindowSize.GetY() - 1;
 	GLfloat zFloat = 1.0f * point.GetZ();
 
 	return COpenGLPoint(xFloat, yFloat, zFloat);

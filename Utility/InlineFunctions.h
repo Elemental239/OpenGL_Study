@@ -19,9 +19,20 @@ inline bool GetFlagWithPosition(unsigned int flags, unsigned int position)
 	return (flags & (1 << position)) != 0;
 }
 
-inline bool GetFlag(unsigned int flags, unsigned int flag)
+template<class intT>
+inline bool GetFlag(intT flags, intT flag)
 {
 	return (flags & flag) != 0;
 }
+
+//inline bool GetFlag(unsigned int flags, unsigned int flag)
+//{
+//	return (flags & flag) != 0;
+//}
+//
+//inline bool GetFlag(unsigned int flags, int64_t flag)
+//{
+//	return (flags & flag) != 0;
+//}
 
 #endif //__Utility_InlineFunctions_H__

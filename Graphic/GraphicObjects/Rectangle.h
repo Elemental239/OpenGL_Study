@@ -11,8 +11,8 @@ public:
 	CRectanglePrimitive(CSize size, CColor cColorLeftBottom, CColor cColorLeftTop, CColor cColorRightTop, CColor cColorRightBottom);
 
 	virtual void DrawSelf() override;
-	int GetHeight() { return GetRectSize().GetY(); }
-	int GetWidth() { return GetRectSize().GetX(); }
+	int GetHeight() { return GetSize().GetY(); }
+	int GetWidth() { return GetSize().GetX(); }
 
 protected:
 	virtual void CreateShaderProgram() override;
@@ -29,8 +29,12 @@ class CRectangle : public CRectanglePrimitive
 {
 public:
 	CRectangle(CSize size, CColor cColor) : CRectanglePrimitive(size, cColor, cColor, cColor, cColor) { }
+};
 
-	void SetSize(CSize size) { SetRectSize(size); }
+class CRandomColorRectangle : public CRectanglePrimitive
+{
+public:
+	CRandomColorRectangle(CSize size) : CRectanglePrimitive(size, CRandomColor(), CRandomColor(), CRandomColor(), CRandomColor()) { }
 };
 
 #endif //__Graphic__Rectangle__H__

@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "ApplicationInfo.h"
 #include "Dialogs/MainMenuDialog.h"
+#include "Window.h"
 
 CCommonGame::CCommonGame()
 {

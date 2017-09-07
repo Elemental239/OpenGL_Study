@@ -21,9 +21,12 @@ public:
 
 	virtual void DrawSelf() override;
 
+	virtual void SetOrigin(CPoint point) { m_bInited = false; IControl::SetOrigin(point); }
+	virtual void SetSize(CSize size) { m_bInited = false; IControl::SetSize(size); }
+
 protected:
 	//OpenGL related
-	TShaderProgramRef m_shaderProgram;
+	TShaderProgramRef m_spShaderProgram;
 	GLuint m_VAO; // VertexArrayObject
 	GLuint m_VBO; // VertexBufferObject
 	GLuint m_EBO; // ElementsBufferObject
