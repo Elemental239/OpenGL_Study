@@ -1,6 +1,40 @@
 #include "Control.h"
 #include "Logger.h"
 
+IControl::IControl() : m_pParent(nullptr)
+{
+}
+
+void IControl::AddChild(CSharedPtr<IControl>& obj)
+{
+	if (!obj)
+		return;
+
+	obj->SetParent(this);
+	m_children.push_back(obj);
+}
+
+void IControl::RemoveChild(CSharedPtr<IControl> obj)
+{
+	for (auto iter = m_children.end(); iter-- != m_children.begin(); )
+	{
+		if ((*iter) == obj)
+			m_children.erase(iter);
+	}
+
+	obj->SetParent(nullptr);
+}
+
+void IControl::RemoveChildren()
+{
+	for (auto iter = m_children.begin(); iter != m_children.end(); ++iter)
+	{
+		(*iter)->SetParent(nullptr);
+	}
+
+	m_children.erase(m_children.begin(), m_children.end());
+}
+
 ///////////////////////////////////////////////////////
 ///CControl
 CControl::CControl()
@@ -19,8 +53,7 @@ void CControl::Draw()
 
 void CControl::DrawChild(TControlRef spControl)
 {
-	//spControl->AdjustGraphicPresentations(spCurrentVisualPresentation->GetOrigin(), spCurrentVisualPresentation->GetRectSize());
-
+	spControl->AdjustPositionAndSize();
 	spControl->Draw();
 }
 

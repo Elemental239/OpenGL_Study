@@ -4,15 +4,16 @@
 #include "Object.h"
 #include "SharedPtr.h"
 #include "WindowEvents.h"
-#include "ControlsContainer.h"
 
 class IControl;
 typedef CSharedPtr<IControl> TControlRef;
 
-class IControl : public CObject, public CControlsContainer
+class IControl : public CObject
 {
 public:
-	//virtual void AdjustGraphicPresentations(CPoint origin, CSize size) = 0;
+	IControl();
+
+	virtual void AdjustPositionAndSize() = 0;
 
 	virtual bool OnSystemEvent(const EventData& event) = 0;
 	virtual bool OnSignal(const SignalData& signal) = 0;
@@ -24,12 +25,20 @@ public:
 	CPoint GetOrigin() const { return m_origin; }
 	virtual void SetSize(CSize size) { m_size = size; }
 	virtual CSize GetSize() const { return m_size; }
-	void SetParent(CControlsContainer* spParent) { m_pParent = spParent; }
+	void SetParent(IControl* spParent) { m_pParent = spParent; }
+
+	void AddChild(CSharedPtr<IControl>& obj);
+	void RemoveChild(CSharedPtr<IControl> obj);
+	void RemoveChildren();
+
+protected:
+	std::vector<CSharedPtr<IControl> > m_children;
+	IControl* GetParent() { return m_pParent; }
 
 private:
 	CPoint m_origin;
 	CSize m_size;
-	CControlsContainer* m_pParent;
+	IControl* m_pParent;
 };
 
 class CControl : public IControl
@@ -41,11 +50,7 @@ public:
 	virtual bool OnSystemEvent(const EventData& event) override;
 	virtual bool OnSignal(const SignalData& signal) override;
 	
-	//virtual void AdjustGraphicPresentations(CPoint origin, CSize size) override;
-		
-	//virtual CSize GetSize() override { return GetCurrentVisualPresentation()->GetRectSize(); }
-	//virtual CPoint GetOrigin() override { return GetCurrentVisualPresentation()->GetOrigin(); }
-
+	
 protected:
 	virtual void DrawSelf() {}
 	bool IsPointInsideMyBounds(const CPoint& point) const;
