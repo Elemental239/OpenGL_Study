@@ -56,13 +56,18 @@ public:
 	///<summary>Left, top, right, bottom</summary>
 	std::vector<int> GetMargins() const { return m_margins; } //TODO: OPTIMISE: array copy with reserve/std::copy/etc.
 
+	virtual void AddChild(CSharedPtr<CGraphicObject>& obj)
+	{
+		IControl::AddChild(obj.static_cast_to<IControl>());	// cause every GraphicObject is a control
+	}
+
+	virtual void AdjustPositionAndSize() override;
+
 protected:
 	bool m_bInited;
 	int64_t m_nAlignOption;	//Flags
 	int32_t m_nSizeOption;	//Flags
 	std::vector<int> m_margins;
-	//CPoint m_containerOrigin;
-	//CSize m_containerSize;
 
 	//virtual void PrepareInitiation() { AdjustSizeAndPosition(); }
 };

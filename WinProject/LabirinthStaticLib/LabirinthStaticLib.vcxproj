@@ -13,7 +13,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\Graphic\Controls\Button.h" />
     <ClInclude Include="..\..\Graphic\Controls\Control.h" />
-    <ClInclude Include="..\..\Graphic\Controls\ControlsContainer.h" />
     <ClInclude Include="..\..\Graphic\Controls\Grid.h" />
     <ClInclude Include="..\..\Graphic\Dialog.h" />
     <ClInclude Include="..\..\Graphic\Dialogs\ConveyLifeGameDialog.h" />
@@ -56,7 +55,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\Graphic\Controls\Button.cpp" />
     <ClCompile Include="..\..\Graphic\Controls\Control.cpp" />
-    <ClCompile Include="..\..\Graphic\Controls\ControlsContainer.cpp" />
     <ClCompile Include="..\..\Graphic\Controls\Grid.cpp" />
     <ClCompile Include="..\..\Graphic\Dialog.cpp" />
     <ClCompile Include="..\..\Graphic\Dialogs\ConveyLifeGameDialog.cpp" />

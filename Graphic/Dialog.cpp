@@ -2,11 +2,7 @@
 #include "Logger.h"
 #include "GraphicObjects/Rectangle.h"
 #include "SharedPtr.h"
-
-void IDialog::AddChild(CSharedPtr<CGraphicObject>& obj)
-{
-	CControlsContainer::AddChild(obj.static_cast_to<IControl>());	// cause every GraphicObject is a control
-}
+#include "Window.h"
 
 CDialog::CDialog(): m_bChildrenInited(false)
 {
@@ -24,15 +20,20 @@ void CDialog::InitChildren()
 	{
 		m_bChildrenInited = true;
 
+		CreateBackgroundImage();
 		CreateChildren();
 	}
 }
 
-void CDialog::Draw()
+void CDialog::AddChild(CSharedPtr<CGraphicObject>& obj) // Dialog itself contains only one background rect
 {
-	for (size_t i = 0; i < m_children.size(); i++)
+	if (m_children.size())
 	{
-		m_children[i]->Draw();
+		m_children[0]->AddChild(obj.static_cast_to<IControl>());
+	}
+	else
+	{
+		CGraphicObject::AddChild(obj);
 	}
 }
 
@@ -118,6 +119,13 @@ void CDialog::ActionOnButtonEvent(const EventData& event)
 void CDialog::ActionOnMouseEvent(const EventData& event)
 {
 	//Empty
+}
+
+void CDialog::CreateBackgroundImage()
+{
+	TGraphicObjectRef spRectangle = std::make_shared<CRectangle>(GetContainingWindow()->GetSize(), COLOR_WHITE);
+	spRectangle->SetOrigin(CPoint(0, 0));
+	AddChild(spRectangle);
 }
 
 void CDialog::OnLifetimeEvent(EDialogLifetimeEvent event)

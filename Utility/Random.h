@@ -22,4 +22,6 @@ private:
 	std::mt19937 m_generator;
 };
 
+#define RANDOM Random::Instance()
+
 #endif //__Utility_Random_H__

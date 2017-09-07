@@ -24,12 +24,13 @@ void IWindow::AddDialog(TDialogRef spDialog)
 {
 	spDialog->OnLifetimeEvent(DIALOG_LIFETIME_EVENT_BEFORE_SHOW);
 
-	CSize windowSize = CSize(GetWidth(), GetHeight());
+	spDialog->SetSize(GetSize());
 	//TGraphicObjectRef spDialogGraphicRepresentation = new CRectangle(windowSize, spDialog->GetBackgroundColor());
 	//spDialogGraphicRepresentation->SetContainerParams(CPoint(), windowSize);
 	//spDialog->SetVisualPresentation(spDialogGraphicRepresentation);
 	spDialog->SetContainingWindow(this);
 	spDialog->InitChildren();
+	
 	m_dialogs.push(spDialog);
 
 	spDialog->OnLifetimeEvent(DIALOG_LIFETIME_EVENT_AFTER_SHOW);

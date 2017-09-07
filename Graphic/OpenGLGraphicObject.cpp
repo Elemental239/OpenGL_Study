@@ -50,7 +50,7 @@ void COpenGLGraphicObject::DrawSelf()
 
 COpenGLPoint COpenGLGraphicObject::TranslatePixelPoint(const CPoint& point) const
 {
-	CSize szWindowSize = CWindowManagerProvider::Instance().GetWindowManager()->GetActiveWindow()->GetSize();
+	CSize szWindowSize = WINDOW_MANAGER->GetActiveWindow()->GetSize();
 
 	GLfloat xFloat = (2.0f * (point.GetX() + GetOrigin().GetX())) / szWindowSize.GetX() - 1;
 	GLfloat yFloat = (2.0f * (point.GetY() + GetOrigin().GetY())) / szWindowSize.GetY() - 1;

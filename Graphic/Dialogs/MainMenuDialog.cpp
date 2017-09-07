@@ -8,6 +8,7 @@
 #include "Commands.h"
 #include "ColorsResources.h"
 #include "ConveyLifeGameDialog.h"
+#include "Random.h"
 
 CMainMenuDialog::CMainMenuDialog()
 {
@@ -23,30 +24,44 @@ void CMainMenuDialog::CreateChildren()
 {
 	MARKER("CMainMenuDialog::CreateChildren()");
 
-	TGraphicObjectRef spRectangle = std::make_shared<CRandomColorRectangle>(CSize(200, 100));
-	spRectangle->SetMargins(20, 20, 20, 20);
-	spRectangle->SetAlignOption(EAlignOption::CENTER_Y);
-	spRectangle->SetAlignOption(EAlignOption::CENTER_X);
-	AddChild(spRectangle);
+	RemoveChildren();
 
-	//TGraphicObjectRef spRectangle = new CRectanglePrimitive(CSize(200, 100), CRandomColor(), CRandomColor(), CRandomColor(), CRandomColor());
-	//spRectangle->SetMargins(20, 20, 20, 20);
+	for (int i = 0; i < 2; i++)
+	{
+		auto size = CSize(RANDOM.GetIntII(1, 1200), RANDOM.GetIntII(1, 800));
+		auto leftMargin = RANDOM.GetIntII(0, 1200 - size.GetX());
+		auto bottomMargin = RANDOM.GetIntII(0, 800 - size.GetY());
+
+		TGraphicObjectRef spRectangle = std::make_shared<CRandomColorRectangle>(size);
+		spRectangle->SetMargins(leftMargin, 0, 0, bottomMargin);
+		spRectangle->SetAlignOption(EAlignOption::BOTTOM);
+		spRectangle->SetAlignOption(EAlignOption::LEFT);
+		AddChild(spRectangle);
+	}
+
+	//TGraphicObjectRef spRectangle = std::make_shared<CRandomColorRectangle>(CSize(400, 400));
+	//spRectangle->SetMargins(20, 0, 0, 0);
 	//spRectangle->SetAlignOption(EAlignOption::CENTER_Y);
-	//spRectangle->SetAlignOption(EAlignOption::CENTER_X);
+	//spRectangle->SetAlignOption(EAlignOption::LEFT);
+	//AddChild(spRectangle);
 
-	//TGraphicObjectRef spRectanglePressed = new CRectangle(CSize(200, 100), COLOR_GREEN);
-	//spRectanglePressed->SetMargins(20, 20, 20, 20);
-	//spRectanglePressed->SetAlignOption(EAlignOption::CENTER_Y);
-	//spRectanglePressed->SetAlignOption(EAlignOption::CENTER_X);
-
-	//TControlRef childControl = new CButton(CMD_OPEN_LIFE_GAME_WINDOW, spRectangle, spRectanglePressed);
-	//AddChild(childControl);
-
-	int a = 0;
+	//TGraphicObjectRef spRectangle2 = std::make_shared<CRandomColorRectangle>(CSize(250, 300));
+	//spRectangle2->SetMargins(100, 0, 0, 10);
+	////spRectangle->SetMargins(20, 20, 20, 20);
+	////spRectangle->SetAlignOption(EAlignOption::CENTER_Y);
+	////spRectangle->SetAlignOption(EAlignOption::CENTER_X);
+	//spRectangle->AddChild(spRectangle2);
 }
 
 bool CMainMenuDialog::OnSystemEvent(const EventData& event)
 {
+	if (event.m_nEventType == EVT_BUTTON && event.m_nKeyboardKey == GLFW_KEY_ENTER && event.m_nAction == GLFW_RELEASE)
+	{
+		CreateChildren();
+
+		return true;
+	}
+
 	return __super::OnSystemEvent(event);
 }
 

@@ -5,9 +5,7 @@
 #include "WindowManager.h"
 #include "SharedPtr.h"
 #include "ColorsResources.h"
-#include "Controls/ControlsContainer.h"
-
-class CGraphicObject;
+#include "GraphicObject.h"
 
 enum EDialogLifetimeEvent
 {
@@ -17,7 +15,7 @@ enum EDialogLifetimeEvent
 	DIALOG_LIFETIME_EVENT_AFTER_HIDE
 };
 
-class IDialog : public CObject, public CControlsContainer
+class IDialog : public CGraphicObject
 {
 	friend class IWindow;
 public:
@@ -28,11 +26,10 @@ public:
 	virtual bool OnSignal(const SignalData& signal) = 0;
 
 	virtual void InitChildren() = 0;
-	virtual void Draw() = 0;
+	//virtual void Draw() = 0;
 
 	bool IsClosed() const { return m_bClosed; }
 	void Close() { m_bClosed = true; }
-	void AddChild(CSharedPtr<CGraphicObject>& obj);
 
 	//virtual CColor GetBackgroundColor() { return COLOR_WHITE; }
 
@@ -58,7 +55,7 @@ public:
 	virtual bool OnSignal(const SignalData& signal) override;
 
 	virtual void InitChildren() override;
-	virtual void Draw() override;
+	virtual void AddChild(CSharedPtr<CGraphicObject>& obj) override;
 
 private:
 	bool m_bChildrenInited;
@@ -71,6 +68,8 @@ private:
 
 	void ActionOnButtonEvent(const EventData& event);
 	void ActionOnMouseEvent(const EventData& event);
+
+	virtual void CreateBackgroundImage();
 };
 
 #endif //__Graphic_Dialog_H__

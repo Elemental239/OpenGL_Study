@@ -26,8 +26,10 @@ void CCommonGame::Start()
 void CCommonGame::CreateMainWindow()
 {
 	WindowConstructionParams firstWindowParams;
-	firstWindowParams.m_nWindowWidth = 800;
-	firstWindowParams.m_nWindowHeight = 600;
+	//firstWindowParams.m_nWindowWidth = 800;
+	//firstWindowParams.m_nWindowHeight = 600;
+	firstWindowParams.m_nWindowWidth = 1200;
+	firstWindowParams.m_nWindowHeight = 800;
 	firstWindowParams.m_strWindowLabel = MAIN_WINDOW_LABEL;
 	firstWindowParams.m_colorBase = CColor(0xFF, 0xFF, 0xFF);
 	firstWindowParams.m_bIsResizable = true;
