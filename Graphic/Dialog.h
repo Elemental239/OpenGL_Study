@@ -7,6 +7,8 @@
 #include "ColorsResources.h"
 #include "Controls/ControlsContainer.h"
 
+class CGraphicObject;
+
 enum EDialogLifetimeEvent
 {
 	DIALOG_LIFETIME_EVENT_BEFORE_SHOW,
@@ -30,8 +32,9 @@ public:
 
 	bool IsClosed() const { return m_bClosed; }
 	void Close() { m_bClosed = true; }
+	void AddChild(CSharedPtr<CGraphicObject>& obj);
 
-	virtual CColor GetBackgroundColor() { return COLOR_WHITE; }
+	//virtual CColor GetBackgroundColor() { return COLOR_WHITE; }
 
 protected:
 	IWindow* GetContainingWindow() { return m_pWindow; }

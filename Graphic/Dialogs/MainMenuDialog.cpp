@@ -23,6 +23,12 @@ void CMainMenuDialog::CreateChildren()
 {
 	MARKER("CMainMenuDialog::CreateChildren()");
 
+	TGraphicObjectRef spRectangle = std::make_shared<CRandomColorRectangle>(CSize(200, 100));
+	spRectangle->SetMargins(20, 20, 20, 20);
+	spRectangle->SetAlignOption(EAlignOption::CENTER_Y);
+	spRectangle->SetAlignOption(EAlignOption::CENTER_X);
+	AddChild(spRectangle);
+
 	//TGraphicObjectRef spRectangle = new CRectanglePrimitive(CSize(200, 100), CRandomColor(), CRandomColor(), CRandomColor(), CRandomColor());
 	//spRectangle->SetMargins(20, 20, 20, 20);
 	//spRectangle->SetAlignOption(EAlignOption::CENTER_Y);
@@ -35,6 +41,8 @@ void CMainMenuDialog::CreateChildren()
 
 	//TControlRef childControl = new CButton(CMD_OPEN_LIFE_GAME_WINDOW, spRectangle, spRectanglePressed);
 	//AddChild(childControl);
+
+	int a = 0;
 }
 
 bool CMainMenuDialog::OnSystemEvent(const EventData& event)

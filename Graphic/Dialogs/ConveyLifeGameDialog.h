@@ -14,7 +14,7 @@ public:
 
 	virtual void OnLifetimeEvent(EDialogLifetimeEvent event) override;
 
-	virtual CColor GetBackgroundColor() override { return COLOR_BLACK; }
+	//virtual CColor GetBackgroundColor() override { return COLOR_BLACK; }
 
 private:
 

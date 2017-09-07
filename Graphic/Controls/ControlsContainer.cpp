@@ -1,7 +1,7 @@
 #include "ControlsContainer.h"
 #include "Control.h"
 
-void CControlsContainer::AddChild(CSharedPtr<IControl> obj)
+void CControlsContainer::AddChild(CSharedPtr<IControl>& obj)
 {
 	if (!obj)
 		return;

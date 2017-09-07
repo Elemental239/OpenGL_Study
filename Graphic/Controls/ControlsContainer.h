@@ -6,7 +6,7 @@ class IControl;
 class CControlsContainer
 {
 public:
-	void AddChild(CSharedPtr<IControl> obj);
+	void AddChild(CSharedPtr<IControl>& obj);
 	void RemoveChild(CSharedPtr<IControl> obj);
 	void RemoveChildren();
 

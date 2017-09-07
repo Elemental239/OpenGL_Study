@@ -1,6 +1,12 @@
 #include "Dialog.h"
 #include "Logger.h"
 #include "GraphicObjects/Rectangle.h"
+#include "SharedPtr.h"
+
+void IDialog::AddChild(CSharedPtr<CGraphicObject>& obj)
+{
+	CControlsContainer::AddChild(obj.static_cast_to<IControl>());	// cause every GraphicObject is a control
+}
 
 CDialog::CDialog(): m_bChildrenInited(false)
 {

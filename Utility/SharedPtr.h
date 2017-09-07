@@ -8,14 +8,15 @@ template<typename T>
 class CSharedPtr : public CObject
 {
 public:
-	CSharedPtr() : sp_obj(NULL) {}
+	CSharedPtr() : sp_obj(nullptr) {}
 	CSharedPtr(T*);
 	CSharedPtr& operator=(const CSharedPtr<T>&);
 	CSharedPtr(const CSharedPtr<T>&);
+	CSharedPtr(const std::shared_ptr<T>&);
 	~CSharedPtr();
 
 	template<class K>
-	K* static_cast_to() { return static_cast<K*>(sp_obj.get()); }
+	CSharedPtr<K> static_cast_to() { return std::static_pointer_cast<K>(sp_obj); }
 
 	operator T*() { return sp_obj.get(); }
 
@@ -45,6 +46,12 @@ template<typename T>
 CSharedPtr<T>::CSharedPtr(const CSharedPtr<T>& other)
 {
 	sp_obj = other.sp_obj;
+}
+
+template<typename T>
+inline CSharedPtr<T>::CSharedPtr(const std::shared_ptr<T>& ptr)
+{
+	sp_obj = ptr;
 }
 
 template<typename T>
