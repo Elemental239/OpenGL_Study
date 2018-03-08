@@ -4,6 +4,10 @@
 #include "glfw-3.1.1/include/GLFW/glfw3.h"
 #include "Window.h"
 
+//includes for sleep
+#include <chrono>
+#include <thread>
+
 ///////////////////////////////////////////////////
 ///Various OpenGL global callbacks
 void opengl_GLFW_error_callback(int error, const char* description)
@@ -170,6 +174,9 @@ void CWindowManager::StartMainLoop()
 				m_windows[i]->Draw();
 			}
 		}
+
+		//TODO: change with time counting, not static change
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
 
 	glfwTerminate();

@@ -63,7 +63,7 @@ bool CDialog::OnSystemEvent(const EventData& event)
 
 		case EVT_RESIZE:
 		{
-			m_children[0]->SetSize(CSize(event.m_nNewWidth, event.m_nNewHeight));
+			SetSize(CSize(event.m_nNewWidth, event.m_nNewHeight));
 			break;
 		}
 

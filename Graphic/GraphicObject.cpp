@@ -34,6 +34,8 @@ void CGraphicObject::AdjustPositionAndSize()
 	
 	SetSize(calculator.GetResultSize());
 	SetOrigin(calculator.GetResultOriginPoint()); // TODO: test me!
+
+	LOG("point = %s, size = %s", GetOrigin().ToString().ToCharPtr(), GetSize().ToString().ToCharPtr());
 }
 
 bool CGraphicObject::OnSystemEvent(const EventData& event)
